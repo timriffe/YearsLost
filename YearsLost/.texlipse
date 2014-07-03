@@ -1,0 +1,14 @@
+#TeXlipse project settings
+#Sun Jun 15 11:28:41 CEST 2014
+markTmpDer=true
+builderNum=2
+outputDir=
+makeIndSty=
+bibrefDir=
+outputFormat=pdf
+tempDir=tmp
+mainTexFile=YearsLost.tex
+outputFile=YearsLost.pdf
+langSpell=en
+markDer=true
+srcDir=
