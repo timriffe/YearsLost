@@ -1,5 +1,5 @@
 
-setwd("/home/triffe/workspace/YearsLost")
+setwd("/home/triffe/git/YearsLost/YearsLost")
 # get plotting functions
 source("R/Functions.R")
 

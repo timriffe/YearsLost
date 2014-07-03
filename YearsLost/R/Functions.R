@@ -1,5 +1,15 @@
 library(devtools)
-load_all("/home/triffe/git/Leaves/PlosOne/R/RiffeetalFunctions")
+if (! "RiffeetalFunctions" %in% installed.packages()[,"Package"]){
+    cat("\nInstalling custom package from github
+This may fail on Mac or Windows if some preliminary configuring isn't done
+See page: https://github.com/hadley/devtools
+if you're having problems loading/installing from github\n")
+    install_github(repo = "Leaves", subdir = "PlosOne/R/RiffeetalFunctions", username = "timriffe")
+}
+library(RiffeetalFunctions)
+
+
+# custom functions used in figure production. Not annotated. All experimental.
 lx2dx <- function(lx){
     dx <- -diff(c(lx,0))
     dx[(length(dx) - 1)] <-  sum(dx[(length(dx) - 1):length(dx)])

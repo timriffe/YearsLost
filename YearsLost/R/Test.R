@@ -1,4 +1,8 @@
 
+Do.This <- FALSE
+
+# this was my first hacky attempt. Things are cleaner now and in separate files...
+if (Do.This){
 library(DemogBerkeley)
 Dx <- readHMD("/home/triffe/DATA/HMD/deaths/Deaths_1x1/USA.Deaths_1x1.txt")
 Ex <- readHMD("/home/triffe/DATA/HMD/exposures/Exposures_1x1/USA.Exposures_1x1.txt")
@@ -142,6 +146,5 @@ COD <- read.csv("/home/triffe/Desktop/COD_5x1_adjusted_chapters.csv", stringsAsF
 COD <- COD[COD$Year == 2010, ]
 COD$Age <- as.integer(gsub("\\+","",unlist(lapply(strsplit(COD$Age,split = "-"),"[[",1))))
 
-head(COD)
-
+}
 
