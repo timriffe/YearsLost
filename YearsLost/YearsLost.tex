@@ -13,87 +13,99 @@
 \bibpunct{(}{)}{,}{a}{}{;} 
 \usepackage{url}
 \usepackage{nth}
+\usepackage{authblk}
 % for the d in integrals
 \newcommand{\dd}{\; \mathrm{d}}
 \newcommand{\tc}{\quad\quad\text{,}}
 \newcommand{\tp}{\quad\quad\text{.}}
+\defcitealias{HMD}{HMD}
 
 \begin{document}
 
 
-\title{Years lived, years left and years lost}
-\author{Tim Riffe}
+\title{Life lost, lifesaving, and causes of death.}
+
+\author[1]{Tim Riffe}
+\author[2]{A{\"i}da Sole Auro}
+\affil[1]{Department of Demography, University of California, Berkeley}
+\affil[2]{Institut National d'{\'e}tudes d{\'e}mographiques}
+% A{\"i}da Sole Auro
 \maketitle
 
-%Dear A{\"i}da,
-%The following is only a partly conceived idea nugget, possibly divisible into
-%two or three separate papers. There is a part about mortality impacts on
-%population structure, which can be separated; The main idea is on the
-% demography of saved
-%lives, with and without causes. Here you see some formulas and explanations
-%(some figures attached to email), but I hope that the applications are
-%imaginable and interesting enough, and that their place in the demographer's
-%toolkit is evident. I'd be happy to receive your comment, suggestions, and if
-% you're interested your signature! I imagine this as a PAA submission at first, but I think it can materialize quickly to be
-%ready for a journal. Please let me know what you think!  Best wishes,
-%Tim
-
 \begin{abstract}
-To structure a population by age is to represent its years already
-lived, a reflection of past fertility and attrition. To structure a population
-by remaining years of life is to represent its potential future; latency against
-attrition. The years lost by a population due to death are equally viewable.
-These lost years too can be classified by the ages in which the losses occurred, by the ages at which the lost years would have been lived, or by the
-lost distribution of remaining years of life. Together these perspectives
-characterize the timing, magnitude and interplay between length-of-life,
-population stocks and attrition, distinguishing between past-future,
-realized-foregone and their interactions.
+The lives and potential years of life lost due to death are presented as metric
+for describing the population impacts of death and for comparing causes of
+death. Lost lives and years of life may be classified by the ages in which
+deaths occurred, by the ages to which deaths would be postponed were they saved, by the
+ages in which the lost years would have been lived, or by the distribution of
+lost remaining lifespans. These temporal perspectives define the
+potential impacts of death and causes of death on population size and structure,
+and on the distribution of lifespans within populations. 
 \end{abstract}
 
-Alternate titles: ``a demography of saved
-lives'' or ``relationships between birth flows, death flows and population
-stocks with more emphasis on the death part''
+\section*{Temporal relationships}
+%To begin, assume a closed population and ignore what determines the size of
+%successive birth cohorts, $B(t)$, which we usually call the birth flow. If
+%$B(t)$ is a given, then the only other factor that determines population size
+%and age structure is the length of the lives of its members. For simplicity,
+%assume that the age pattern to mortality is fixed (this isn't necessary, but it
+% simplifies notation). The population of age $a$ in year $t$, $P(a,t)$, is a function of the survival of the birth cohort born in year $t-a$. Since we're
+%fixing mortality, survival from age 0 to $a$ is $l(a)$ for any given cohort, so
+%$P(a,t) = B(t-a)l(a)$.
 
-\section*{Getting on with it}
-To begin, assume a closed population and ignore what determines the size of
-successive birth cohorts, $B(t)$, which we usually call the birth flow. If
-$B(t)$ is a given, then the only other factor that determines population size
-and age structure is the length of the lives of its members. For simplicity,
-assume that the age pattern to mortality is fixed (this isn't necessary, but it simplifies notation). The
-population of age $a$ in year $t$, $P(a,t)$, is a function of the survival of the birth cohort born in year $t-a$. Since we're
-fixing mortality, survival from age 0 to $a$ is $l(a)$ for any given cohort, so
-$P(a,t) = B(t-a)l(a)$.
-
-At any given $t$, there is a population stock that can be structured by birth
+Population stock in a given year, $t$, can be structured by birth
 cohorts or age, the way we typically make population pyramids. If an entire
 lifespan is denoted by the random variable, $X$, then the remaining lifespan,
-$y$, of a still-alive person aged $a$, $y = X - a$. For the cohort born in year
-$t-a$, the distribution of $X$ is given by $d(X)$, which is equal to the familar
-lifetable $d_x$ for $x=X$, when calculated with a radix of 1.
-The distribution of \textit{remaining} lifetimes for those having attained age
-$a$, $f(y|a)$ is given by:
+$y$, of a still-alive person aged $a$, $y = X - a$. 
+\begin{figure}[h]
+\centering
+	\caption{A lifeline, where chronological age (years lived) is indexed by $a$
+	and thanatological age (years left) is indexed by $y$.}
+	\label{fig:line}
+	\includegraphics[scale=.8]{Figures/LifeLine.pdf}	
+\end{figure}
+Figure~\ref{fig:line} gives a schematic representation of this simple
+relationshp. For a cohort, the
+distribution of $X$ is given by $f(X)$, which is equal to the familar lifetable
+$d(a)$ for $a = X$, when specified with a radix of 1. The distribution of
+\textit{remaining} lifetimes for those having survived to age $a$, $f(y|a)$ is
+given by:\footnote{Equation \eqref{eq:fya} is easily modifiable to account for
+mortality schedules that change over time.}
 \begin{equation}
+\label{eq:fya}
 f(y|a) = \mu(a+y) \frac{l(a+y)}{l(a)} \tc
 \end{equation}
-which means that the population having survived to age $a$ and with $y$
-remaining years of life is $P(a,y) = P(a)f(y|a)$ and the total population with
-$y$ remaining years of life, $P(y)$, is simply $\int _{a=0}^\infty P(a,y) \dd
-a$, a single death cohort with members from many birth cohorts. This
-decomposition resorts the lifeline segments of a living population by the part
-yet-unlived rather than by the part lived. The lived part we call ``age'' and
-the unlived part has no common name. Since age is a sort of placemarker on the lifeline, I like to call both $a$ and $y$ ``age'', and differentiate by
-calling them \textit{chronological} and \textit{thanatological}
-age, respectively.\footnote{Thanatos was the Greek god of death, which marks the
-end of the lifeline to which $y$ relates. By this token, one could just call chronological
-age \textit{aphrodesian} age, but this would probably confuse things.}
+where $\mu(a)$ is the force of mortality at exact age $a$, and $l(a)$ is
+the value of the survival function at exact age $a$, the probability of
+surviving from birth to age $a$. Figure~\ref{fig:fya} shows selected
+cross-sections of the $f(y|a)$ surface calculated from the 2010 US male period lifetable (HMD). 
+\begin{figure}[h]
+\centering
+	\caption{US males, 2010, $f(y|a)$ for selected ages.*}
+	\label{fig:fya}
+	\includegraphics[scale=.8]{Figures/fya.pdf}	
+	\caption*{*Data from \citetalias{HMD}. Note that $f(y|0) = d(a) = f(X)$.}
+\end{figure}
+$f(y|a)$ can be used to calculate the population having survived to age $a$ and
+with $y$ remaining years of life as $P(a,y) = P(a)f(y|a)$, where the total
+population with $y$ remaining years of life, $P(y)$, is simply $\int
+_{a=0}^\infty P(a,y) \dd a$, a single death cohort with members from many birth
+cohorts. This decomposition sorts the lifeline segments of a living population
+by the part yet-unlived (years left) rather than by the part lived. The lived
+part we call ``age'' and the unlived part has no common name. Since age is a
+placemarker on the lifeline, both $a$ and $y$ could be called ``age'', and we
+can specify them as \textit{chronological} and \textit{thanatological} age,
+respectively.\footnote{Thanatos was the Greek god of death, which marks the end of the lifeline to which $y$ relates. By this token, one could just call chronological age \textit{aphrodesian} age, but this would probably confuse things.}
 
 The indices $a$ and $y$ differentiate between the past and future
 parts of a lifeline, respectively, and by extension of populations when
 so structured.
-In comparing $P(a)$ with $P(y)$ we still refer to the living part of a population.
+In comparing $P(a)$ with $P(y)$, as in \citet{brouard1986structure}, we still
+refer to the living (lived or to-be-lived) part of a population.
 Is it so clear that the dead are no longer part of the population? If a life is
 completely saved, this life stays in the living population and is not counted
-as a death, but we think of saved lives as a transient state classification.
+as a death, but we often imagine saved lives as a transient state
+classification.
 Perhaps this is not correct for demographers: amongst the living there
 are no saved lives but only lived lives. Still we can quantify
 hypothetically saveable life, and for this we must look to deaths.
@@ -103,24 +115,88 @@ to proceed), one may ask much more than how many lives can be saved, $D^s(a)$
 \begin{equation}
 D^s(a) = \mu(a)P(a) \quad \quad \text{,}
 \end{equation}
-but also how many years would the saved people live? The simplest calculation is
-to multiply the number of gained survivors by remaining life expectancy, $e(a)$:
+but also how many years would the saved people live? The simplest calculation
+is to multiply the number of gained survivors by remaining life expectancy, $e(a)$:
 \begin{align}
 \label{eq:savedea}
-D^s(a)e(a) &= P(a)\mu(a)\frac{1}{l(a)}\int_{y=0}^\infty l(a+y) \dd y \notag\\
-         &= \mu(a)\int_{y=0}^\infty B(t-a)l(a+y) \dd y 
+D^s(a)e(a) &= P(a)\mu(a)\frac{1}{l(a)}\int_{y=0}^\infty l(a+y) \dd y %\notag\\
+         %&= \mu(a)\int_{y=0}^\infty B(t-a)l(a+y) \dd y 
 \end{align}
-$D^s(a)e(a)$ assigns person-years gained by a population to the ages in which
-they were saved. One may also wish
-to know the distribution of remaining lifespans of saved lives, which is quite different than \eqref{eq:savedea}:
-\begin{align}
+$D^s(a)e(a)$ classifies potentially saved person-years by the
+ages in which they were saved. Figure~\ref{fig:Day} (left) shows US 2010 period
+deaths (all the lives that could be saved) by age and sex (males on the left,
+females on the right). Deaths have been decomposed into discrete categories of
+remaining years of life using equation~\eqref{eq:fya}, under the assumption that saved lives are subject to the same mortality schedule as the rest of the population, and under the supposition that all 2010 deaths get saved (just
+once). The results of this decompositon are represented by color bands in
+Figure~\ref{fig:Day}. Figure~\ref{fig:Dya} (right) displays the same
+information after flipping the y axis and color gradient from
+Figure~\ref{fig:Day}. Now the remaining lifespans (years left) of
+hypothetically saved lives are the primary y axis, while ages (years lived)
+are displayed with color. 
+
+As is already widely understood, lives saved in young
+ages contribute more potential years of life to the population over time, and this heuristic is visible in the color gradient of Figure~\ref{fig:Day}. \footnote{One hasty conclusion from this figure is that, at least if the assumption of mortality homogeneity is not to far off, a potentially saved male life selected at random will have on average more remaining years of life than a randomly selected female saveable life. This is so despite male mortality being higher than female mortality, precisely because high male mortality causes many deaths
+in younger ages, where mortality is lower (i.e., the age gradient is stronger
+than the sex gradient).} Most of the saveable lives would have short lifespans
+if reapportioned to the living population, even under the assumption of
+homogenous mortality.
+\begin{figure}
+\centering
+\caption{US, 2010 potentially saveable lives (Deaths)*}
+\label{fig:1}
+\begin{subfigure}[b]{.48\linewidth}
+\centering
+	\caption{Classified by age (years lived) and sex, and decomposed
+by hypothetical remaining years of life (years left).}
+	\label{fig:Day}
+	\includegraphics[scale=.55]{Figures/Deathsxy10.pdf}	
+\end{subfigure}
+~
+\begin{subfigure}[b]{.48\linewidth}
+\centering
+    \caption{Classified by hypothetical remaining years of life
+(years left) and sex, and decomposed by age (years lived).}
+	\label{fig:Dya}
+    \includegraphics[scale=.55]{Figures/Deathsyx10.pdf}
+\end{subfigure}
+\caption*{*Data from \citetalias{HMD}}
+\end{figure}
+
+\begin{figure}
+\centering
+\caption{US, 2010 person years of life potentially won*}
+\label{fig:2}
+\begin{subfigure}[b]{.48\linewidth}
+\centering
+	\caption{Classified by age at saving and sex, and decomposed by future ages to
+	be lived.}
+	\label{fig:SavedGained}
+	\includegraphics[scale=.55]{Figures/YearsSavedGainedxx10.pdf}	
+\end{subfigure}
+~
+\begin{subfigure}[b]{.48\linewidth}
+\centering
+    \caption{Classified by future ages to be lived and sex, and decomposed by age at saving.}
+	\label{fig:LostLived}
+    \includegraphics[scale=.55]{Figures/YearsLostLivedyx10.pdf}
+\end{subfigure}
+\caption*{*Data from \citetalias{HMD}. (Note different x scale from
+Figure~\ref{fig:1}).}
+\end{figure}
+
+One may also wish
+to know the distribution of remaining lifespans of saved lives, which is quite
+different from \eqref{eq:savedea}:\footnote{Under constant mortality, but
+not-necessarily constant fertility, this simplifies to $D^s(a)f(y|a) =
+B(t-a)\mu(a)\mu(a+y)l(a+y)$}
+\begin{equation}
 \label{eq:savedy}
-D^s(a)f(y|a) &= P(a)\mu(a)\mu(a+y) \frac{l(a+y)}{l(a)} \notag \tc\\
-\intertext{and bringing things back to the birth flow for no apparent reason:}
-           &= B(t-a)\mu(a)\mu(a+y)l(a+y) \tc
-\end{align}
+D^s(a)f(y|a) = P(a)\mu(a)\mu(a+y) \frac{l(a+y)}{l(a)} \tc
+\end{equation}
 or indeed the ages in which the gained years of life would be lived, which is
 the same as \eqref{eq:savedy} but shifted up element-wise by $a$. 
+
+\section{Application to causes of death.}
 
 These basic relationships carry over when deaths and survival are adjusted to
 account for the hypothetical elimination of particular causes (in the case of
@@ -137,7 +213,9 @@ serve as a basis for judging how much particular causes actually compete as
 risks, wherein true ersatz causes will have identical distributions (and so may
 be grouped).
 
-Let us then define the force of mortality, $\mu(a) = \sum _{c=1}^n \mu^c(a)$, the sum of $n$ categorically separable causes. The people that will die from cause $c$ are:
+Let us then define the force of mortality, $\mu(a) = \sum _{c=1}^n \mu^c(a)$,
+as the sum of $n$ categorically separable causes. The people that will die from
+cause $c$ are:
 \begin{align}
 D^c &= \int_0^\infty D^c(a) \dd a \\
 &= \int_0^\infty \mu^c(a)P(a) \dd a \tc\\
@@ -159,31 +237,8 @@ case of cause-specific saveable lives and their cause-deleted remaining
 lifespans.
 
 \section{Observed patterns}
-The utility of the above relationships is best described
-graphically at first, and perhaps more use examples can be computed. My first
-visualizations are attached in the email (US 2010), but there are other
-directions one could take.
-I imagine a table of figures, perhaps comparing 6 casues for 4 countries (or
-more, Magali may give access to the HMD COD beta collection if we ask nicely) or
-time points (or something like that).
-The hardest issue is making axes comparable\ldots 
 
-%\section{Comments}
-%Other ideas: we have production and consumption patterns over age from the NTA
-%project, which would let the daring demographer assign values (cumulative,
-% ouch!). I'll not brainstorm too much just yet unless more material is needed. I think the basic idea has enough
-%traction on its own to not need to devise extentions just yet.
 
-%If you think this idea is cool and worth pursuing I'd be happy to join forces
-% as your time and interests allow. You said you're most interested in healthy life
-%expectancy, but I'd like to think that this topic is an a substantial correlate
-%and relevant for your research.
-
-%For now, I'd cut out the birth flow age structure thing, that's just where the
-%idea began\ldots
-
-%I do not have a particular journal in mind, but I'm biased towards open access
-%journals. Perhaps this would also make a nice PAA 2015 proposal (need to think
-%about that already!).
-
+\bibliographystyle{plainnat}
+  \bibliography{references}  
 \end{document}

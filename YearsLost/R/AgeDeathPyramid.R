@@ -39,7 +39,7 @@ par(xaxs = "i",yaxs = "i", mai = c(.5, .5, .5, 1))
 tics <- plotSetup(xlim)
 PyrLevels(Males, Females, revColors = TRUE, colRamp = BrewerRamp("Blues"))
 PyramidOutline(colSums(Males), colSums(Females), col = NA, border = gray(.2), lwd = .5)
-DrawLabels(tics, ylab = "Years Left",xlab = "(1000s)", xlabs = zapsmall(abs(tics$x / 1e3)))
+DrawLabels(tics, ylab = "Years Lived",xlab = "(1000s)", xlabs = zapsmall(abs(tics$x / 1e3)))
 Drawlegend(tics, N = min(dim(Males)), colRamp = BrewerRamp("Blues"))
 dev.off()
 
