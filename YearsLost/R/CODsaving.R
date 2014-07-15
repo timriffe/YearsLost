@@ -42,9 +42,6 @@ expandAbdridged <- function(M){
     )))
 }
 
-
-head(COD)
-
 library(reshape2)
 MF <- acast(COD, Age ~ COD.chap, value.var = "Rates.F")
 MM <- acast(COD, Age ~ COD.chap, value.var = "Rates.M")

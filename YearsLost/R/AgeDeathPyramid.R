@@ -43,6 +43,9 @@ DrawLabels(tics, ylab = "Years Lived",xlab = "(1000s)", xlabs = zapsmall(abs(tic
 Drawlegend(tics, N = min(dim(Males)), colRamp = BrewerRamp("Blues"))
 dev.off()
 
+
+
+
 # OK, the years lost by deaths in a given age is a function of
 # the distribution of remaining life in each age and the deaths
 # in those ages.
@@ -93,29 +96,53 @@ xlim       <- max(pretty(c(colSums(MalesA), colSums(FemalesA)))) * c(-1, 1)
 
 #xlim     <- max(pretty(c(colSums(MalesY), colSums(FemalesY)))) * c(-1, 1)
 
-pdf("Figures/YearsLostLivedyx10.pdf",height = 4,width = 4.5)
+pdf("Figures/YearsLostLivedyx10.pdf",height = 4,width = 4.6)
 #dev.new(height = 4,width = 4.5)
-par(xaxs = "i",yaxs = "i", mai = c(.5, .5, .5, 1))
+par(xaxs = "i",yaxs = "i", mai = c(.5, .6, .5, 1))
 tics <- plotSetup(xlim)
-PyrLevels(MalesY, FemalesY, revColors = FALSE, colRamp = BrewerRamp("Blues"))
+PyrLevels(MalesY, FemalesY, revColors = FALSE, colRamp = BrewerRamp("BuGn"))
 PyramidOutline(colSums(MalesY), colSums(FemalesY), col = NA, border = gray(.2), lwd = .5)
 DrawLabels(tics, ylab = "Ages gained",xlab = "Years gained (Millions)", xlabs = zapsmall(abs(tics$x / 1e6)))
-Drawlegend(tics, N = min(dim(MalesY)), colRamp = BrewerRamp("Blues"), revColors = TRUE, label = "Age Saved at")
+Drawlegend(tics, N = min(dim(MalesY)), colRamp = BrewerRamp("BuGn"), revColors = TRUE, label = "Age Saved at")
 dev.off()
 
 
-pdf("Figures/YearsSavedGainedxx10.pdf",height = 4,width = 4.5)
+pdf("Figures/YearsSavedGainedxx10.pdf",height = 4,width = 4.6)
 #dev.new(height = 4,width = 4.5)
-par(xaxs = "i",yaxs = "i", mai = c(.5, .5, .5, 1))
+par(xaxs = "i",yaxs = "i", mai = c(.5, .6, .5, 1))
 tics <- plotSetup(xlim)
 PyrLevels(MalesA, FemalesA, revColors = FALSE, colRamp = BrewerRamp("Blues"))
 PyramidOutline(colSums(MalesA), colSums(FemalesA), col = NA, border = gray(.2), lwd = .5)
-DrawLabels(tics, ylab = "Age Saved",xlab = "Years gained (Millions)", xlabs = zapsmall(abs(tics$x / 1e6)))
+DrawLabels(tics, ylab = "Age Saved at",xlab = "Years gained (Millions)", xlabs = zapsmall(abs(tics$x / 1e6)))
 Drawlegend(tics, N = min(dim(MalesA)), colRamp = BrewerRamp("Blues"), revColors = TRUE, label = "Ages gained")
 dev.off()
 
+sum(MalesA)
+sum(MalesY)
+sum(FemalesA)
+sum(FemalesY)
+sum(Dxm) 
+sum(Dxf)
+sum(Dxm) + sum(Dxf)
+sum(MalesA) + sum(FemalesA)
 
-# What would everything look like if particular causes were eliminated, assuming exclusivity 
+# saved-years-weighted mean age at which lives would be saved
+sum((rowSums(Males) + rowSums(Females)) * .5:110.5) / sum(Males+Females)
+
+# mean age in which saved lives are lived after saving
+sum((colSums(Males) + colSums(Females)) * .5:110.5) / sum(Males+Females)
+# i.e., average age of a life once-saved
+sum(colSums(Males)* .5:110.5) / sum(Males)
+sum(colSums(Females)* .5:110.5) / sum(Females)
+
+plot(rowSums(Males) + rowSums(Females))
+plot(colSums(Males) + colSums(Females))
+
+sum(Males[51,])
+Dxm[51]
+fy50 <- dxm[51:111] / lxm[51]
+
+(sum(fy50 * 50.5:110.5) - 50) * Dxm[51]
 
 
 

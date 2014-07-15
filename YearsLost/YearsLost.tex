@@ -65,8 +65,8 @@ $y$, of a still-alive person aged $a$, $y = X - a$.
 	\includegraphics[scale=.8]{Figures/LifeLine.pdf}	
 \end{figure}
 Figure~\ref{fig:line} gives a schematic representation of this simple
-relationshp. For a cohort, the
-distribution of $X$ is given by $f(X)$, which is equal to the familar lifetable
+relationshp, which generalizes to other durations or state transitions. For a
+cohort, the distribution of $X$ is given by $f(X)$, which is equal to the familar lifetable
 $d(a)$ for $a = X$, when specified with a radix of 1. The distribution of
 \textit{remaining} lifetimes for those having survived to age $a$, $f(y|a)$ is
 given by:\footnote{Equation \eqref{eq:fya} is easily modifiable to account for
@@ -104,8 +104,8 @@ In comparing $P(a)$ with $P(y)$, as in \citet{brouard1986structure}, we still
 refer to the living (lived or to-be-lived) part of a population.
 Is it so clear that the dead are no longer part of the population? If a life is
 completely saved, this life stays in the living population and is not counted
-as a death, but we often imagine saved lives as a transient state
-classification.
+as a death, but we (in common thinking) often imagine saved lives as a transient
+state classification.
 Perhaps this is not correct for demographers: amongst the living there
 are no saved lives but only lived lives. Still we can quantify
 hypothetically saveable life, and for this we must look to deaths.
@@ -115,31 +115,31 @@ to proceed), one may ask much more than how many lives can be saved, $D^s(a)$
 \begin{equation}
 D^s(a) = \mu(a)P(a) \quad \quad \text{,}
 \end{equation}
-but also how many years would the saved people live? The simplest calculation
-is to multiply the number of gained survivors by remaining life expectancy, $e(a)$:
+but also how many years would the people saved at age $a$ live,
+$W^s(a)$\footnote{A mnemonic for $W$ could be \textit{won} years.}? The simplest
+calculation is to multiply the number of gained survivors by remaining life expectancy, $e(a)$:
 \begin{align}
 \label{eq:savedea}
-D^s(a)e(a) &= P(a)\mu(a)\frac{1}{l(a)}\int_{y=0}^\infty l(a+y) \dd y %\notag\\
+W^s(a) = D^s(a)e(a) &= P(a)\mu(a)\frac{1}{l(a)}\int_{y=0}^\infty l(a+y) \dd y
+%\notag\\
          %&= \mu(a)\int_{y=0}^\infty B(t-a)l(a+y) \dd y 
 \end{align}
 $D^s(a)e(a)$ classifies potentially saved person-years by the
 ages in which they were saved. Figure~\ref{fig:Day} (left) shows US 2010 period
 deaths (all the lives that could be saved) by age and sex (males on the left,
-females on the right). Deaths have been decomposed into discrete categories of
-remaining years of life using equation~\eqref{eq:fya}, under the assumption that saved lives are subject to the same mortality schedule as the rest of the population, and under the supposition that all 2010 deaths get saved (just
-once). The results of this decompositon are represented by color bands in
+females on the right). Over 1.23 million deaths were recorded for males
+and females each in 2010 in the US. Deaths have been decomposed into discrete
+categories of remaining years of life using equation~\eqref{eq:fya}, under the assumption that saved lives are subject to the same mortality schedule as the rest of the population, and under the supposition that all 2010 deaths get saved (just once). The results of this decompositon are represented by color bands in
 Figure~\ref{fig:Day}. Figure~\ref{fig:Dya} (right) displays the same
 information after flipping the y axis and color gradient from
 Figure~\ref{fig:Day}. Now the remaining lifespans (years left) of
 hypothetically saved lives are the primary y axis, while ages (years lived)
-are displayed with color. 
+are displayed with color. Figure~\ref{fig:Dya} communicates that most saveable
+lives would live short remaining lifespans once saved and granted the same lifetable
+mortality. This is so because most saveable lives are already in high
+chronological ages. In general, the only saveable lives that might live very
+long remaining lifespans are the few deaths that occur in young ages.
 
-As is already widely understood, lives saved in young
-ages contribute more potential years of life to the population over time, and this heuristic is visible in the color gradient of Figure~\ref{fig:Day}. \footnote{One hasty conclusion from this figure is that, at least if the assumption of mortality homogeneity is not to far off, a potentially saved male life selected at random will have on average more remaining years of life than a randomly selected female saveable life. This is so despite male mortality being higher than female mortality, precisely because high male mortality causes many deaths
-in younger ages, where mortality is lower (i.e., the age gradient is stronger
-than the sex gradient).} Most of the saveable lives would have short lifespans
-if reapportioned to the living population, even under the assumption of
-homogenous mortality.
 \begin{figure}
 \centering
 \caption{US, 2010 potentially saveable lives (Deaths)*}
@@ -168,49 +168,71 @@ by hypothetical remaining years of life (years left).}
 \label{fig:2}
 \begin{subfigure}[b]{.48\linewidth}
 \centering
-	\caption{Classified by age at saving and sex, and decomposed by future ages to
-	be lived.}
+	\caption{Classified by age at saving and sex, $W^s(a)$, and decomposed by
+	future ages to be lived.}
 	\label{fig:SavedGained}
 	\includegraphics[scale=.55]{Figures/YearsSavedGainedxx10.pdf}	
 \end{subfigure}
 ~
 \begin{subfigure}[b]{.48\linewidth}
 \centering
-    \caption{Classified by future ages to be lived and sex, and decomposed by age at saving.}
+    \caption{Classified by future ages to be lived and sex, and decomposed
+    by age at saving.}
 	\label{fig:LostLived}
     \includegraphics[scale=.55]{Figures/YearsLostLivedyx10.pdf}
 \end{subfigure}
 \caption*{*Data from \citetalias{HMD}. (Note different x scale from
 Figure~\ref{fig:1}).}
 \end{figure}
+Figure~\ref{fig:SavedGained} shows the results of applying
+equation~\eqref{eq:savedea} to the same US data, which is essentially a
+reweighting of Figure~\ref{fig:Day} by remaining life expectancy. Color bands
+are assigned by decomposing the total life to be lived into the ages through
+which it will be lived. For example, if we save all 11700 of the 50-year-old
+males that died in 2010, they would live a total of 349000 combined years (under
+constant and homogenous mortality), spread out over ages 50 and higher according
+to $f(50+y|50)$. In Figure~\ref{fig:SavedGained} we decompose these gained
+years of life according to equation\eqref{eq:savedy} (using $f(a+y|a)$) and
+highlight this decomposition with color, while in Figure~\ref{fig:LostLived}, \textit{gained} ages become the primary y axis,
+while color bands represent the ages in which populations in each age group were
+saved. Figure~\ref{fig:LostLived} represents the cumulative contribution to the
+population pyramid that would result from saving all lives in 2010 and then
+surviving them forward according to 2010 mortality conditions.
 
-One may also wish
-to know the distribution of remaining lifespans of saved lives, which is quite
-different from \eqref{eq:savedea}:\footnote{Under constant mortality, but
+One may also wish to know the distribution of remaining lifespans of saved
+lives, which is quite different from \eqref{eq:savedea}:\footnote{Under constant mortality, but
 not-necessarily constant fertility, this simplifies to $D^s(a)f(y|a) =
 B(t-a)\mu(a)\mu(a+y)l(a+y)$}
 \begin{equation}
 \label{eq:savedy}
 D^s(a)f(y|a) = P(a)\mu(a)\mu(a+y) \frac{l(a+y)}{l(a)} \tc
 \end{equation}
-or indeed the ages in which the gained years of life would be lived, which is
-the same as \eqref{eq:savedy} but shifted up element-wise by $a$. 
+or indeed the time-to-death distribution of the total years of life
+gained:\footnote{not yet included in figures, coming soon.}
+\begin{equation}
+\label{eq:gainedy}
+W^s(y) = \int_{a=0}^\infty D^s(a)\frac{l(a+y)}{l(a)} \dd a \tc
+\end{equation}
+or indeed the ages in which the gained years of life would be lived,
+$W^s(a+y|a)$:
+\begin{equation}
+\label{eq:gaineday}
+W^s(a+y|a) = D^s(a)\frac{l(a+y)}{l(a)} \tc
+\end{equation}
+A bit more description to come here.
 
-\section{Application to causes of death.}
-
+\section{Extention to causes of death.}
 These basic relationships carry over when deaths and survival are adjusted to
 account for the hypothetical elimination of particular causes (in the case of
-exclusivity).
-In this case $D^s$ is the sum of $c$ causes, and to speak of eliminating
-cause $c$ from the lifetable is to speak of saving $D^{sc}$ lives and then
-subject them to mortality conditions of all causes except $c$ (I give myself
-carte blanche regarding competing risks for the time being).
-This is problematic in that causes are not actually exclusive, and also in that we don't truly eliminate causes
-entirely over all ages, but it serves as a good basis for comparing the relative
+exclusivity). In this case $D^s$ is the sum of $c$ causes, and to speak of
+eliminating cause $c$ from the lifetable is to speak of saving $D^{sc}$ lives and then
+subject them to the mortality conditions of all causes except $c$.
+This is problematic in that causes are not exclusive, and also in that we do not
+truly eliminate causes entirely over all ages, but it serves as a good basis for comparing the relative
 impacts of different causes on a given population structure. Similarity between
 temporal patterns of saveable cause-specific remaining lifespans might also
-serve as a basis for judging how much particular causes actually compete as
-risks, wherein true ersatz causes will have identical distributions (and so may
+serve as an ad hoc basis for judging how much particular causes actually compete
+as risks, wherein true ersatz causes will have similar distributions (and so may
 be grouped).
 
 Let us then define the force of mortality, $\mu(a) = \sum _{c=1}^n \mu^c(a)$,
@@ -235,6 +257,8 @@ e^{-c}(a) &= \frac{1}{l^{-c}(a)}\int _y^\infty l^{-c}(a+y) \dd y \tp
 and so on, repeating equations \eqref{eq:savedea} and \eqref{eq:savedy} for the
 case of cause-specific saveable lives and their cause-deleted remaining
 lifespans.
+
+Figures to be repeated for a sample cause of death, probably external causes.
 
 \section{Observed patterns}
 

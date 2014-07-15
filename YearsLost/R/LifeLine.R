@@ -5,9 +5,9 @@ source("R/Functions.R")
 a <- 5
 
 graphics.off()
-#dev.new(height = 1, width = 5)
-pdf("Figures/LifeLine.pdf", height = 1, width = 5)
-par(mai = c(0, 0, 0, 0), xaxs = "i", yaxs = "i")
+#dev.new(height = 1, width = 6)
+pdf("Figures/LifeLine.pdf", height = 1, width = 6)
+par(mai = c(0, .5, 0, .5), xaxs = "i", yaxs = "i")
 plot(NULL, 
         type = 'n', 
         xlim = c(0, 10), 
@@ -26,8 +26,10 @@ points(1, 1, pch = 1, cex = 1.5)
 points(9, 1, pch = 19, cex = 1.5)
 
 segments(a + 1, .9, a + 1, 1.1, lwd = 1)
-text(c(1+a/2,1+a + (8-a)/2),1.8,c("a","y"),col = c("forestgreen","blue"))
-text(5,.2,"X")
+text(c(1 + a / 2, 1 + a + (8 - a) / 2), 1.8, c("a", "y"), col = c("forestgreen", "blue"))
+text(5, .2, "X")
+text(0, 1, "Birth\n(state entry)", xpd = TRUE)
+text(10, 1, "Death\n(state exit)", xpd = TRUE)
 dev.off()
 
 
