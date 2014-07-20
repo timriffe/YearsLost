@@ -29,9 +29,16 @@
 \author[2]{A{\"i}da Sole Auro}
 \affil[1]{Department of Demography, University of California, Berkeley}
 \affil[2]{Institut National d'{\'e}tudes d{\'e}mographiques}
-% A{\"i}da Sole Auro
+
 \maketitle
 
+% AS: I know that you said that this paper is not motivated by a substantive
+ % research question, but I
+%feel that there is a lack of the main research point. Why are you doing this
+% investigation? Are you going to present various descriptive possible scenarios about mortality 
+% impacts and potentials gains (in years of good/bad life). To address so, the
+% abstract needs to explain, in a very synthetic way, what the reader will find in the full manuscript.
+%
 \begin{abstract}
 The lives and potential years of life lost due to death are presented as metric
 for describing the population impacts of death and for comparing causes of
@@ -43,20 +50,37 @@ potential impacts of death and causes of death on population size and structure,
 and on the distribution of lifespans within populations. 
 \end{abstract}
 
-\section*{Temporal relationships}
-%To begin, assume a closed population and ignore what determines the size of
-%successive birth cohorts, $B(t)$, which we usually call the birth flow. If
-%$B(t)$ is a given, then the only other factor that determines population size
-%and age structure is the length of the lives of its members. For simplicity,
-%assume that the age pattern to mortality is fixed (this isn't necessary, but it
-% simplifies notation). The population of age $a$ in year $t$, $P(a,t)$, is a function of the survival of the birth cohort born in year $t-a$. Since we're
-%fixing mortality, survival from age 0 to $a$ is $l(a)$ for any given cohort, so
-%$P(a,t) = B(t-a)l(a)$.
+%There is a need for an introduction. A general framework to situate the reader,
+% which concludes with a research question. We also need a paragraph to present
+% the data you are willing to use, as well as years and countries. The
+% introduction might structure a little bit what comes next: A) Temporal
+% relationships, B) Extension to causes of death; C) Population comparisons.
+%
 
-Population stock in a given year, $t$, can be structured by birth
-cohorts or age, the way we typically make population pyramids. If an entire
-lifespan is denoted by the random variable, $X$, then the remaining lifespan,
-$y$, of a still-alive person aged $a$, $y = X - a$. 
+
+\section*{Temporal relationships}
+% To begin, assume a closed population and ignore what determines the size of
+% successive birth cohorts, $B(t)$, which we usually call the birth flow. If
+% $B(t)$ is a given, then the only other factor that determines population size
+% and age structure is the length of the lives of its members. For simplicity,
+% assume that the age pattern to mortality is fixed (this isn't necessary, but
+% it simplifies notation). The population of age $a$ in year $t$, $P(a,t)$, is a function of 
+% the survival of the birth cohort born in year $t-a$. Since we're
+% fixing mortality, survival from age 0 to $a$ is $l(a)$ for any given cohort,
+% so $P(a,t) = B(t-a)l(a)$.
+
+% AS: Temporal relationships: I really like this section, but I think it needs
+% to be reordered. Starting from Figure 1, moving to Figure 2 which perfectly illustrates what you 
+% can do (using different populations) to compute the average years of life
+% left. But I suggest you to first describe the idea, what you have done at the
+% bottom of page 2 and then say something like: "and this translates into the following 
+% form"; therefore, you can add your formulas. Followed by Figure 3. Since I am
+% writing this email as I am reading, I just realized that you need a paragraph in front to introduce
+% what follows: a) lifetime; b) remaining years of life; c) potentially savable lives. I need to 
+% think more about these figures, but the work is there.  Population stock in a
+% given year, $t$, can be structured by birth cohorts or age, the way we typically make 
+% population pyramids. If an entire lifespan is denoted by the random variable,
+% $X$, then the remaining lifespan, $y$, of a still-alive person aged $a$, $y = X - a$.
 \begin{figure}[h]
 \centering
 	\caption{A lifeline, where chronological age (years lived) is indexed by $a$
@@ -222,6 +246,13 @@ W^s(a+y|a) = D^s(a)\frac{l(a+y)}{l(a)} \tc
 A bit more description to come here.
 
 \section{Extention to causes of death}
+% AS: Extension to causes of death. This is the case you want to make. Saying,
+% for instance, what if we eliminate mortality from heart disease? Or stroke? or hypertension? We 
+% need to explain an story here and the draft needs to be shaped according to
+% that. I think that all your mathematical material is very relevant but we need to get deeper into 
+% the general idea and maybe leave the formulas for an appendix. But it is ok
+% for the moment, we will think about that later.
+
 These basic relationships carry over when deaths and survival are adjusted to
 account for the hypothetical elimination of particular causes (in the case of
 exclusivity). In this case $D^s$ is the sum of $c$ causes, and to speak of
@@ -281,7 +312,10 @@ population because it has a single structure, but between countries it may only
 make sense to go back to rates, but then we lose the point of the paper. This is
 my tentative stance on between-country comparisons. It's of course all easy to
 decompose, but that seems like a frivolous step.
-
+% AS: Regarding expanding the analysis to more populations, I think that you are
+% right, but part of the differences would be not only due to the structure but the context 
+% of each population.
+%
 ---------------------------------------
 \bibliographystyle{plainnat}
   \bibliography{references}  
