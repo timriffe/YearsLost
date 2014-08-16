@@ -147,4 +147,60 @@ COD <- COD[COD$Year == 2010, ]
 COD$Age <- as.integer(gsub("\\+","",unlist(lapply(strsplit(COD$Age,split = "-"),"[[",1))))
 
 }
+#
+#require(devtools)
+#install_github('rCharts', 'ramnathv')
+library(rCharts)
 
+
+setwd("/home/triffe/git/YearsLost/YearsLost")
+# get plotting functions
+source("R/Functions.R")
+
+library(DemogBerkeley)
+Dx  <- readHMDweb("USA","Deaths_1x1",username = us, password = pw)
+Ex  <- readHMDweb("USA","Exposures_1x1",username = us, password = pw)
+Px  <- readHMDweb("USA","Population",username = us, password = pw)
+
+Dxm <- Dx$Male[Dx$Year == 2010]
+Exm <- Ex$Male[Ex$Year == 2010]
+Dxf <- Dx$Female[Dx$Year == 2010]
+Exf <- Ex$Female[Ex$Year == 2010]
+Pxm <- Px$Male1[Px$Year == 2010]
+Pxf <- Px$Female1[Px$Year == 2010]
+
+Mxm <- Dxm / Exm
+Mxf <- Dxf / Exf
+
+lxm <- c(1, exp(-cumsum(Mxm)))
+lxf <- c(1, exp(-cumsum(Mxf)))
+
+dxm <- lx2dx(lxm)
+dxf <- lx2dx(lxf)
+# OK, the years lost by deaths in a given age is a function of
+# the distribution of remaining life in each age and the deaths
+# in those ages.
+
+# xlim is shared
+xlim     <- max(pretty(c(Pxm, Pxf))) * c(-1, 1)
+
+# Leaf
+Males   <- ThanoAgg(Pxm, dxm, FALSE, N = 10)
+Females <- ThanoAgg(Pxf, dxf, FALSE, N = 10)
+
+library(reshape2)
+MalesL <- melt(-Males, varnames = c("a","y"),value.name = "Population")
+FemalesL <- melt(Females, varnames = c("a","y"),value.name = "Population")
+MalesL$Sex <- "m"
+FemalesL$Sex <- "f"
+Pop2        <- rbind(MalesL,FemalesL)
+Pop2$Population <- Pop2$Population / sum(abs(Pop2$Population)) * 100
+
+n1 <- nPlot(Population~y, data = Pop2,groups="a",type = 'multiBarHorizontalChart')
+n1$chart(stacked = TRUE)
+slotNames(n1)
+n1$chart
+
+d1 <- dPlot(value~y+a,data=Pop,type="bar",stacked=TRUE)
+d1$yAxis(type="addCategoryAxis", orderRule="a")
+d1$xAxis(type="addMeasureAxis")
