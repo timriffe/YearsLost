@@ -40,8 +40,9 @@
 % abstract needs to explain, in a very synthetic way, what the reader will find in the full manuscript.
 %
 \begin{abstract}
-The lives and potential years of life lost due to death are presented as metric
-for describing the population impacts of death and for comparing causes of
+We classify cause of death impacts on the stock and structure of lives and
+lifespans in ten countries using a counterfactual framework. The lives and potential years
+of life lost due to death are presented as a metric for describing the population impacts of death and for comparing causes of
 death. Lost lives and years of life may be classified by the ages in which
 deaths occurred, by the ages to which deaths would be postponed were they saved, by the
 ages in which the lost years would have been lived, or by the distribution of
@@ -56,10 +57,51 @@ and on the distribution of lifespans within populations.
 % introduction might structure a little bit what comes next: A) Temporal
 % relationships, B) Extension to causes of death; C) Population comparisons.
 %
+\section*{Introduction}
+A core task of demography is to explain and predict the population
+pyramid and the forces that shape it. The pyramid represents population
+size and age structure, and it is shaped by the flows of births,
+deaths, and migrations\footnote{We are guilty of omitting migration from
+the following exposition, although some of the methods presented here would
+translate cleanly to emigration.}. Of these flows, births are usually regarded as the primary driver of age structure in the pyramid. Year to year variation in the
+number of deaths deducts relatively smoothly from a wide range of ages,
+making mortality mostly invisible in the pyramid, whereas year to year variation
+in the number of births is preserved in ages. This is perhaps why the formal
+relationships between mortality and age structure have been less charted than
+those between births and age structure. 
 
+Demographers most often quantify death in terms of rates and expectancies,
+because such quantities are considered purged of accidental distortions from
+age structure. Public health institutes and news media often also report trends
+in absolute numbers of deaths from particular causes and the total potential years of life lost (YPLL) due to
+these deaths.\footnote{\citet{gardner1990ypll} reviews commonly used methods of
+calculating YPLL. The Global Burden of Disease reports refer to YPLL as YLL.
+As a news media example, in 2013 the Guardian ran a data blog entry
+visualizing the years of life lost in the USA due to gun violence
+\citep{rogers2013gun}. } In either of these treatments, mortality and deaths are
+isolated from age structure, although the notion of YPLL dovetails with
+population size. In this paper we deviate from common practice, and
+instead treat deaths as population through the notion of potentially saveable
+life. Demography based on this step is a counterfactual exercise. We will show
+that saveable life and lifetime can be quantified flexibly with respect to
+demgographic perspectives on age and lifespan. These perspectives refine and
+supplement YPLL when assessing the population impacts of causes of death, and we
+think that they may provide useful information for the targetting and planning
+of public health interventions and the comparison of mortality burdens between
+populations and subpopulations. The visualizations presented here may also
+enrich reporting on the relative impacts of causes of death.
+
+We first formally define what is meant by age and lifespan
+perspectives. We first explain on the example of all-cause
+mortality before proposing an extention to causes of death. We then compare a selection of ten
+contemporary national populations based on pre-release data newly collected by
+the Human Mortality Database\citetalias{HMD}, and propose a few different ways
+of arranging and visualizing results for purposes of reporting making
+comparisons. Finally we discuss the limits of these methods and the
+utility of the information gained by them.
 
 \section*{Temporal relationships}
-% To begin, assume a closed population and ignore what determines the size of
+% To begin, sume a closed population and ignore what determines the size of
 % successive birth cohorts, $B(t)$, which we usually call the birth flow. If
 % $B(t)$ is a given, then the only other factor that determines population size
 % and age structure is the length of the lives of its members. For simplicity,
@@ -77,10 +119,12 @@ and on the distribution of lifespans within populations.
 % form"; therefore, you can add your formulas. Followed by Figure 3. Since I am
 % writing this email as I am reading, I just realized that you need a paragraph in front to introduce
 % what follows: a) lifetime; b) remaining years of life; c) potentially savable lives. I need to 
-% think more about these figures, but the work is there.  Population stock in a
-% given year, $t$, can be structured by birth cohorts or age, the way we typically make 
-% population pyramids. If an entire lifespan is denoted by the random variable,
-% $X$, then the remaining lifespan, $y$, of a still-alive person aged $a$, $y = X - a$.
+% think more about these figures, but the work is there.  
+
+Population stock in a
+ given year, $t$, can be structured by birth cohorts or age, the way we typically make 
+ population pyramids. If an entire lifespan is denoted by the random variable,
+ $X$, then the remaining lifespan, $y$, of a still-alive person aged $a$, $y = X - a$.
 \begin{figure}[h]
 \centering
 	\caption{A lifeline, where chronological age (years lived) is indexed by $a$
@@ -89,10 +133,10 @@ and on the distribution of lifespans within populations.
 	\includegraphics[scale=.8]{Figures/LifeLine.pdf}	
 \end{figure}
 Figure~\ref{fig:line} gives a schematic representation of this simple
-relationshp, which generalizes to other durations or state transitions. For a
-cohort, the distribution of $X$ is given by $f(X)$, which is equal to the familar lifetable
-$d(a)$ for $a = X$, when specified with a radix of 1. The distribution of
-\textit{remaining} lifetimes for those having survived to age $a$, $f(y|a)$ is
+relationship between age and the lifespan for a single life.
+For a cohort, the distribution of $X$ is given by $f(X)$, which is equal to the familar lifetable
+$d(a)$ for $a = X$, when the lifetable is specified with a radix of 1. The
+distribution of \textit{remaining} lifetimes for those having survived to age $a$, $f(y|a)$ is
 given by:\footnote{Equation \eqref{eq:fya} is easily modifiable to account for
 mortality schedules that change over time.}
 \begin{equation}
