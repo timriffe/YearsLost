@@ -1,0 +1,19 @@
+
+This folder contains some objects not present in the repository at this time.
+
+There is a folder 'COD5x1', which contains HMD Cause of Death csv output tabulated into 20 chapters for SWE,NOR,USA,CAN,ENW and FRA. These files are presumably in the same format and with similar names to what the HMD will eventually (in the course of 2014) publish. Some changes may happen in these files between the time of this writing and when they get published, but the producer (Magali Barbieri) thinks that any such changes will not affect results in this study.
+
+The R script 'R/DataPrep.R' pulls standard HMD data from the web and combines information from the COD files to produce two large lists of data, 'COD.Rdata' and 'HMD.Rdata' that are also present in the Data folder, but hidden at this time. 
+
+The DataPrep script 1) recodes the 20 HMD chapters into 8 categories.
+                    2) graduates the COD patterns into single ages 
+                    3) extends the COD patterns to age 110+ by holding constant the
+                       COD fractions from the given open age group (90 or 100 usually)
+                    4) produces some cause-deleted data objects
+
+When the HMD publishes the final data, the DataPrep script will be modified to pull everything directly from the web or easier reproducibility.
+
+
+
+
+
