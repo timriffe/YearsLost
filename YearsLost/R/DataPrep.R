@@ -181,8 +181,22 @@ grabCountryCOD <- function(XXX,HMD,Yr = 2010){
                         list(makeLD(x))
                     }
             ),"[[",1)
-    invisible(list(LDm = LDm_list, LDf = LDf_list, 
-                    Klxm = Klxm, Klxf = Klxf,
+    
+    
+    DWmc_list <- lapply(names(LDm_list), function(CD, LDm_list, Dxmc){
+                t(LDm_list[[CD]])[2:112, 2:112] * Dxmc[,CD]
+            }, LDm_list = LDm_list, Dxmc = Dxmc)
+    DWfc_list <- lapply(names(LDf_list), function(CD, LDf_list, Dxfc){
+                t(LDf_list[[CD]])[2:112, 2:112] * Dxfc[,CD]
+            }, LDf_list = LDf_list, Dxfc = Dxfc)
+    
+    names(DWmc_list) <-  names(DWfc_list) <- names(LDm_list)
+            
+    invisible(
+            list(
+            DWmc_list = DWmc_list, DWfc_list = DWfc_list,     
+            LDm = LDm_list, LDf = LDf_list, 
+            Klxm = Klxm, Klxf = Klxf,
             Kdxm = Kdxm, Kdxf = Kdxf, 
             Mxmc = Mxmc, Mxfc = Mxfc, 
             Dxfc = Dxfc, Dxmc = Dxmc,
