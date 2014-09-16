@@ -310,7 +310,7 @@ saved. Figure~\ref{fig:LostLived} represents the cumulative contribution to the
 population pyramid that would result from saving all lives in 2010 and then
 surviving them forward according to 2010 mortality conditions.
 
-\section*{Extention to causes of death}
+\section*{Causes of death}
 % AS: Extension to causes of death. This is the case you want to make. Saying,
 % for instance, what if we eliminate mortality from heart disease? Or stroke? or hypertension? We 
 % need to explain an story here and the draft needs to be shaped according to
@@ -325,11 +325,7 @@ eliminating cause $c$ from the lifetable is to speak of saving $D^{sc}$ lives an
 subject them to the mortality conditions of all causes except $c$.
 This is problematic in that causes are not exclusive, and also in that we do not
 truly eliminate causes entirely over all ages, but it serves as a good basis for comparing the relative
-impacts of different causes on a given population structure. Similarity between
-temporal patterns of saveable cause-specific remaining lifespans might also
-serve as an ad hoc basis for judging how much particular causes actually compete
-as risks, wherein true ersatz causes will have similar distributions (and so may
-be grouped).
+impacts of different causes on a given population structure.
 
 Let us then define the force of mortality, $\mu(a) = \sum _{c=1}^n \mu^c(a)$,
 as the sum of $n$ categorically separable causes. The people that will die from
@@ -341,13 +337,14 @@ D^c &= \int_0^\infty D^c(a) \dd a \\
 from mortality, retaining $D^c$ lives in the population. It makes sense to
 calculate the distribution of remaining lifespans of the $D^c$ people that would
 have died of this cause using $l(a)$ removed of the cause in question, so we define
-$l^{-c}(a)$:}
+$l^{-c}(a)$,}
 l^{-c}(a) &= e^{-\int _0^a \mu(a)-\mu^c(a) \dd a} \tc\\
-\intertext{which is hopefully more legible to render as:}
+\intertext{which is hopefully more legible to render as}
 l^{-c}(a) &= e^{-\int _0^a \mu^{-c}(a) \dd a} \tp\\
-\intertext{Continue with the same notational concept of ${ }^{-c}$ to define
-remaining life expectancy assuming survival to age $a$ and no more death from
-cause $c$ after age $a$, $e^{-c}(a)$:}
+\intertext{This is a stronger supposition than the idea of repeated
+rescusitation from \citet{vaupel1987repeated}, but the idea is to separate out
+the impacts of particular causes.
+Continue with the same notational concept of ${ }^{-c}$ to define remaining life expectancy assuming survival to age $a$ and no more death from cause $c$ after age $a$, $e^{-c}(a)$:}
 e^{-c}(a) &= \frac{1}{l^{-c}(a)}\int _y^\infty l^{-c}(a+y) \dd y \tp
 \end{align}
 and so on, repeating equations \eqref{eq:savedea} and \eqref{eq:savedy} for the
