@@ -41,7 +41,7 @@ grabCountryHMD <- function(XXX,Yr=2010,.us=us,.pw=pw){
 # 1) get required HMD data, stick into list
 HMD <- lapply(HMDcountries,grabCountryHMD)
 names(HMD) <- CODcountries
-
+save(HMD, file = "Data/HMD.Rdata")
 # ---------------------------------------------------------------------------
 # 2) get COD data
 # ---------------------------------------------------------------------------
@@ -217,7 +217,7 @@ COD <- lapply(CODcountries,grabCountryCOD,HMD=HMD)
 names(COD) <- CODcountries
 
 save(COD, file = "Data/COD.Rdata")
-save(HMD, file = "Data/HMD.Rdata")
+
 
 
 
