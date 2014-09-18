@@ -260,7 +260,7 @@ mortality.
 	\caption{Classified by age (years lived) and sex, and decomposed
 by hypothetical remaining years of life (years left).}
 	\label{fig:Day}
-	% Figure produced in R/AgeDeathPyramid.R
+	% Figure produced in R/AllCauseFigures.R
 	\includegraphics[scale=.55]{Figures/Deathsxy10.pdf}	
 	\caption*{$D^s(a)$ from equation~\eqref{eq:Dsa}}
 \end{subfigure}
@@ -270,7 +270,7 @@ by hypothetical remaining years of life (years left).}
     \caption{Classified by hypothetical remaining years of life
 (years left) and sex, and decomposed by age (years lived).}
 	\label{fig:Dya}
-	% Figure Produced in R/ThanoDeath.R
+	% Figure produced in R/AllCauseFigures.R
     \includegraphics[scale=.55]{Figures/Deathsyx10.pdf}
     \caption*{$D^s(y)$ from equation~\eqref{eq:savedy}}
 \end{subfigure}
@@ -285,7 +285,7 @@ by hypothetical remaining years of life (years left).}
 	\caption{Classified by age at saving and sex, $W^s(a)$, and decomposed by
 	future ages to be lived.}
 	\label{fig:SavedGained}
-	% Figure produced in R/AgeDeathPyramid.R
+	% Figure produced in R/AllCauseFigures.R
 	\includegraphics[scale=.55]{Figures/YearsSavedGainedxx10.pdf}
 	\caption*{$W^s(a)$ from equation~\ref{eq:savedea}}	
 \end{subfigure}
@@ -295,7 +295,7 @@ by hypothetical remaining years of life (years left).}
     \caption{Classified by future ages to be lived and sex, and decomposed
     by age at saving.}
 	\label{fig:LostLived}
-	% Figure produced in R/AgeDeathPyramid.R
+	% Figure produced in R/AllCauseFigures.R
     \includegraphics[scale=.55]{Figures/YearsLostLivedyx10.pdf}
     \caption*{$W^s(a+y|a)$ from equation~\ref{eq:gaineday}}	
 \end{subfigure}
@@ -360,6 +360,38 @@ lifespans.
 Now Figures~\ref{fig:1} and~\ref{fig:2} can be repeated for
 any particular cause of death, and the profile of each of the four perspectives
 characterizes the population impact of the given cause of death.
+Figure~\ref{fig:3} mirrors that of figures~\ref{fig:1}, except that the deaths
+ decomposed are only deaths with external causes, and external causes have been
+ eliminated from the lifetable functions used for decomposition and
+ redistribution.
+
+
+\begin{figure}
+\centering
+\caption{USA, 2010 Deaths from external causes}
+\label{fig:3}
+\begin{subfigure}[b]{.48\linewidth}
+\centering
+	\caption{Classified by age (years lived) and sex, and decomposed
+by hypothetical remaining years of life (years left).}
+	\label{fig:Dayc}
+	% Figure produced in R/SingleCauseExampleFigures.R
+	\includegraphics[scale=.55]{Figures/Deathsxy10USAExternal.pdf}	
+	\caption*{$D^{sc}(a)$}
+\end{subfigure}
+~
+\begin{subfigure}[b]{.48\linewidth}
+\centering
+    \caption{Classified by hypothetical remaining years of life
+(years left) and sex, and decomposed by age (years lived).}
+	\label{fig:Dyac}
+	% Figure produced in R/AllCauseFigures.R
+    \includegraphics[scale=.55]{Figures/Deathsyx10USAExternal.pdf}
+    \caption*{$D^{sc}(y)$ }
+\end{subfigure}
+\end{figure}
+
+
 \section{Observed patterns}
 ---------------------------------------
 
