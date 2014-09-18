@@ -90,10 +90,10 @@ pdf("Figures/YearsLostLivedyx10.pdf",height = 4,width = 4.6)
 #dev.new(height = 4,width = 4.5)
 par(xaxs = "i",yaxs = "i", mai = c(.5, .6, .5, 1))
 tics <- plotSetup(xlim)
-PyrLevels(MalesY, FemalesY, revColors = FALSE, colRamp = BrewerRamp("BuGn"))
+PyrLevels(MalesY, FemalesY, revColors = FALSE, colRamp = BrewerRamp("Oranges"))
 PyramidOutline(colSums(MalesY), colSums(FemalesY), col = NA, border = gray(.2), lwd = .5)
 DrawLabels(tics, ylab = "Ages gained",xlab = "Years gained (Millions)", xlabs = zapsmall(abs(tics$x / 1e6)))
-Drawlegend(tics, N = min(dim(MalesY)), colRamp = BrewerRamp("BuGn"), revColors = TRUE, label = "Age Saved at")
+Drawlegend(tics, N = min(dim(MalesY)), colRamp = BrewerRamp("Oranges"), revColors = TRUE, label = "Age Saved at")
 dev.off()
 
 # originally from AgeDeathPyramid.R

@@ -63,14 +63,14 @@ DrawLabels(tics, ylab = "Years Left",xlab = "(1000s)", xlabs = zapsmall(abs(tics
 Drawlegend(tics, N = min(dim(Males)), colRamp = BrewerRamp("BuGn"), label = "Years Lived",revColors = TRUE)
 dev.off()
 
-
-LDM <- makeLD(lxm)
-LDF <- makeLD(lxf)
+names(COD$USA)
+LDM <- makeLD(lxmc)
+LDF <- makeLD(lxfc)
 #(rowSums(t(LDF)[2:112,2:112] * Dxf,na.rm=TRUE))
 
 
-Males   <- t(LDM)[2:112,2:112] * Dxm
-Females <- t(LDF)[2:112,2:112] * Dxf
+Males   <- t(LDM)[2:112,2:112] * Dxmc
+Females <- t(LDF)[2:112,2:112] * Dxfc
 
 MalesY     <- AggM(Males, TRUE, N = 10)
 FemalesY   <- AggM(Females, TRUE, N = 10)
@@ -83,10 +83,12 @@ pdf(paste0("Figures/YearsLostLivedyx10",XYZ,cause,".pdf"),height = 4,width = 4.6
 #dev.new(height = 4,width = 4.5)
 par(xaxs = "i",yaxs = "i", mai = c(.5, .6, .5, 1))
 tics <- plotSetup(xlim)
-PyrLevels(MalesY, FemalesY, revColors = FALSE, colRamp = BrewerRamp("BuGn"))
+PyrLevels(MalesY, FemalesY, revColors = FALSE, colRamp = BrewerRamp("Oranges"))
 PyramidOutline(colSums(MalesY), colSums(FemalesY), col = NA, border = gray(.2), lwd = .5)
-DrawLabels(tics, ylab = "Ages gained",xlab = "Years gained (Millions)", xlabs = zapsmall(abs(tics$x / 1e6)))
-Drawlegend(tics, N = min(dim(MalesY)), colRamp = BrewerRamp("BuGn"), revColors = TRUE, label = "Age Saved at")
+DrawLabels(tics, ylab = "Ages gained",
+        xlab = "Years gained (1000s)", 
+        xlabs = zapsmall(abs(tics$x / 1e3)), cex=.7)
+Drawlegend(tics, N = min(dim(MalesY)), colRamp = BrewerRamp("Oranges"), revColors = TRUE, label = "Age Saved at")
 dev.off()
 
 # originally from AgeDeathPyramid.R
@@ -96,6 +98,7 @@ par(xaxs = "i",yaxs = "i", mai = c(.5, .6, .5, 1))
 tics <- plotSetup(xlim)
 PyrLevels(MalesA, FemalesA, revColors = FALSE, colRamp = BrewerRamp("Blues"))
 PyramidOutline(colSums(MalesA), colSums(FemalesA), col = NA, border = gray(.2), lwd = .5)
-DrawLabels(tics, ylab = "Age Saved at",xlab = "Years gained (Millions)", xlabs = zapsmall(abs(tics$x / 1e6)))
+DrawLabels(tics, ylab = "Age Saved at",xlab = "Years gained (100s)", 
+        xlabs = zapsmall(abs(tics$x / 1e3)), cex = .7)
 Drawlegend(tics, N = min(dim(MalesA)), colRamp = BrewerRamp("Blues"), revColors = TRUE, label = "Ages gained")
 dev.off()

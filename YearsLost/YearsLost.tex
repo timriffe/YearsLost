@@ -360,11 +360,21 @@ lifespans.
 Now Figures~\ref{fig:1} and~\ref{fig:2} can be repeated for
 any particular cause of death, and the profile of each of the four perspectives
 characterizes the population impact of the given cause of death.
-Figure~\ref{fig:3} mirrors that of figures~\ref{fig:1}, except that the deaths
- decomposed are only deaths with external causes, and external causes have been
- eliminated from the lifetable functions used for decomposition and
- redistribution.
-
+Figures~\ref{fig:3} and~ \ref{fig:4} depict the same temporal viewpoints,
+respectively, but now the deaths decomposed are only deaths to external
+causes, and external causes have been eliminated from the lifetable functions used for decomposition and
+ redistribution. Causes differ in their impact profiles, and this can form a
+ basic for comparison. As with population pyramids, one may prefer the use of
+ percent scales to facilitate comparisons between causes or countries. These
+ figures for external causes give visual form to the intuition that demographers
+ aleady have about external causes of death. External causes are important in
+ young ages, and affect males more than females. Saving a randomly selected
+ death from an external cause will on average have a higher payoff in terms of
+ expected years of life gained than does preventing a death in general. Further,
+ a typical life saved will traverse many working ages, and reach well into old
+ age.
+ The group with the most to gain by eliminating external causes are males in
+ their 20s.
 
 \begin{figure}
 \centering
@@ -385,30 +395,64 @@ by hypothetical remaining years of life (years left).}
     \caption{Classified by hypothetical remaining years of life
 (years left) and sex, and decomposed by age (years lived).}
 	\label{fig:Dyac}
-	% Figure produced in R/AllCauseFigures.R
+	% Figure produced in R/SingleCauseExampleFigures.R
     \includegraphics[scale=.55]{Figures/Deathsyx10USAExternal.pdf}
     \caption*{$D^{sc}(y)$ }
 \end{subfigure}
 \end{figure}
 
 
-\section{Observed patterns}
----------------------------------------
+\begin{figure}
+\centering
+\caption{USA, 2010 Deaths from external causes, years of life potentially won*}
+\label{fig:4}
+\begin{subfigure}[b]{.48\linewidth}
+\centering
+	\caption{Classified by age at saving and sex, $W^s(a)$, and decomposed by
+	future ages to be lived.}
+	\label{fig:SavedGained}
+	% Figure produced in R/SingleCauseExampleFigures.R
+	\includegraphics[scale=.55]{Figures/YearsSavedGainedxx10USAExternal.pdf}
+	\caption*{$W^s(a)$ from equation~\ref{eq:savedea}}	
+\end{subfigure}
+~
+\begin{subfigure}[b]{.48\linewidth}
+\centering
+    \caption{Classified by future ages to be lived and sex, and decomposed
+    by age at saving.}
+	\label{fig:LostLived}
+	% Figure produced in R/SingleCauseExampleFigures.R
+    \includegraphics[scale=.55]{Figures/YearsLostLivedyx10USAExternal.pdf}
+    \caption*{$W^s(a+y|a)$ from equation~\ref{eq:gaineday}}	
+\end{subfigure}
+\caption*{(Note different x scale from Figure~\ref{fig:3}).}
+\end{figure}
 
-This section takes the previous all-cause results and expands to more
-populations (the same populations to be included in cause comparisons). Here,
-each of the four plots is placed into a separate panel comparing populations.
+\FloatBarrier
 
-Then, decide whether to present a separate panel for each country of all causes
-for each perspective, or rather each cause in a unique panel comparing
-countries. I'm leaning toward each each country in a separate panel, but need to
-think on it more. I'm doubting whether it makes sense to compare populations
-that are not stable, since part of differences will be due to previous
-population structure. Comparing causes (save for competing risks) works within a
-population because it has a single structure, but between countries it may only
-make sense to go back to rates, but then we lose the point of the paper. This is
-my tentative stance on between-country comparisons. It's of course all easy to
-decompose, but that seems like a frivolous step.
+\section*{Observed patterns}
+In this section we summarize cause of death impacts from eight
+major cause groups: cancers, cardiovascular disease, external causes, ill
+defined casues, infant and congenital causes, infectious disease, mental
+debilitation, and other causes. These results will be summarized for the USA,
+Canada, England and Wales, France, Norway and Finland based on a soon-to-be
+released collection from the HMD.
+
+\section*{Discussion}
+
+%---------------------------------------
+
+
+%Then, decide whether to present a separate panel for each country of all causes
+%for each perspective, or rather each cause in a unique panel comparing
+%countries. I'm leaning toward each each country in a separate panel, but need
+% to think on it more. I'm doubting whether it makes sense to compare populations
+%that are not stable, since part of differences will be due to previous
+%population structure. Comparing causes (save for competing risks) works within
+% a population because it has a single structure, but between countries it may only
+%make sense to go back to rates, but then we lose the point of the paper. This
+% is my tentative stance on between-country comparisons. It's of course all easy to
+%decompose, but that seems like a frivolous step.
 % AS: Regarding expanding the analysis to more populations, I think that you are
 % right, but part of the differences would be not only due to the structure but the context 
 % of each population.
