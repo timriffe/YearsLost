@@ -1,4 +1,11 @@
-setwd("/home/triffe/git/YearsLost/YearsLost")
+# for Tim, this will choke
+if (system("hostname",intern=TRUE)=="triffe-N80Vm"){
+  # if I'm on the laptop
+  setwd("/home/tim/git/YearsLost/YearsLost")
+} else {
+  # in that case I'm on Berkeley system, and other people in the dept can run this too
+  setwd(paste0("/hdir/0/",system("whoami",intern=TRUE),"/git/YearsLost/YearsLost"))
+}
 # get plotting functions
 source("R/Functions.R")
 

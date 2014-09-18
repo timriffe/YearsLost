@@ -128,6 +128,7 @@ Population stock in a
  population pyramids. If an entire lifespan is denoted by the random variable
  $X$, then the remaining lifespan, $y$, of a still-alive person aged $a$, $y = X - a$.
 \begin{figure}[h]
+% Figure produced in R/LifeLine.R
 \centering
 	\caption{A lifeline, where chronological age (years lived) is indexed by $a$
 	and thanatological age (years left) is indexed by $y$.}
@@ -152,6 +153,7 @@ cross-sections of the $f(y|a)$ surface calculated from the 2010 US male period
 lifetable \citepalias{HMD}.
 \begin{figure}[h]
 \centering
+% Figure produced in R/fya.R
 	\caption{US males, 2010, $f(y|a)$ for selected ages.*}
 	\label{fig:fya}
 	\includegraphics[scale=.8]{Figures/fya.pdf}	
@@ -258,6 +260,7 @@ mortality.
 	\caption{Classified by age (years lived) and sex, and decomposed
 by hypothetical remaining years of life (years left).}
 	\label{fig:Day}
+	% Figure produced in R/AgeDeathPyramid.R
 	\includegraphics[scale=.55]{Figures/Deathsxy10.pdf}	
 	\caption*{$D^s(a)$ from equation~\eqref{eq:Dsa}}
 \end{subfigure}
@@ -267,6 +270,7 @@ by hypothetical remaining years of life (years left).}
     \caption{Classified by hypothetical remaining years of life
 (years left) and sex, and decomposed by age (years lived).}
 	\label{fig:Dya}
+	% Figure Produced in R/ThanoDeath.R
     \includegraphics[scale=.55]{Figures/Deathsyx10.pdf}
     \caption*{$D^s(y)$ from equation~\eqref{eq:savedy}}
 \end{subfigure}
@@ -281,6 +285,7 @@ by hypothetical remaining years of life (years left).}
 	\caption{Classified by age at saving and sex, $W^s(a)$, and decomposed by
 	future ages to be lived.}
 	\label{fig:SavedGained}
+	% Figure produced in R/AgeDeathPyramid.R
 	\includegraphics[scale=.55]{Figures/YearsSavedGainedxx10.pdf}
 	\caption*{$W^s(a)$ from equation~\ref{eq:savedea}}	
 \end{subfigure}
@@ -290,6 +295,7 @@ by hypothetical remaining years of life (years left).}
     \caption{Classified by future ages to be lived and sex, and decomposed
     by age at saving.}
 	\label{fig:LostLived}
+	% Figure produced in R/AgeDeathPyramid.R
     \includegraphics[scale=.55]{Figures/YearsLostLivedyx10.pdf}
     \caption*{$W^s(a+y|a)$ from equation~\ref{eq:gaineday}}	
 \end{subfigure}
@@ -320,7 +326,7 @@ surviving them forward according to 2010 mortality conditions.
 
 These basic relationships carry over when deaths and survival are adjusted to
 account for the hypothetical elimination of particular causes (in the case of
-exclusivity). In this case $D^s$ is the sum of $c$ causes, and to speak of
+exclusivity). In this case $D^s$ is the sum of $n$ causes, and to speak of
 eliminating cause $c$ from the lifetable is to speak of saving $D^{sc}$ lives and then
 subject them to the mortality conditions of all causes except $c$.
 This is problematic in that causes are not exclusive, and also in that we do not
@@ -345,18 +351,15 @@ l^{-c}(a) &= e^{-\int _0^a \mu^{-c}(a) \dd a} \tp\\
 rescusitation from \citet{vaupel1987repeated}, but the idea is to separate out
 the impacts of particular causes.
 Continue with the same notational concept of ${ }^{-c}$ to define remaining life expectancy assuming survival to age $a$ and no more death from cause $c$ after age $a$, $e^{-c}(a)$:}
-e^{-c}(a) &= \frac{1}{l^{-c}(a)}\int _y^\infty l^{-c}(a+y) \dd y \tp
+e^{-c}(a) &= \frac{1}{l^{-c}(a)}\int _{y=0}^\infty l^{-c}(a+y) \dd y \tp
 \end{align}
 and so on, repeating equations \eqref{eq:savedea} and \eqref{eq:savedy} for the
 case of cause-specific saveable lives and their cause-deleted remaining
 lifespans.
 
----------------------------------------
-
-include here a similar 2x2 set of figures showing the same four perspectives for
-external causes, and add referenced description in text about what it all means.
-
----------------------------------------
+Now Figures~\ref{fig:1} and~\ref{fig:2} can be repeated for
+any particular cause of death, and the profile of each of the four perspectives
+characterizes the population impact of the given cause of death.
 \section{Observed patterns}
 ---------------------------------------
 
