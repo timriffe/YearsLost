@@ -53,5 +53,12 @@ DrawLabels(tics, ylab = "Years Left",xlab = "(1000s)", xlabs = zapsmall(abs(tics
 Drawlegend(tics, N = min(dim(Males)), colRamp = BrewerRamp("BuGn"), label = "Years Lived",revColors = TRUE)
 dev.off()
 
-
+plot(0:110,colSums(Males))
+My <- colSums(Males)
+Fy <- colSums(Females)
+y<- .5:110.5
+sum(My * y)/sum(My)
+sum(Fy * y)/sum(Fy)
+sum(Dxm * y)/sum(Dxm)
+sum(Dxf * y)/sum(Dxf)
 

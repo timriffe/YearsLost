@@ -26,7 +26,7 @@
 \title{Life lost, lifesaving, and causes of death.}
 
 \author[1]{Tim Riffe}
-\author[2]{A{\"i}da Sole Auro}
+\author[2]{A{\"i}da Sol\'{e} Aur\'{o}}
 \affil[1]{Department of Demography, University of California, Berkeley}
 \affil[2]{Institut National d'{\'E}tudes D{\'e}mographiques}
 
@@ -80,8 +80,7 @@ As a news media example, in 2013 the Guardian ran a data blog entry
 visualizing the years of life lost in the USA due to gun violence
 \citep{rogers2013gun}. } In either of these treatments, mortality and deaths are
 isolated from age structure, although the notion of YPLL dovetails with
-population size. In this paper we deviate from common practice, and
-instead treat deaths as population through the notion of potentially saveable
+population size. In this paper we deviate from common practice, and treat deaths as population through the notion of potentially saveable
 life. Demography based on this step is a counterfactual exercise, in
 line with the formal treatment given in
 \citet{vaupel1987repeated}.\footnote{\citet{vaupel2008lifesaving} follows in a
@@ -90,17 +89,20 @@ will show that saveable life and lifetime can be quantified flexibly with respec
 think that they may provide useful information for the targetting and planning
 of public health interventions and the comparison of mortality burdens between
 populations and subpopulations. The visualizations presented here may also
-enrich reporting on the relative impacts of causes of death.
+enrich standard reporting on the absolute and relative population impacts of
+causes of death.
 
 We first formally define what is meant by age and lifespan
 perspectives, illustrating on the example of all-cause
-mortality before proposing an extention to causes of death. We then compare a selection of ten
-contemporary national populations based on pre-release data newly collected by
-the Human Mortality Database\citetalias{HMD}. We propose a few different ways
-of arranging and visualizing results for purposes of reporting or making
-comparisons. Finally we discuss the limits of these methods and the
-utility of the information gained by them. All data used in the following comes
-from the Human Mortality Database (HMD).
+mortality before proposing an extention to causes of death. Concepts are
+illustrated based on the population of the United States in 2010. We then
+compare a selection of six contemporary national populations (United States, France, England \& Wales, Norway,
+Finland and Canada) based on pre-release
+data newly collected by the Human Mortality
+Database~\citepalias{HMD}.\footnote{Possibly up to ten poulations will be
+covered if the data is compiled and ready prior to PAA. These would likely
+include Japan, the Czech Republic, Belgium and Switzerland.} We propose a few
+different ways of arranging and visualizing results for purposes of reporting or making comparisons. Finally we discuss the limits of these methods and the utility of the information gained by them. All data used in the following comes from the HMD.
 
 \section*{Temporal relationships}
 % To begin, sume a closed population and ignore what determines the size of
@@ -136,10 +138,16 @@ Population stock in a
 	\includegraphics[scale=.8]{Figures/LifeLine.pdf}	
 \end{figure}
 Figure~\ref{fig:line} gives a schematic representation of this simple
-relationship between age and the lifespan for a single life.
+relationship between age and the lifespan for a single person-life. The lived
+part we call ``age'' and the yet-unlived part has no common name. Since age is a
+placemarker on the lifeline, both $a$ and $y$ could be called ``age'', and we
+can specify them as \textit{chronological} and \textit{thanatological} age,
+respectively.\footnote{Thanatos was the Greek god of death, which marks the end of the lifeline to which $y$ relates. By this token, one could just call chronological age \textit{aphrodesian} age, but this would probably confuse things.}
+
 For a cohort, the distribution of $X$ is given by $f(X)$, which is equal to the familar lifetable
-$d(a)$ for $a = X$, when the lifetable is specified with a radix of 1. The
-distribution of \textit{remaining} lifetimes for those having survived to age $a$, $f(y|a)$ is
+$d(a)$ for $a = X$, when the lifetable is specified with a radix equal
+to unity ($l(0)=1$).
+The distribution of \textit{remaining} lifetimes for those having survived to age $a$, $f(y|a)$ is
 given by:\footnote{Equation \eqref{eq:fya} is easily modifiable to account for
 mortality schedules that change over time.}
 \begin{equation}
@@ -150,8 +158,15 @@ where $\mu(a)$ is the force of mortality at exact age $a$, and $l(a)$ is
 the value of the survival function at exact age $a$, proportional to the
 probability of surviving from birth to age $a$. Figure~\ref{fig:fya} shows selected
 cross-sections of the $f(y|a)$ surface calculated from the 2010 US male period
-lifetable \citepalias{HMD}.
-\begin{figure}[h]
+lifetable \citepalias{HMD}. The area under each chronological age-conditioned curve is equal to one.
+As an individual grows older (here in constant mortality), the central mass of the
+curve approaches zero, moving one year down per year lived. The shape of the center of
+the curve does not change much until after chronological age 60, where
+conditional rescaling drives up death probabilities more and more. Upward
+scaling continues beyond those ages shown here, with $y=0$ becoming the greatest
+single value in all ages beyond the modal chronological age at death.
+
+ \begin{figure}[h]
 \centering
 % Figure produced in R/fya.R
 	\caption{US males, 2010, $f(y|a)$ for selected ages.*}
@@ -159,16 +174,13 @@ lifetable \citepalias{HMD}.
 	\includegraphics[scale=.8]{Figures/fya.pdf}	
 	\caption*{*Note that $f(y|0) = d(a) = f(X)$.}
 \end{figure}
+
 $f(y|a)$ can be used to calculate the population having survived to age $a$ and
 with $y$ remaining years of life as $P(a,y) = P(a)f(y|a)$, where the total
 population with $y$ remaining years of life, $P(y)$, is simply $\int
 _{a=0}^\infty P(a,y) \dd a$, a single death cohort with members from many birth
 cohorts. This decomposition sorts the lifeline segments of a living population
-by the part yet-unlived (years left) rather than by the part lived. The lived
-part we call ``age'' and the unlived part has no common name. Since age is a
-placemarker on the lifeline, both $a$ and $y$ could be called ``age'', and we
-can specify them as \textit{chronological} and \textit{thanatological} age,
-respectively.\footnote{Thanatos was the Greek god of death, which marks the end of the lifeline to which $y$ relates. By this token, one could just call chronological age \textit{aphrodesian} age, but this would probably confuse things.}
+by the part yet-unlived (years left) rather than by the part lived. 
 
 The indices $a$ and $y$ differentiate between the past and future
 parts of a lifeline, respectively, and by extension of populations when
@@ -237,19 +249,24 @@ deaths (all the lives that could be saved) by age and sex (males on the left,
 females on the right). Over 1.23 million deaths were recorded for males
 and females each in 2010 in the US. Deaths have been decomposed into discrete
 categories of remaining years of life using equation~\eqref{eq:fya}, under the assumption that saved lives are subject to the same mortality schedule as the rest of the population, and under the supposition that all 2010 deaths get saved (just once). The results of this decompositon are represented by color bands in
-Figure~\ref{fig:Day}. Figure~\ref{fig:Dya} (right) displays the same
-decomposition after swapping the y axis and color gradient from
-Figure~\ref{fig:Day}. Now thanatological age (years left) of
-hypothetically saved lives are the primary y axis, while ages (years lived)
-are displayed with color. Figure~\ref{fig:Dya} communicates that most saveable
+Figure~\ref{fig:Day}. The average chronological age at death
+for males was a full seven years lower than that for females
+(69.9 versus, 76.9, respectively). Figure~\ref{fig:Dya} (right) displays the
+same decomposition after swapping the y axis and color gradient from Figure~\ref{fig:Day}. Now thanatological age (years left) of hypothetically saved lives are the primary y axis, while chronological age groups (years lived) are displayed with color. Figure~\ref{fig:Dya} communicates that most saveable
 lives would live short remaining lifespans once saved and granted the same lifetable
 mortality. This is so because most saveable lives are already in high
 chronological ages. In general, the only saveable lives that might live very
-long remaining lifespans are the few deaths that occur in young ages. Randomly
-selected saveable males would have on average longer remaining lifespans than
-randomly selected saveable females from this population. This paradox is due to
-age structure distortion, which is however mostly due to sex differences in
-mortality.
+long remaining lifespans are the few deaths that occur in young ages. 
+
+Randomly
+selected saveable males from this population would have on average longer
+remaining lifespans than randomly selected saveable females (16.7 versus 13.3 years,
+respectively). This is a paradox because females have lower mortality rates in
+nearly all ages, and have longer remaining life expectancies in all ages. Female
+mortality advantage is in this case more than offset by the relative youth of
+male deaths. Untangling the paradox further becomes a recursive exercise,
+since the relative youth of male deaths is due an interaction between mortality
+schedules and population structure, iself an outcome of past vital forces.
 
 \begin{figure}
 \centering
@@ -301,6 +318,7 @@ by hypothetical remaining years of life (years left).}
 \end{subfigure}
 \caption*{(Note different x scale from Figure~\ref{fig:1}).}
 \end{figure}
+
 Figure~\ref{fig:SavedGained} shows the results of applying
 equation~\eqref{eq:savedea} to the same US data, which is essentially a
 reweighting of Figure~\ref{fig:Day} by remaining life expectancy. Color bands
@@ -364,7 +382,7 @@ Figures~\ref{fig:3} and~ \ref{fig:4} depict the same temporal viewpoints,
 respectively, but now the deaths decomposed are only deaths to external
 causes, and external causes have been eliminated from the lifetable functions used for decomposition and
  redistribution. Causes differ in their impact profiles, and this can form a
- basic for comparison. As with population pyramids, one may prefer the use of
+ basis for comparison. As with population pyramids, one may prefer the use of
  percent scales to facilitate comparisons between causes or countries. These
  figures for external causes give visual form to the intuition that demographers
  aleady have about external causes of death. External causes are important in
@@ -372,9 +390,17 @@ causes, and external causes have been eliminated from the lifetable functions us
  death from an external cause will on average have a higher payoff in terms of
  expected years of life gained than does preventing a death in general. Further,
  a typical life saved will traverse many working ages, and reach well into old
- age.
+ ages.
  The group with the most to gain by eliminating external causes are males in
  their 20s.
+ 
+ The average chronological age of deaths to external causes in the USA in 2010
+ was 47.9 for males and 57.1 for females. Their cause-deleted mean remaining
+ lifetimes were 34.0 and 29.8 years, respectively. The mean age-at-saving of all
+ the person-years hypothetically won under these same conditions becomes 36.7
+ for males and 40.3 for females, whereas the mean of the ages \textit{enjoyed}
+ by these hypothetically saved people are 59.7 and 63.3, respectively. Means do
+ not tell the story as well as images. 
 
 \begin{figure}
 \centering
@@ -410,7 +436,7 @@ by hypothetical remaining years of life (years left).}
 \centering
 	\caption{Classified by age at saving and sex, $W^s(a)$, and decomposed by
 	future ages to be lived.}
-	\label{fig:SavedGained}
+	\label{fig:SavedGainedUSAExternal}
 	% Figure produced in R/SingleCauseExampleFigures.R
 	\includegraphics[scale=.55]{Figures/YearsSavedGainedxx10USAExternal.pdf}
 	\caption*{$W^s(a)$ from equation~\ref{eq:savedea}}	
@@ -420,7 +446,7 @@ by hypothetical remaining years of life (years left).}
 \centering
     \caption{Classified by future ages to be lived and sex, and decomposed
     by age at saving.}
-	\label{fig:LostLived}
+	\label{fig:LostLivedUSAExternal}
 	% Figure produced in R/SingleCauseExampleFigures.R
     \includegraphics[scale=.55]{Figures/YearsLostLivedyx10USAExternal.pdf}
     \caption*{$W^s(a+y|a)$ from equation~\ref{eq:gaineday}}	
@@ -432,11 +458,11 @@ by hypothetical remaining years of life (years left).}
 
 \section*{Observed patterns}
 In this section we summarize cause of death impacts from eight
-major cause groups: cancers, cardiovascular disease, external causes, ill
-defined casues, infant and congenital causes, infectious disease, mental
+major cause groups: cancers, cardiovascular disease, external causes, ill-defined casues, infant and congenital causes, infectious disease, mental
 debilitation, and other causes. These results will be summarized for the USA,
 Canada, England and Wales, France, Norway and Finland based on a soon-to-be
-released collection from the HMD.
+released collection from the HMD. This section may have a supplemental appendix
+of results.
 
 \section*{Discussion}
 
@@ -456,7 +482,7 @@ released collection from the HMD.
 % AS: Regarding expanding the analysis to more populations, I think that you are
 % right, but part of the differences would be not only due to the structure but the context 
 % of each population.
-%
+% 
 ---------------------------------------
 \bibliographystyle{plainnat}
   \bibliography{references}  
