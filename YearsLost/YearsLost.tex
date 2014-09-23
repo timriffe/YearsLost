@@ -63,10 +63,13 @@ pyramid and the forces that shape it. The pyramid represents population
 size and age structure, and it is shaped by the flows of births,
 deaths, and migrations\footnote{We are guilty of omitting migration from
 the following exposition, although some of the methods presented here would
-translate cleanly to emigration.}. Of these flows, births are usually regarded as the primary driver of age structure in the pyramid. Year to year variation in the
-number of deaths tends to deduct smoothly from a wide range of ages,
-making mortality mostly invisible in the pyramid, whereas year to year variation
-in the number of births is preserved in ages. This is perhaps why 
+translate cleanly to emigration.}. Of these flows, births are usually regarded
+as the primary driver of variation in the profile of the pyramid,\footnote{This
+is true to the extent that wars, epidemics, and other mortality shocks effect
+broad age ranges rather than abrupt age groups.} whereas the pattern of survival
+exterts a gentler influence on the overall shape of the pyramid.
+Year to year variation in the number of deaths tends to deduct
+smoothly from a wide range of ages, making mortality mostly invisible in the pyramid, whereas year to year variation in the number of births is preserved in ages. This is perhaps why 
 relationships between mortality and age structure have been less charted than
 those between births and age structure. 
 
@@ -74,7 +77,7 @@ Demographers most often quantify death in terms of rates
 because such quantities are considered purged of accidental distortions from
 age structure. Public health institutes and news media often also report trends
 in absolute numbers of deaths from particular causes and the total potential years of life lost (YPLL) due to
-these deaths.\footnote{\citet{gardner1990} reviews commonly used methods of
+these deaths.\footnote{\citet{gardner1990} review commonly used methods of
 calculating YPLL. The Global Burden of Disease reports refer to YPLL as YLL.
 As a news media example, in 2013 the Guardian ran a data blog entry
 visualizing the years of life lost in the USA due to gun violence
@@ -84,7 +87,7 @@ population size. In this paper we deviate from common practice, and treat deaths
 life. Demography based on this step is a counterfactual exercise, in
 line with the formal treatment given in
 \citet{vaupel1987repeated}.\footnote{\citet{vaupel2008lifesaving} follows in a
-similar vein, but aimed at the effects of lifesaving on period distortions.} We
+similar vein, but aims at the effects of lifesaving on period distortions.} We
 will show that saveable life and lifetime can be quantified flexibly with respect to demographic perspectives on age and lifespan. These perspectives refine and supplement YPLL when assessing the population impacts of causes of death, and we
 think that they may provide useful information for the targetting and planning
 of public health interventions and the comparison of mortality burdens between
@@ -96,13 +99,12 @@ We first formally define what is meant by age and lifespan
 perspectives, illustrating on the example of all-cause
 mortality before proposing an extention to causes of death. Concepts are
 illustrated based on the population of the United States in 2010. We then
-compare a selection of six contemporary national populations (United States, France, England \& Wales, Norway,
-Finland and Canada) based on pre-release
+compare a selection of five contemporary national populations (United States, England \& Wales, Norway, Sweden and Canada) based on pre-release
 data newly collected by the Human Mortality
 Database~\citepalias{HMD}.\footnote{Possibly up to ten poulations will be
-covered if the data is compiled and ready prior to PAA. These would likely
-include Japan, the Czech Republic, Belgium and Switzerland.} We propose a few
-different ways of arranging and visualizing results for purposes of reporting or making comparisons. Finally we discuss the limits of these methods and the utility of the information gained by them. All data used in the following comes from the HMD.
+covered if the data are compiled and ready prior to PAA. These would likely
+include Japan, the Czech Republic, Belgium, France and Switzerland.} We propose
+a few different ways of arranging and visualizing results for purposes of reporting or making comparisons. Finally we discuss the limits of these methods and the utility of the information gained by them. All data used in the following comes from the HMD.
 
 \section*{Temporal relationships}
 % To begin, sume a closed population and ignore what determines the size of
@@ -265,8 +267,8 @@ respectively). This is a paradox because females have lower mortality rates in
 nearly all ages, and have longer remaining life expectancies in all ages. Female
 mortality advantage is in this case more than offset by the relative youth of
 male deaths. Untangling the paradox further becomes a recursive exercise,
-since the relative youth of male deaths is due an interaction between mortality
-schedules and population structure, iself an outcome of past vital forces.
+since the relative youth of male deaths is due to an interaction between
+mortality schedules and population structure, iself an outcome of past vital forces.
 
 \begin{figure}
 \centering
@@ -299,8 +301,8 @@ by hypothetical remaining years of life (years left).}
 \label{fig:2}
 \begin{subfigure}[b]{.48\linewidth}
 \centering
-	\caption{Classified by age at saving and sex, $W^s(a)$, and decomposed by
-	future ages to be lived.}
+	\caption{Classified by age at hypothetical saving and sex, $W^s(a)$, and
+	decomposed by future ages to be lived.}
 	\label{fig:SavedGained}
 	% Figure produced in R/AllCauseFigures.R
 	\includegraphics[scale=.55]{Figures/YearsSavedGainedxx10.pdf}
@@ -309,8 +311,8 @@ by hypothetical remaining years of life (years left).}
 ~
 \begin{subfigure}[b]{.48\linewidth}
 \centering
-    \caption{Classified by future ages to be lived and sex, and decomposed
-    by age at saving.}
+    \caption{Classified by cumulative ages to be lived through and sex, and
+    decomposed by age at saving.}
 	\label{fig:LostLived}
 	% Figure produced in R/AllCauseFigures.R
     \includegraphics[scale=.55]{Figures/YearsLostLivedyx10.pdf}
@@ -344,12 +346,12 @@ surviving them forward according to 2010 mortality conditions.
 
 These basic relationships carry over when deaths and survival are adjusted to
 account for the hypothetical elimination of particular causes (in the case of
-exclusivity). In this case $D^s$ is the sum of $n$ causes, and to speak of
+independence). In this case $D^s$ is the sum of $n$ causes, and to speak of
 eliminating cause $c$ from the lifetable is to speak of saving $D^{sc}$ lives and then
 subject them to the mortality conditions of all causes except $c$.
-This is problematic in that causes are not exclusive, and also in that we do not
-truly eliminate causes entirely over all ages, but it serves as a good basis for comparing the relative
-impacts of different causes on a given population structure.
+This is problematic in that causes are not independent, and also in that
+reductions in cause-specific mortality are not so thorough , but it serves as a
+good basis for comparing the relative impacts of different causes on a given population structure.
 
 Let us then define the force of mortality, $\mu(a) = \sum _{c=1}^n \mu^c(a)$,
 as the sum of $n$ categorically separable causes. The people that will die from
@@ -366,10 +368,10 @@ l^{-c}(a) &= e^{-\int _0^a \mu(a)-\mu^c(a) \dd a} \tc\\
 \intertext{which is hopefully more legible to render as}
 l^{-c}(a) &= e^{-\int _0^a \mu^{-c}(a) \dd a} \tp\\
 \intertext{This is a stronger supposition than the idea of repeated
-rescusitation from \citet{vaupel1987repeated}, but the idea is to separate out
+resuscitation from \citet{vaupel1987repeated}, but the idea is to separate out
 the impacts of particular causes.
-Continue with the same notational concept of ${ }^{-c}$ to define remaining life expectancy assuming survival to age $a$ and no more death from cause $c$ after age $a$, $e^{-c}(a)$:}
-e^{-c}(a) &= \frac{1}{l^{-c}(a)}\int _{y=0}^\infty l^{-c}(a+y) \dd y \tp
+Let us continue with the same notational concept of ${ }^{-c}$ to define
+remaining life expectancy assuming survival to age $a$ and no more death from cause $c$ after age $a$, $e^{-c}(a)$:} e^{-c}(a) &= \frac{1}{l^{-c}(a)}\int _{y=0}^\infty l^{-c}(a+y) \dd y \tp
 \end{align}
 and so on, repeating equations \eqref{eq:savedea} and \eqref{eq:savedy} for the
 case of cause-specific saveable lives and their cause-deleted remaining
@@ -444,8 +446,8 @@ by hypothetical remaining years of life (years left).}
 ~
 \begin{subfigure}[b]{.48\linewidth}
 \centering
-    \caption{Classified by future ages to be lived and sex, and decomposed
-    by age at saving.}
+    \caption{Classified by cumulative ages to be lived through and sex, and
+    decomposed by age at saving.}
 	\label{fig:LostLivedUSAExternal}
 	% Figure produced in R/SingleCauseExampleFigures.R
     \includegraphics[scale=.55]{Figures/YearsLostLivedyx10USAExternal.pdf}
@@ -460,7 +462,7 @@ by hypothetical remaining years of life (years left).}
 In this section we summarize cause of death impacts from eight
 major cause groups: cancers, cardiovascular disease, external causes, ill-defined casues, infant and congenital causes, infectious disease, mental
 debilitation, and other causes. These results will be summarized for the USA,
-Canada, England and Wales, France, Norway and Finland based on a soon-to-be
+Canada, England and Wales, Norway, and Sweden based on a soon-to-be
 released collection from the HMD. This section may have a supplemental appendix
 of results.
 
