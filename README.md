@@ -1,6 +1,6 @@
 YearsLost
 =========
-contains latex and R code belonging to a paper in progress (with Aïda Sole Auro) with provisional title:
+contains latex and R code belonging to a paper in progress (with Aïda Sole i Auró) with provisional title:
 "Life lost, lifesaving, and causes of death."
 
 It is liekly too early to cite this, but you are cetainly free to do so before publication. Everything is freely available, with attribution, but it's probably a good idea to get in touch if you'd like to use something:
