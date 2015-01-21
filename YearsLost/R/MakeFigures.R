@@ -13,7 +13,7 @@ source("R/Functions.R")
 # life line Figure (1)
 source("R/LifeLine.R")
 source("R/fya.R")
-
+source("R/AllCauseFigures.R")
 
 
 

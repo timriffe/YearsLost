@@ -15,7 +15,7 @@ COD <- local(get(load("Data/COD.Rdata")))
 # "Cancer"      "Cardio"      "External"    "Ill defined" "Inf/Cong"   
 # "Infectious"  "Mental"      "Other"   
 
-names(COD$USA)
+#names(COD$USA)
 
 cause <- "External"
 XYZ   <- "USA"
@@ -70,7 +70,7 @@ Dcym <- colSums(Males)
 Dcyf <- colSums(Females)
 
 
-names(COD$USA)
+#names(COD$USA)
 LDM <- makeLD(lxmc)
 LDF <- makeLD(lxfc)
 #(rowSums(t(LDF)[2:112,2:112] * Dxf,na.rm=TRUE))
@@ -114,13 +114,13 @@ Males   <- t(LDM)[2:112,2:112] * Dxmc
 Females <- t(LDF)[2:112,2:112] * Dxfc
 
 # rowSums = thano, colsums = chrono
-plot(colSums(Males))
-plot(rowSums(Males))
-
-sum(colSums(Males)*y)/sum(Males)
-sum(colSums(Females)*y)/sum(Females)
-
-sum(rowSums(Males)*y)/sum(Males)
-sum(rowSums(Females)*y)/sum(Females)
-
+#plot(colSums(Males))
+#plot(rowSums(Males))
+#
+#sum(colSums(Males)*y)/sum(Males)
+#sum(colSums(Females)*y)/sum(Females)
+#
+#sum(rowSums(Males)*y)/sum(Males)
+#sum(rowSums(Females)*y)/sum(Females)
+#
 
