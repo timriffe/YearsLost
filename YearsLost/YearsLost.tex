@@ -19,6 +19,7 @@
 \newcommand{\tc}{\quad\quad\text{,}}
 \newcommand{\tp}{\quad\quad\text{.}}
 \defcitealias{HMD}{HMD}
+\defcitealias{HFD}{HFD}
 
 \begin{document}
 
@@ -103,7 +104,9 @@ compare a selection of five contemporary national populations (United States, En
 data newly collected by the Human Mortality
 Database~\citepalias{HMD}. We propose
 a selection of strategies for visualizing and arranging results for purposes of
-reporting or making comparisons. Finally we discuss the limits of these methods and the utility of the information gained by them. All data used in the following comes from the HMD.
+reporting or making comparisons. Finally we discuss the limits of these methods
+and the utility of the information gained by them. All mortality data used in
+the following comes from the HMD.
 
 \section*{Temporal relationships}
 % To begin, sume a closed population and ignore what determines the size of
@@ -151,25 +154,27 @@ For a cohort, the distribution of $X$ is given by $f(X)$, which is equal to the
 lifetable death distribution, $d(a)$, for $a = X$, when the lifetable is
 specified with a radix equal to unity ($l(0)=1$).
 The distribution of \textit{remaining} lifetime, $y$, for those having survived
-to age $a$, $f(y|a)$ is given by:\footnote{Equation \eqref{eq:fya} is easily modifiable to account for
-mortality schedules that change over time.}
+to age $a$, $f(y|a)$ is given by:\footnote{This definition is identical to
+that used in \citet{brouard1989mouvements}, \citet{vaupel2009life} or
+\citet{rao2014generalization} in proving the equality of chronological and
+thanatological age structure in stationary populations. Brouard apparently had
+proven this earlier than 1989, since he cites the relationship in
+\citet{brouard1986structure}. Equation \eqref{eq:fya} is easily modifiable to
+account for mortality schedules that change over time.}
 \begin{equation}
 \label{eq:fya}
 f(y|a) = \mu(a+y) \frac{l(a+y)}{l(a)} \tc
 \end{equation}
 where $\mu(a)$ is the force of mortality at exact age $a$, and $l(a)$ is
 the value of the survival function at exact age $a$, proportional to the
-probability of surviving from birth to age $a$. This definition is identical to
-that used in \citet{brouard1989mouvements}, \citet{vaupel2009life} or
-\citet{rao2014generalization}, and it can be simplified in words as the
-probability of surviving $y$ years in the future given survival to current age
-$a$, and then dying at the exact age $a+y$.
+probability of surviving from birth to age $a$. \eqref{eq:fya} can be expressed
+in words as the probability of surviving $y$ years in the future given survival to current age $a$, and then dying at the exact age $a+y$.
 Figure~\ref{fig:fya} shows selected cross-sections of the $f(y|a)$ surface calculated from the 2010 US male period
 lifetable \citepalias{HMD}. The area under each chronological age-conditioned curve is equal to one.
 As an individual grows older (here under a fixed mortality schedule), the
-central mass of the curve approaches zero, moving one year down per year lived. The shape of the center of
-the curve does not change much until after chronological age 60, where
-conditional rescaling drives up death probabilities more and more. Upward
+central mass of the curve approaches zero, moving one year down per year lived.
+In these data, the shape of the center of the curve does not change much until
+after chronological age 60, where conditional rescaling drives up death probabilities more and more. Upward
 scaling continues beyond those ages shown here, with $y=0$ becoming the greatest
 single value in all ages beyond the modal chronological age at death.
 
@@ -185,10 +190,9 @@ single value in all ages beyond the modal chronological age at death.
 $f(y|a)$ can be used to calculate the population having survived to age $a$ and
 with $y$ remaining years of life as $P(a,y) = P(a)f(y|a)$, where the total
 population with $y$ remaining years of life, $P(y)$, is simply $\int
-_{a=0}^\infty P(a,y) \dd a$, a single death cohort with members from many birth
-cohorts. This decomposition sorts the lifeline segments of a living population
+_{a=0}^\infty P(a,y) \dd a$ \citep{brouard1986structure, brouard1989mouvements},
+a single death cohort with members from many birth cohorts. This decomposition sorts the lifeline segments of a living population
 by the part yet-unlived (years left) rather than by the part lived. 
-
 The indices $a$ and $y$ differentiate between the past and future
 parts of a lifeline, respectively, and by extension of populations when
 so structured.
@@ -198,12 +202,12 @@ Is it so clear that the dead are no longer part of the population? If a life is
 completely saved, this life stays in the living population and is not counted
 as a death, but we (in common thinking) often imagine saved lives as a transient
 state classification.
-Perhaps this is not correct for demographers: amongst the living there
+Perhaps this is not correct for demographers: Among the living there
 are no saved lives but only lived lives. Still we can quantify
 hypothetically saveable life, and for this we must look to deaths.
 It is nice, and often realistic, to think that many of the lives taken by death
 are or will one day be saveable, but it is difficult to know what mortality
-rates would apply to a population of saved individuals. To start, we consider
+rates would apply to a population of saved individuals. Consider
 the hypothetical population of lives saved a single time from death and subject to
 the same mortality as the population at large.
 
@@ -230,10 +234,10 @@ ages in which they were saved. One may also wish to know the distribution of rem
 lives, which is quite different from \eqref{eq:savedea}:
 \begin{equation}
 \label{eq:savedya}
-D^s(a)f(y|a) = P(a)\mu(a)\mu(a+y) \frac{l(a+y)}{l(a)} \tc
+D^s(a)f(y|a) = P(a)\mu(a)\mu(a+y) \frac{l(a+y)}{l(a)} \tp
 \end{equation}
-which aggregates up to the thanatological age distribution of saved lives,
-$D^s(y)$:
+Equation \eqref{eq:savedya} aggregates up to the thanatological age distribution
+of saved lives, $D^s(y)$:
 \begin{equation}
 \label{eq:savedy}
 D^s(y) = \int D^s(a)f(y|a) \dd a \tp
@@ -261,9 +265,9 @@ for males was a full seven years lower than that for females
 (69.9 versus, 76.9, respectively). Figure~\ref{fig:Dya} (right) displays the
 same decomposition after swapping the y axis and color gradient from Figure~\ref{fig:Day}. Now thanatological age (years left) of hypothetically saved lives are the primary y axis, while chronological age groups (years lived) are displayed with color. Figure~\ref{fig:Dya} communicates that most saveable
 lives would live short remaining lifespans once saved and granted the same lifetable
-mortality. This is so because most saveable lives are already in high
-chronological ages. In general, the only saveable lives that might live very
-long remaining lifespans are the few deaths that occur in young ages. 
+mortality. This is so in this data because most saveable lives are already in
+chronological ages subject to high mortality rates. In general, the only
+saveable lives that might live very long remaining lifespans are the few deaths that occur in young ages. 
 
 Randomly
 selected saveable males from this population would have on average longer
@@ -273,7 +277,8 @@ nearly all ages, and have longer remaining life expectancies in all ages. Female
 mortality advantage is in this case more than offset by the relative youth of
 male deaths. Untangling the paradox further becomes a recursive exercise,
 since the relative youth of male deaths is due to an interaction between
-mortality schedules and population structure, iself an outcome of past vital forces.
+mortality schedules and population structure, itself a result of past
+vital forces.
 
 \begin{figure}
 \centering
@@ -335,10 +340,22 @@ males that died in 2010, they would live a total of 349000 combined years (under
 homogenous mortality), spread out over ages 50 and higher according to $\frac{l(50+y)}{l(50)}$. In Figure~\ref{fig:SavedGained} we decompose these
 gained years of life according to equation~\eqref{eq:savedy} (using $f(a+y|a)$)
 and highlight this decomposition with color, while in Figure~\ref{fig:LostLived}, \textit{gained} ages become the primary y axis,
-while color bands represent the ages in which populations in each age group were
-saved. Figure~\ref{fig:LostLived} represents the cumulative contribution to the
+and color bands represent the ages in which populations in each age group were
+saved. 
+
+Figure~\ref{fig:LostLived} represents the cumulative contribution to the
 population pyramid that would result from saving all lives in 2010 and then
-surviving them forward according to 2010 mortality conditions.
+surviving them forward according to 2010 mortality conditions. The chronological
+age axis indexes ages that are lived through at some point in the
+future, in sequence rather than simultaneously. Under the same assumption of
+fixed schedules, one could multiply this cumulative age structure with other
+age-schedules, such as age-specific fertility rates, or the economic age profiles produced by
+the NTA project, to benchmark the cumulative impacts of mortality on other
+quantities of interest. This increases the hypothetical nature of the exercise,
+but may still be useful for the sake of comparison. For instance, the females
+who died in 2010 would have given birth to 54122 babies cumulatively over their
+remaining lifetime assuming they were subject to constant 2010 period fertility
+\citep{HFD} and mortality.
 
 \section*{Causes of death}
 % AS: Extension to causes of death. This is the case you want to make. Saying,
