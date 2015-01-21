@@ -147,11 +147,11 @@ respectively.\footnote{Thanatos was the Greek god of death, which marks the end 
 The chronological and thanatological age perspectives are applicable to state
 durations in general, but in this paper we focus on the full lifespan.
 
-For a cohort, the distribution of $X$ is given by $f(X)$, which is equal to the familar lifetable
-$d(a)$ for $a = X$, when the lifetable is specified with a radix equal
-to unity ($l(0)=1$).
-The distribution of \textit{remaining} lifetimes for those having survived to age $a$, $f(y|a)$ is
-given by:\footnote{Equation \eqref{eq:fya} is easily modifiable to account for
+For a cohort, the distribution of $X$ is given by $f(X)$, which is equal to the
+lifetable death distribution, $d(a)$, for $a = X$, when the lifetable is
+specified with a radix equal to unity ($l(0)=1$).
+The distribution of \textit{remaining} lifetime, $y$, for those having survived
+to age $a$, $f(y|a)$ is given by:\footnote{Equation \eqref{eq:fya} is easily modifiable to account for
 mortality schedules that change over time.}
 \begin{equation}
 \label{eq:fya}
@@ -159,8 +159,12 @@ f(y|a) = \mu(a+y) \frac{l(a+y)}{l(a)} \tc
 \end{equation}
 where $\mu(a)$ is the force of mortality at exact age $a$, and $l(a)$ is
 the value of the survival function at exact age $a$, proportional to the
-probability of surviving from birth to age $a$. Figure~\ref{fig:fya} shows selected
-cross-sections of the $f(y|a)$ surface calculated from the 2010 US male period
+probability of surviving from birth to age $a$. This definition is identical to
+that used in \citet{brouard1989mouvements}, \citet{vaupel2009life} or
+\citet{rao2014generalization}, and it can be simplified in words as the
+probability of surviving $y$ years in the future given survival to current age
+$a$, and then dying at the exact age $a+y$.
+Figure~\ref{fig:fya} shows selected cross-sections of the $f(y|a)$ surface calculated from the 2010 US male period
 lifetable \citepalias{HMD}. The area under each chronological age-conditioned curve is equal to one.
 As an individual grows older (here under a fixed mortality schedule), the
 central mass of the curve approaches zero, moving one year down per year lived. The shape of the center of
