@@ -351,11 +351,11 @@ future, in sequence rather than simultaneously. Under the same assumption of
 fixed schedules, one could multiply this cumulative age structure with other
 age-schedules, such as age-specific fertility rates, or the economic age profiles produced by
 the NTA project, to benchmark the cumulative impacts of mortality on other
-quantities of interest. This increases the hypothetical nature of the exercise,
-but may still be useful for the sake of comparison. For instance, the females
+quantities of interest. For instance, the females
 who died in 2010 would have given birth to 54122 babies cumulatively over their
 remaining lifetime assuming they were subject to constant 2010 period fertility
-\citep{HFD} and mortality.
+\citepalias{HFD} and mortality. In the
+following we work only with mortality data.
 
 \section*{Causes of death}
 % AS: Extension to causes of death. This is the case you want to make. Saying,
@@ -371,10 +371,18 @@ independence). In this case $D^s$ is the sum of $n$ causes, and to speak of
 eliminating cause $c$ from the lifetable is to speak of saving $D^{sc}$ lives and then
 subject them to the mortality conditions of all causes except $c$.
 This is problematic in that causes are not independent, and also in that
-reductions in cause-specific mortality are not so thorough , but it serves as a
-good basis for comparing the relative impacts of different causes on a given population structure.
+reductions in cause-specific mortality are not so thorough and immediate, but it
+serves as a good basis for comparing the relative impacts of different causes on
+a given population structure. Humans have succeeded in eradicating certain
+causes of death in the past, and it
+is not so audacious to imagine that we may do so yet. While these
+eliminations may not deduct 100\% of their magnitude from all-cause mortality
+due to substitution, there is an undeniable all-cause benefit, and at least 
+we know its bounds. For some causes of death, independence is easier to imagine,
+such as deaths due to needless violence or particular kinds of accidents. We
+demonstrate concepts using large cause groupings.
 
-Let us then define the force of mortality, $\mu(a) = \sum _{c=1}^n \mu^c(a)$,
+Define the force of mortality, $\mu(a) = \sum _{c=1}^n \mu^c(a)$,
 as the sum of $n$ categorically separable causes. The people that will die from
 cause $c$ are:
 \begin{align}
@@ -404,18 +412,17 @@ characterizes the population impact of the given cause of death.
 Figures~\ref{fig:3} and~ \ref{fig:4} depict the same temporal viewpoints,
 respectively, but now the deaths decomposed are only deaths to external
 causes, and external causes have been eliminated from the lifetable functions used for decomposition and
- redistribution. Causes differ in their impact profiles, and this can form a
- basis for comparison. As with population pyramids, one may prefer the use of
- percent scales to facilitate comparisons between causes or countries. These
+ redistribution. Causes differ in their impact profiles, and this forms a
+ basis for comparison. As with standard population pyramids, one may prefer the
+ use of percent scales to facilitate comparisons between causes or countries. These
  figures for external causes give visual form to the intuition that demographers
  aleady have about external causes of death. External causes are important in
- young ages, and affect males more than females. Saving a randomly selected
- death from an external cause will on average have a higher payoff in terms of
- expected years of life gained than does preventing a death in general. Further,
+ young ages, and affect males more than females. Saving a randomly selected death from an external
+ cause will on average have a higher payoff in terms of expected years of life gained than does preventing a death in general. Further,
  a typical life saved will traverse many working ages, and reach well into old
  ages.
  The group with the most to gain by eliminating external causes are males in
- their 20s.
+ their 20s (clearest in Figure~\ref{fig:4}).
  
  The average chronological age of deaths to external causes in the USA in 2010
  was 47.9 for males and 57.1 for females. Their cause-deleted mean remaining
@@ -489,7 +496,47 @@ of results.
 
 \section*{Discussion}
 
-%---------------------------------------
+There are many perspectives under which the demography can account for the
+relationships between stocks and flows, but not all form part of the collective
+practice of demography. 
+Our objective in these exercises has been to offer a novel quantitative and
+visual basis to assess the impact of mortality on population stocks.
+This is done by calculating the lifespan distributions foregone due to death and indexing the results based on various aspects of the lifespan. Practical suggestions have included both chronological and thanatological age
+perspectives, as well as two ways of accounting for years of lifespan gained:
+(i) Theyears would we won by saving the deaths in age $a$, and (ii) the
+ages saved individuals would pass through if survived forward.
+
+The reader may choose to interpret this exercise as we
+have narrated it: ``what would have happened if these lives had been saved?''. We wish to point out that believing
+this statement is not necessary in order for the measures to be useful, just as common uses of
+period life expectancy require a certain degree of suspended disbelief. For
+clarity, we list the most important assumptions to be aware of when treating
+data as we have.
+\begin{enumerate}
+\item Unchanging period rate schedules. Note that the same formulas apply when
+data in the cohort perspective are used, but some care must be taken to allocate past deaths according to observed mortality within the cohort, and then complete non-extinct
+cohorts' mortality experience according to
+projection. \citet{brouard1986structure} combined history and projection
+in this way in his original study of population structure.  In any case, period measures are the best barometer of the
+present that we have, and all calculations done in this paper fall under the
+period umbrella. The researcher is not limited to the use of static age
+schedules, and $f(y|a)$ could be calculated for age schedules that vary
+by birth cohort.
+\item Homogenous populations. In using rate schedules derived from the
+population at large in order to describe a hypothetical population of saved
+individuals, we may neglect that saved individuals may be a frailer than the
+general population, and so subject to higher mortality rates going forward. We
+offer to remedy for this shortcoming, except to note that this possibility may
+hold truer for some causes than for others, and in general the degree of bias is
+unknown.
+\item Independence of causes. As discussed in the text, all causes of death
+compete to be first, and removing the first cause may not reduce the all cause
+rate by the same amount we have partitioned, $\mu^c$. The final reduction will
+lie somewhere between 0 and $\mu^c$, and may depend on the cause and
+overall level of mortality. We think that this possible unsolvable limitation
+ought not keep the researcher from exploring in this direction.
+\end{enumerate}
+
 
 
 %Then, decide whether to present a separate panel for each country of all causes
