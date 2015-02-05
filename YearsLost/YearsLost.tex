@@ -20,6 +20,7 @@
 \newcommand{\tp}{\quad\quad\text{.}}
 \defcitealias{HMD}{HMD}
 \defcitealias{HFD}{HFD}
+\usepackage{appendix}
 
 \begin{document}
 
@@ -60,7 +61,7 @@ and on the distribution of lifespans within populations.
 \section*{Introduction}
 A core task of demography is to account for and predict the population
 pyramid and the forces that shape it. The pyramid represents population
-size and age structure, and it is shaped by the flows of births,
+size and age-sex structure, and it is shaped by the flows of births,
 deaths, and migrations\footnote{We are guilty of omitting migration from
 the following exposition, although some of the methods presented here would
 translate cleanly to emigration.}. Of these flows, births are usually regarded
@@ -69,32 +70,36 @@ is true to the extent that wars, epidemics, and other mortality shocks effect
 broad age ranges rather than abrupt age groups.} whereas the pattern of survival
 exerts a gentler influence on the overall tapering and height of the pyramid.
 Year to year variation in the number of deaths tends to deduct
-smoothly from a wide range of ages, making mortality all but the most
-severe mortality shocks illegible in the pyramid. This is perhaps why
-relationships between mortality and age structure have been less charted than those between births and age structure.
+smoothly from a wide range of ages, making all but the most
+severe mortality shocks illegible in the pyramid. This could be one of the
+reasons why relationships between mortality and age structure have been less charted than those between births and age structure.
 
 Demographers most often quantify death in terms of age-specific rates via the
 lifetable and its summary indices because these are considered purged of
-accidental distortions from population age structure. Public health institutes and news media often also
-report trends in absolute numbers of deaths from particular causes and the total potential years of life lost (YPLL) due to
-these deaths.\footnote{\citet{gardner1990} review commonly used methods of
+accidental distortions from population age structure. Moreover, public health
+institutions and news media often also report trends in absolute numbers of
+deaths from particular causes and the total potential years of life lost (YPLL) due to these deaths.\footnote{\citet{gardner1990} review commonly used methods of
 calculating YPLL. The Global Burden of Disease reports refer to YPLL as YLL.
 As a news media example, in 2013 the Guardian ran a data blog entry
 visualizing the years of life lost in the USA due to gun violence
-\citep{rogers2013gun}. } In either of these treatments, mortality and deaths are
-isolated from age structure. The notion of YPLL instead dovetails with
-population size over time. 
+\citep{rogers2013gun}. } The notion of YPLL dovetails with
+population size over time. In either of these treatments, mortality and deaths are
+isolated from age structure. 
 
-In this paper our point of departure is to
-treat deaths as age-structured population stocks through the notion of
-potentially saveable life. Demography based on this step is a counterfactual exercise, in line with the formal treatment given in
-\citet{vaupel1987repeated}.\footnote{\citet{vaupel2008lifesaving} follows in a
-similar vein, but aims at the effects of lifesaving on period distortions.}
-Saveable life and lifetime can be quantified flexibly with respect to demographic perspectives on age and lifespan. These perspectives refine and supplement YPLL when assessing the population impacts of causes of death, and we think that they would provide useful information for the targetting and planning
-of public health interventions and the comparison of mortality burdens between
-populations and subpopulations. The variety of visualizations presented here may
-also enrich official periodic reporting on the absolute and relative population
-impacts of causes of death.
+The point of departure for this article is to
+treat deaths analytically as population stocks through the notion of
+potentially saveable life. A potentially saveable life is a life that
+has been lost, a death, and a set of lost lives is a kind of population. The
+population of lost lives has static characteristics observed at the moment of
+death, such as age and sex structure. Were the
+population still living, it would also have a structure of remaining lifespans. Observed mortality patterns may be used to project remaining
+lifespan structure onto the lost population as an approximation of what would
+happen were the population to be resurrected simultaneously.
+This step is a counterfactual exercise, in line with the formal treatment given
+in \citet{vaupel1987repeated}.\footnote{\citet{vaupel2008lifesaving} follows in
+a similar vein, but aims at the effects of lifesaving on period distortions.}
+Saveable life and lifetime can be quantified under various demographic
+perspectives on age and lifespan. These perspectives refine and supplement YPLL when assessing the population impacts of causes of death, and we think that they would provide useful information for the targetting and planning of public health interventions and the comparison of mortality burdens between populations and subpopulations. The variety of visualizations presented in this article may also enrich official periodic reporting on the absolute and relative population impacts of causes of death.
 
 We first formally define what is meant by age and lifespan
 perspectives, illustrating on the example of all-cause
@@ -108,7 +113,7 @@ reporting or making comparisons. Finally we discuss the limits of these methods
 and the utility of the information gained by them. All mortality data used in
 the following comes from the HMD.
 
-\section*{Temporal relationships}
+\section*{Temporal relationships: Age and lifespan perspectives}
 % To begin, sume a closed population and ignore what determines the size of
 % successive birth cohorts, $B(t)$, which we usually call the birth flow. If
 % $B(t)$ is a given, then the only other factor that determines population size
@@ -143,34 +148,21 @@ Population stock in a
 \end{figure}
 Figure~\ref{fig:line} gives a schematic representation of this simple
 relationship between age and the lifespan for a single person-life. The lived
-part we call ``age'' and the yet-unlived part has no common name. Since age is a
-placemarker on the lifeline, both $a$ and $y$ could be called ``age'', and we
-can specify them as \textit{chronological} and \textit{thanatological} age,
-respectively.\footnote{Thanatos was the Greek god of death, which marks the end of the lifeline to which $y$ relates. By this token, one could just call chronological age \textit{aphrodesian} age, but this would probably confuse things.}
+part we call ``age'' and the yet-unlived part has no common name. Both $a$ and $y$ are placemarkers on the
+lifeline and could therefore be called ``age''. We refer to these indices as
+\textit{chronological} and \textit{thanatological} age, respectively.\footnote{Thanatos was the Greek god of death, which marks the end of the lifeline to which $y$ relates. By this token, one could just call chronological age \textit{aphrodesian} age, but this would probably confuse things.}
 The chronological and thanatological age perspectives are applicable to state
 durations in general, but in this paper we focus on the full lifespan.
 
 For a cohort, the distribution of $X$ is given by $f(X)$, which is equal to the
 lifetable death distribution, $d(a)$, for $a = X$, when the lifetable is
 specified with a radix equal to unity ($l(0)=1$).
-The distribution of \textit{remaining} lifetime, $y$, for those having survived
-to age $a$, $f(y|a)$ is given by:\footnote{This definition is identical to
-that used in \citet{brouard1989mouvements}, \citet{vaupel2009life} or
-\citet{rao2014generalization} in proving the equality of chronological and
-thanatological age structure in stationary populations. Brouard apparently had
-proven this earlier than 1989, since he cites the relationship in
-\citet{brouard1986structure}. Equation \eqref{eq:fya} is easily modifiable to
-account for mortality schedules that change over time.}
-\begin{equation}
-\label{eq:fya}
-f(y|a) = \mu(a+y) \frac{l(a+y)}{l(a)} \tc
-\end{equation}
-where $\mu(a)$ is the force of mortality at exact age $a$, and $l(a)$ is
-the value of the survival function at exact age $a$, proportional to the
-probability of surviving from birth to age $a$. \eqref{eq:fya} can be expressed
-in words as the probability of surviving $y$ years in the future given survival to current age $a$, and then dying at the exact age $a+y$.
-Figure~\ref{fig:fya} shows selected cross-sections of the $f(y|a)$ surface calculated from the 2010 US male period
-lifetable \citepalias{HMD}. The area under each chronological age-conditioned curve is equal to one.
+The definition of the survival-conditioned distribution of \textit{remaining}
+lifetime $f(y|a)$ can be summarized in words as the probability of surviving $y$
+years in the future given survival to current age $a$, and then dying at the
+exact age $a+y$.\footnote{A more explicit defintion is provided in the
+appendices.} Figure~\ref{fig:fya} shows selected cross-sections of the $f(y|a)$
+surface calculated from the 2010 US male period lifetable \citepalias{HMD}. The area under each chronological age-conditioned curve is equal to one.
 As an individual grows older (here under a fixed mortality schedule), the
 central mass of the curve approaches zero, moving one year down per year lived.
 In these data, the shape of the center of the curve does not change much until
@@ -181,10 +173,10 @@ single value in all ages beyond the modal chronological age at death.
  \begin{figure}[h]
 \centering
 % Figure produced in R/fya.R
-	\caption{US males, 2010, $f(y|a)$ for selected ages.*}
+	\caption{Probability of surviving y years given survival to current age $a$, US
+	males, 2010}
 	\label{fig:fya}
 	\includegraphics[scale=.8]{Figures/fya.pdf}	
-	\caption*{*Note that $f(y|0) = d(a) = f(X)$.}
 \end{figure}
 
 $f(y|a)$ can be used to calculate the population having survived to age $a$ and
@@ -192,17 +184,16 @@ with $y$ remaining years of life as $P(a,y) = P(a)f(y|a)$, where the total
 population with $y$ remaining years of life, $P(y)$, is simply $\int
 _{a=0}^\infty P(a,y) \dd a$ \citep{brouard1986structure, brouard1989mouvements},
 a single death cohort with members from many birth cohorts. This decomposition sorts the lifeline segments of a living population
-by the part yet-unlived (years left) rather than by the part lived. 
+by the part yet-unlived (years left, $y$) rather than by the part lived. 
 The indices $a$ and $y$ differentiate between the past and future
 parts of a lifeline, respectively, and by extension of populations when
-so structured.
-In comparing $P(a)$ with $P(y)$, as in \citet{brouard1986structure}, we still
-refer to the living (lived or to-be-lived) part of a population.
+so structured. As \citet{brouard1986structure}, when comparing the lived and
+to be-lived part of a population, we refer to $P(a)$ and $P(y)$.
 Is it so clear that the dead are no longer part of the population? If a life is
 completely saved, this life stays in the living population and is not counted
 as a death, but we (in common thinking) often imagine saved lives as a transient
 state classification.
-Perhaps this is not correct for demographers: Among the living there
+For demographers, however, among the living there
 are no saved lives but only lived lives. Still we can quantify
 hypothetically saveable life, and for this we must look to deaths.
 It is nice, and often realistic, to think that many of the lives taken by death
@@ -211,54 +202,10 @@ rates would apply to a population of saved individuals. Consider
 the hypothetical population of lives saved a single time from death and subject to
 the same mortality as the population at large.
 
-Assume that all the deaths recorded in a year are saved and brought back to
-life. One may ask much more than the number and age structure of these saved
-lives, $D^s(a)$,
-\begin{equation}
-\label{eq:Dsa}
-D^s(a) = \mu(a)P(a) \tc
-\end{equation}
-but also how many years the people saved at age $a$ would live, 
-$W^s(a)$\footnote{A mnemonic for $W$ could be \textit{won} years. This is
-essentially an age at death breakdown of YPLL.}? The simplest calculation is
-to multiply the number of gained survivors by remaining life expectancy at each
-age, $e(a)$:
-\begin{align}
-\label{eq:savedea}
-W^s(a) = D^s(a)e(a) &= P(a)\mu(a)\frac{1}{l(a)}\int l(a+y) \dd y \tp
-%\notag\\
-         %&= \mu(a)\int_{y=0}^\infty B(t-a)l(a+y) \dd y 
-\end{align}
-$D^s(a)e(a)$ classifies potentially saved person-years by the
-ages in which they were saved. One may also wish to know the distribution of remaining lifespans of saved
-lives, which is quite different from \eqref{eq:savedea}:
-\begin{equation}
-\label{eq:savedya}
-D^s(a)f(y|a) = P(a)\mu(a)\mu(a+y) \frac{l(a+y)}{l(a)} \tp
-\end{equation}
-Equation \eqref{eq:savedya} aggregates up to the thanatological age distribution
-of saved lives, $D^s(y)$:
-\begin{equation}
-\label{eq:savedy}
-D^s(y) = \int D^s(a)f(y|a) \dd a \tp
-\end{equation}
-%or the time-to-death distribution of the total years of life
-%gained,
-%\begin{equation}
-%\label{eq:gainedy}
-%W^s(y) = \int D^s(a)\frac{l(a+y)}{l(a)} \dd a \tc
-%\end{equation}
-Or one might ask through which chronological ages the gained years of life
-would be lived, $W^s(a+y|a)$,
-\begin{equation}
-\label{eq:gaineday}
-W^s(a+y|a) = D^s(a)\frac{l(a+y)}{l(a)} \tp
-\end{equation}
-
 Figure~\ref{fig:Day} (left) shows US 2010 period
 deaths (all the lives that could be saved) by age and sex (males on the left,
-females on the right). Over 1.23 million deaths were recorded for males
-and females each in 2010 in the US. Deaths have been decomposed into discrete
+females on the right). Over 1.23 million deaths each were recorded for US males
+and females in 2010. Deaths have been decomposed into discrete
 categories of remaining years of life using equation~\eqref{eq:fya}, under the assumption that saved lives are subject to the same mortality schedule as the rest of the population, and under the supposition that all 2010 deaths get saved (just once). The results of this decompositon are represented by color bands in
 Figure~\ref{fig:Day}. The average chronological age at death
 for males was a full seven years lower than that for females
@@ -282,7 +229,7 @@ vital forces.
 
 \begin{figure}
 \centering
-\caption{US, 2010 potentially saveable lives (Deaths)}
+\caption{Potentially saveable lives (deaths) in the US by sex, 2010}
 \label{fig:1}
 \begin{subfigure}[b]{.48\linewidth}
 \centering
@@ -291,7 +238,7 @@ by hypothetical remaining years of life (years left).}
 	\label{fig:Day}
 	% Figure produced in R/AllCauseFigures.R
 	\includegraphics[scale=.55]{Figures/Deathsxy10.pdf}	
-	\caption*{$D^s(a)$ from equation~\eqref{eq:Dsa}}
+	\caption*{$D^s(a)$ from appendix equation~\eqref{eq:Dsa}}
 \end{subfigure}
 ~
 \begin{subfigure}[b]{.48\linewidth}
@@ -301,13 +248,13 @@ by hypothetical remaining years of life (years left).}
 	\label{fig:Dya}
 	% Figure produced in R/AllCauseFigures.R
     \includegraphics[scale=.55]{Figures/Deathsyx10.pdf}
-    \caption*{$D^s(y)$ from equation~\eqref{eq:savedy}}
+    \caption*{$D^s(y)$ from appendix equation~\eqref{eq:savedy}}
 \end{subfigure}
 \end{figure}
 
 \begin{figure}
 \centering
-\caption{US, 2010 person years of life potentially won*}
+\caption{Potentially person years of life won in the U.S. by sex, 2010*}
 \label{fig:2}
 \begin{subfigure}[b]{.48\linewidth}
 \centering
@@ -316,7 +263,7 @@ by hypothetical remaining years of life (years left).}
 	\label{fig:SavedGained}
 	% Figure produced in R/AllCauseFigures.R
 	\includegraphics[scale=.55]{Figures/YearsSavedGainedxx10.pdf}
-	\caption*{$W^s(a)$ from equation~\ref{eq:savedea}}	
+	\caption*{$W^s(a)$ from appendix equation~\ref{eq:savedea}}	
 \end{subfigure}
 ~
 \begin{subfigure}[b]{.48\linewidth}
@@ -326,7 +273,7 @@ by hypothetical remaining years of life (years left).}
 	\label{fig:LostLived}
 	% Figure produced in R/AllCauseFigures.R
     \includegraphics[scale=.55]{Figures/YearsLostLivedyx10.pdf}
-    \caption*{$W^s(a+y|a)$ from equation~\ref{eq:gaineday}}	
+    \caption*{$W^s(a+y|a)$ from appendix equation~\ref{eq:gaineday}}	
 \end{subfigure}
 \caption*{*Note different x scale from Figure~\ref{fig:1}.}
 \end{figure}
@@ -382,30 +329,6 @@ we know its bounds. For some causes of death, independence is easier to imagine,
 such as deaths due to needless violence or particular kinds of accidents. We
 demonstrate concepts using large cause groupings.
 
-Define the force of mortality, $\mu(a) = \sum _{c=1}^n \mu^c(a)$,
-as the sum of $n$ categorically separable causes. The people that will die from
-cause $c$ are:
-\begin{align}
-D^c &= \int_0^\infty D^c(a) \dd a \\
-&= \int_0^\infty \mu^c(a)P(a) \dd a \tc\\
-\intertext{and to hypothetically save all these people is to remove cause $c$
-from mortality, retaining $D^c$ lives in the population. It makes sense to
-calculate the distribution of remaining lifespans of the $D^c$ people that would
-have died of this cause using $l(a)$ removed of the cause in question, so we define
-$l^{-c}(a)$,}
-l^{-c}(a) &= e^{-\int _0^a \mu(a)-\mu^c(a) \dd a} \tc\\
-\intertext{which is hopefully more legible to render as}
-l^{-c}(a) &= e^{-\int _0^a \mu^{-c}(a) \dd a} \tp\\
-\intertext{This is a stronger supposition than the idea of repeated
-resuscitation from \citet{vaupel1987repeated}, but the idea is to separate out
-the impacts of particular causes.
-Let us continue with the same notational concept of ${ }^{-c}$ to define
-remaining life expectancy assuming survival to age $a$ and no more death from cause $c$ after age $a$, $e^{-c}(a)$:} e^{-c}(a) &= \frac{1}{l^{-c}(a)}\int _{y=0}^\infty l^{-c}(a+y) \dd y \tp
-\end{align}
-and so on, repeating equations \eqref{eq:savedea} and \eqref{eq:savedy} for the
-case of cause-specific saveable lives and their cause-deleted remaining
-lifespans.
-
 Now Figures~\ref{fig:1} and~\ref{fig:2} can be repeated for
 any particular cause of death, and the profile of each of the four perspectives
 characterizes the population impact of the given cause of death.
@@ -416,7 +339,7 @@ causes, and external causes have been eliminated from the lifetable functions us
  basis for comparison. As with standard population pyramids, one may prefer the
  use of percent scales to facilitate comparisons between causes or countries. These
  figures for external causes give visual form to the intuition that demographers
- aleady have about external causes of death. External causes are important in
+ have about external causes of death. External causes are important in
  young ages, and affect males more than females. Saving a randomly selected death from an external
  cause will on average have a higher payoff in terms of expected years of life gained than does preventing a death in general. Further,
  a typical life saved will traverse many working ages, and reach well into old
@@ -434,7 +357,7 @@ causes, and external causes have been eliminated from the lifetable functions us
 
 \begin{figure}
 \centering
-\caption{USA, 2010 Deaths from external causes}
+\caption{Deaths from external causes in the USA, 2010}
 \label{fig:3}
 \begin{subfigure}[b]{.48\linewidth}
 \centering
@@ -556,4 +479,94 @@ ought not keep the researcher from exploring in this direction.
 ---------------------------------------
 \bibliographystyle{plainnat}
   \bibliography{references}  
+
+
+\begin{appendices}
+\section{Formulas}
+The probability of surviving exactly $y$ years into the future given survial to
+age $a$, $f(y|a)$ is given by:\footnote{This definition is identical to
+that used in \citet{brouard1989mouvements}, \citet{vaupel2009life} or
+\citet{rao2014generalization} in proving the equality of chronological and
+thanatological age structure in stationary populations. Brouard apparently had
+proven this earlier than 1989, since he cites the relationship in
+\citet{brouard1986structure}. Equation \eqref{eq:fya} is easily modifiable to
+account for mortality schedules that change over time.}
+\begin{equation}
+\label{eq:fya}
+f(y|a) = \mu(a+y) \frac{l(a+y)}{l(a)} \tc
+\end{equation}
+where $\mu(a)$ is the force of mortality at exact age $a$, and $l(a)$ is
+the value of the survival function at exact age $a$, proportional to the
+probability of surviving from birth to age $a$. 
+
+
+Assume that all the deaths recorded in a year are saved and brought back to
+life. One may ask much more than the number and age structure of these saved
+lives, $D^s(a)$,
+\begin{equation}
+\label{eq:Dsa}
+D^s(a) = \mu(a)P(a) \tc
+\end{equation}
+but also how many years the people saved at age $a$ would live, 
+$W^s(a)$\footnote{A mnemonic for $W$ could be \textit{won} years. This is
+essentially an age at death breakdown of YPLL.}? The simplest calculation is
+to multiply the number of gained survivors by remaining life expectancy at each
+age, $e(a)$:
+\begin{align}
+\label{eq:savedea}
+W^s(a) = D^s(a)e(a) &= P(a)\mu(a)\frac{1}{l(a)}\int l(a+y) \dd y \tp
+%\notag\\
+         %&= \mu(a)\int_{y=0}^\infty B(t-a)l(a+y) \dd y 
+\end{align}
+$D^s(a)e(a)$ classifies potentially saved person-years by the
+ages in which they were saved. One may also wish to know the distribution of remaining lifespans of saved
+lives, which is quite different from \eqref{eq:savedea}:
+\begin{equation}
+\label{eq:savedya}
+D^s(a)f(y|a) = P(a)\mu(a)\mu(a+y) \frac{l(a+y)}{l(a)} \tp
+\end{equation}
+Equation \eqref{eq:savedya} aggregates up to the thanatological age distribution
+of saved lives, $D^s(y)$:
+\begin{equation}
+\label{eq:savedy}
+D^s(y) = \int D^s(a)f(y|a) \dd a \tp
+\end{equation}
+%or the time-to-death distribution of the total years of life
+%gained,
+%\begin{equation}
+%\label{eq:gainedy}
+%W^s(y) = \int D^s(a)\frac{l(a+y)}{l(a)} \dd a \tc
+%\end{equation}
+Or one might ask through which chronological ages the gained years of life
+would be lived, $W^s(a+y|a)$,
+\begin{equation}
+\label{eq:gaineday}
+W^s(a+y|a) = D^s(a)\frac{l(a+y)}{l(a)} \tp
+\end{equation}
+
+Define the force of mortality, $\mu(a) = \sum _{c=1}^n \mu^c(a)$,
+as the sum of $n$ categorically separable causes. The people that will die from
+cause $c$ are:
+\begin{align}
+D^c &= \int_0^\infty D^c(a) \dd a \\
+&= \int_0^\infty \mu^c(a)P(a) \dd a \tc\\
+\intertext{and to hypothetically save all these people is to remove cause $c$
+from mortality, retaining $D^c$ lives in the population. It makes sense to
+calculate the distribution of remaining lifespans of the $D^c$ people that would
+have died of this cause using $l(a)$ removed of the cause in question, so we define
+$l^{-c}(a)$,}
+l^{-c}(a) &= e^{-\int _0^a \mu(a)-\mu^c(a) \dd a} \tc\\
+\intertext{which is hopefully more legible to render as}
+l^{-c}(a) &= e^{-\int _0^a \mu^{-c}(a) \dd a} \tp\\
+\intertext{This is a stronger supposition than the idea of repeated
+resuscitation from \citet{vaupel1987repeated}, but the idea is to separate out
+the impacts of particular causes.
+Let us continue with the same notational concept of ${ }^{-c}$ to define
+remaining life expectancy assuming survival to age $a$ and no more death from cause $c$ after age $a$, $e^{-c}(a)$:} e^{-c}(a) &= \frac{1}{l^{-c}(a)}\int _{y=0}^\infty l^{-c}(a+y) \dd y \tp
+\end{align}
+and so on, repeating equations \eqref{eq:savedea} and \eqref{eq:savedy} for the
+case of cause-specific saveable lives and their cause-deleted remaining
+lifespans.
+
+\end{appendices}
 \end{document}
