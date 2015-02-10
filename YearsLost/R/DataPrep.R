@@ -15,8 +15,8 @@ CODcountries <- c("USA","CAN","FRA","SWE","NOR","ENW")
 library(DemogBerkeley)
 library(reshape2)
 grabCountryHMD <- function(XXX,Yr=2010,.us=us,.pw=pw){
-    Dx  <- readHMDweb("USA","Deaths_1x1",username = .us, password = .pw)
-    Ex  <- readHMDweb("USA","Exposures_1x1",username = .us, password = .pw)
+    Dx  <- readHMDweb(XXX,"Deaths_1x1",username = .us, password = .pw)
+    Ex  <- readHMDweb(XXX,"Exposures_1x1",username = .us, password = .pw)
     
     Dxm <- Dx$Male[Dx$Year == Yr]
     Exm <- Ex$Male[Ex$Year == Yr]
