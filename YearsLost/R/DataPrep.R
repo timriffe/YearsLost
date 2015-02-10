@@ -11,18 +11,20 @@ if (system("hostname",intern=TRUE) %in% c("triffe-N80Vm", "tim-ThinkPad-L440")){
 source("R/Functions.R")
 HMDcountries <- c("USA","CAN","FRATNP","SWE","NOR","GBRTENW")
 CODcountries <- c("USA","CAN","FRA","SWE","NOR","ENW")
-
+library(RCurl)
 library(DemogBerkeley)
 library(reshape2)
+XXX <- "USA"
 grabCountryHMD <- function(XXX,Yr=2010,.us=us,.pw=pw){
+  
     Dx  <- readHMDweb(XXX,"Deaths_1x1",username = .us, password = .pw)
     Ex  <- readHMDweb(XXX,"Exposures_1x1",username = .us, password = .pw)
+    .Yr <- ifelse(Yr %in% Dx$Year, Yr, max(Dx$Year))
+    Dxm <- Dx$Male[Dx$Year == .Yr]
+    Exm <- Ex$Male[Ex$Year == .Yr]
     
-    Dxm <- Dx$Male[Dx$Year == Yr]
-    Exm <- Ex$Male[Ex$Year == Yr]
-    
-    Dxf <- Dx$Female[Dx$Year == Yr]
-    Exf <- Ex$Female[Ex$Year == Yr]
+    Dxf <- Dx$Female[Dx$Year == .Yr]
+    Exf <- Ex$Female[Ex$Year == .Yr]
     
     Mxm <- Dxm / Exm
     Mxf <- Dxf / Exf
@@ -81,13 +83,14 @@ expandAbdridged <- function(M){
 # 19	Ill-defined or unknown	        6	Ill defined	6	Ill defined
 # 20	External causes	                5	Injuries	7	External
 # ---------------------------------------------------------------------------
-# XXX <- "SWE"
+# XXX <- "NOR"
 
 grabCountryCOD <- function(XXX,HMD,Yr = 2010){
+  cat(XXX,"\n")
     COD         <- read.csv(file.path("Data","COD5x1",paste0(XXX,"_5x1_chapters.csv")), 
             stringsAsFactors = FALSE)
-    Yr <- ifelse(Yr %in% COD$Year, Yr, max(COD$Year))
-    COD         <- COD[COD$Year == Yr & COD$COD.chap != "All", ]
+    .Yr <- ifelse(Yr %in% COD$Year, Yr, max(COD$Year))
+    COD         <- COD[COD$Year == .Yr & COD$COD.chap != "All", ]
     COD$Age     <- as.integer(gsub("\\+","",unlist(lapply(strsplit(COD$Age,split = "-"),"[[",1))))
     
     # these code are hard-coded, but could be generalized for custom aggregations.
@@ -96,7 +99,7 @@ grabCountryCOD <- function(XXX,HMD,Yr = 2010){
     names(recvec) <- sprintf("%.2d",1:20)
     
     TimCodes <- 1:8
-    names(TimCodes) <- c("Infectious","Cancer","Other","Cardio","Inf/Cong","Ill defined","External","Mental")
+    names(TimCodes) <- c("Infectious","Cancer","Other","Cardio","Inf_Cong","Ill defined","External","Mental")
     
     TimNames      <- names(TimCodes)
     names(TimNames) <- 1:8
