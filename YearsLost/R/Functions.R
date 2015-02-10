@@ -40,6 +40,8 @@ PyrLevels <- function(
         revColors = FALSE, 
         revCategories = FALSE,
         scale = sum(c(Males, Females)),
+        x = 0,
+        y = 0,
         ...){
     
     LevelMargin <- which.min(dim(Males))
@@ -131,7 +133,7 @@ plotSetup <- function(
                     panel.first =  list(rect(xlim[1], ylim[1], xlim[2], ylim[2], col = bg, border = FALSE))
             )
         }
-    invisible(list(x = xpretty, y = ypretty, xl = xlim[1]))
+    invisible(list(x = xpretty, y = ypretty, xl = xlim[1],xr = xlim[2],yb=ylim[1],yt = ylim[2]))
 }
 
 DrawLabels <- function(
