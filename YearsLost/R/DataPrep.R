@@ -14,7 +14,7 @@ CODcountries <- c("USA","CAN","FRA","SWE","NOR","ENW")
 library(RCurl)
 library(DemogBerkeley)
 library(reshape2)
-XXX <- "USA"
+XXX <- "CAN"
 grabCountryHMD <- function(XXX,Yr=2010,.us=us,.pw=pw){
   
     Dx  <- readHMDweb(XXX,"Deaths_1x1",username = .us, password = .pw)
@@ -106,10 +106,10 @@ grabCountryCOD <- function(XXX,HMD,Yr = 2010){
     COD$Code8     <- recvec[COD$COD.chap]
     COD$Code8Name <- TimNames[as.character(COD$Code8)]
     # ---------------------------------------------------------------------
-    
+  
     # put into ageXcause array
-    Mf          <- acast(COD, Age ~ Code8Name, value.var = "Rates.F", sum)
-    Mm          <- acast(COD, Age ~ Code8Name, value.var = "Rates.M", sum)
+    Mf          <- acast(COD, Age ~ Code8Name, value.var = "Rates.F", sum)/1e5
+    Mm          <- acast(COD, Age ~ Code8Name, value.var = "Rates.M", sum)/1e5
     
     # these were re-ordered by acast()...
     TimNames    <- colnames(Mm)
@@ -120,8 +120,8 @@ grabCountryCOD <- function(XXX,HMD,Yr = 2010){
     ind0f       <- Mf == 0
     
     # this us just so the spline doesn't break: we put the zeros back later.
-    Mm[ind0m]   <- 1e-8
-    Mf[ind0f]   <- 1e-8
+    #Mm[ind0m]   <- 1e-6 # it turns out sometimes this is pernicious
+    #Mf[ind0f]   <- 1e-6
     
     MaxA        <- max(COD$Age)
     # for imputation of 0s later
@@ -133,15 +133,15 @@ grabCountryCOD <- function(XXX,HMD,Yr = 2010){
     ages[1:(length(ages) - 1)] <- ages[1:(length(ages) - 1)] + diff(ages) / 2
     ages[1]                    <- 0
     
-    # spline through log of cause-specific rates
+    
     Mf1 <- apply(log(Mf),2,function(y,MaxA){
-                exp(splinefun(y~ages)(0:MaxA))      
-            },MaxA=MaxA)
+        infi <- !is.infinite(y)
+        exp(splinefun(y[infi]~ages[infi])(0:MaxA))  
+            },MaxA=MaxA) 
     Mm1 <- apply(log(Mm),2,function(y,MaxA){
-                exp(splinefun(y~ages)(0:MaxA))
+        infi <- !is.infinite(y)
+        exp(splinefun(y[infi]~ages[infi])(0:MaxA))
             },MaxA=MaxA)
-    dimnames(Mf1) <- dimnames(Mm1) <- list(0:MaxA,TimNames)
-
     # puts zeros back in where they belong
     Mf1[ind0f1] <- 0
     Mm1[ind0m1] <- 0
