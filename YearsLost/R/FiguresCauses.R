@@ -140,33 +140,33 @@ mtext(cause, side=3, line=2, cex=1.5, col="black", outer=FALSE, at = -2.5, padj=
 
 pdf(file.path(folder,paste0("Dxy",causes[1],".pdf")),height = 8,width = 6)
 #dev.new(height = 8,width = 6)
-plotDxy(COD,causes[1],countries,xlim=c(-1.6,1.6))
+plotDxy(COD,causes[1],countries,xlim=c(-2,2))
 dev.off()
 #dev.new(height = 8,width = 6)
 pdf(file.path(folder,paste0("Dxy",causes[2],".pdf")),height = 8,width = 6)
-plotDxy(COD,causes[2],countries,xlim=c(-2.8,2.8))
+plotDxy(COD,causes[2],countries,xlim=c(-3.6,3.6))
 dev.off()
 #dev.new(height = 8,width = 6)
 pdf(file.path(folder,paste0("Dxy",causes[3],".pdf")),height = 8,width = 6)
-plotDxy(COD,causes[3],countries)
+plotDxy(COD,causes[3],countries,xlim=c(-2,2))
 dev.off()
 #dev.new(height = 8,width = 6)
 pdf(file.path(folder,paste0("Dxy",causes[4],".pdf")),height = 8,width = 6)
-plotDxy(COD,causes[4],countries, xlim=c(-4,4))
+plotDxy(COD,causes[4],countries, xlim=c(-8,8))
 dev.off()
 #dev.new(height = 8,width = 6)
 #plotDxy(COD,causes[5],countries, xlim=c(-20,20))
 #dev.new(height = 8,width = 6)
 pdf(file.path(folder,paste0("Dxy",causes[6],".pdf")),height = 8,width = 6)
-plotDxy(COD,causes[6],countries, xlim=c(-2.5,2.5))
+plotDxy(COD,causes[6],countries, xlim=c(-3,3))
 dev.off()
 #dev.new(height = 8,width = 6)
 pdf(file.path(folder,paste0("Dxy",causes[7],".pdf")),height = 8,width = 6)
-plotDxy(COD,causes[7],countries, xlim=c(-4,4))
+plotDxy(COD,causes[7],countries, xlim=c(-5,5))
 dev.off()
 #dev.new(height = 8,width = 6)
 pdf(file.path(folder,paste0("Dxy",causes[8],".pdf")),height = 8,width = 6)
-plotDxy(COD,causes[8],countries, xlim=c(-2.5,2.5))
+plotDxy(COD,causes[8],countries, xlim=c(-3.5,3.5))
 dev.off()
 }
 
@@ -238,16 +238,16 @@ plotDyx <- function(COD,cause = "External",countries,xlim=c(-2,2)){
   mtext(cause, side=3, line=2, cex=1.5, col="black", outer=FALSE, at = -2.5, padj=1) 
 }
 pdf(file.path(folder,paste0("Dyx",causes[1],".pdf")),height = 8,width = 6)
-plotDyx(COD,cause=causes[1],countries,xlim=c(-3,3))
+plotDyx(COD,cause=causes[1],countries,xlim=c(-2.6,2.6))
 dev.off()
 pdf(file.path(folder,paste0("Dyx",causes[2],".pdf")),height = 8,width = 6)
-plotDyx(COD,cause=causes[2],countries,xlim=c(-5,5))
+plotDyx(COD,cause=causes[2],countries,xlim=c(-4,4))
 dev.off()
 pdf(file.path(folder,paste0("Dyx",causes[3],".pdf")),height = 8,width = 6)
-plotDyx(COD,cause=causes[3],countries,xlim=c(-2.2,2.2))
+plotDyx(COD,cause=causes[3],countries,xlim=c(-3.6,3.6))
 dev.off()
 pdf(file.path(folder,paste0("Dyx",causes[4],".pdf")),height = 8,width = 6)
-plotDyx(COD,cause=causes[4],countries,xlim=c(-7,7))
+plotDyx(COD,cause=causes[4],countries,xlim=c(-9,9))
 dev.off()
 pdf(file.path(folder,paste0("Dyx",causes[5],".pdf")),height = 8,width = 6)
 plotDyx(COD,cause=causes[5],countries,xlim=c(-2,2))
@@ -256,10 +256,10 @@ pdf(file.path(folder,paste0("Dyx",causes[6],".pdf")),height = 8,width = 6)
 plotDyx(COD,cause=causes[6],countries,xlim=c(-5,5))
 dev.off()
 pdf(file.path(folder,paste0("Dyx",causes[7],".pdf")),height = 8,width = 6)
-plotDyx(COD,cause=causes[7],countries,xlim=c(-8,8))
+plotDyx(COD,cause=causes[7],countries,xlim=c(-9,9))
 dev.off()
 pdf(file.path(folder,paste0("Dyx",causes[8],".pdf")),height = 8,width = 6)
-plotDyx(COD,cause=causes[8],countries,xlim=c(-4.5,4.5))
+plotDyx(COD,cause=causes[8],countries,xlim=c(-6,6))
 dev.off()
 }
 
@@ -292,30 +292,31 @@ dev.off()
 #		xlabs = zapsmall(abs(tics$x / 1e3)), cex=.7)
 #Drawlegend(tics, N = min(dim(MalesY)), colRamp = BrewerRamp("Oranges"), revColors = TRUE, label = "Age Saved at")
 #dev.off()
-
+# XYZ <- "CAN"
+# cause <- "Cancer"
+{
 plotXYZcause3 <- function(COD, XYZ, cause, xlim = c(-1.5,1.5)){
 	Dxfc       <- COD[[XYZ]]$Dxfc[,cause]
-	Dxmc 	   <- COD[[XYZ]]$Dxmc[,cause]
+	Dxmc 	     <- COD[[XYZ]]$Dxmc[,cause]
 	lxmc       <- COD[[XYZ]]$Klxm[,cause]
 	lxfc       <- COD[[XYZ]]$Klxf[,cause]
+  lxmc[is.na(lxmc)] <- 0
+  lxfc[is.na(lxfc)] <- 0
 	LDM        <- makeLD(lxmc)
 	LDF        <- makeLD(lxfc)
+  LDM[is.nan(LDM)] <- 0
+  LDF[is.nan(LDF)] <- 0
 	Males      <- t(LDM)[2:112,2:112] * Dxmc
 	Females    <- t(LDF)[2:112,2:112] * Dxfc
 	MalesY     <- AggM(Males, TRUE, N = 20)
 	FemalesY   <- AggM(Females, TRUE, N = 20)
-	MalesA     <- AggM(Males, FALSE, N = 20)
-	FemalesA   <- AggM(Females, FALSE, N = 20)
-	
-	#Males   <- ThanoAgg(Dxmc, dxmc, FALSE, N = 20)
-	#Females <- ThanoAgg(Dxfc, dxfc, FALSE, N = 20)
+ 
 	tics <- plotSetup(xlim)
 	PyrLevels(MalesY, FemalesY, revColors = FALSE, colRamp = BrewerRamp("Oranges"), scale = 100)
 	PyramidOutline(colSums(MalesY), colSums(FemalesY), col = NA, border = gray(.2), lwd = .5, scale = 100)
 	invisible(tics)
 }
-plotSetup(xlim=c(-2,2))
-plotXYZcause3(COD, "USA", "External")
+
 plotWapyga <- function(COD,cause = "External",countries,xlim=c(-2,2)){
 	pp <- layout(matrix(c(1,2,3,4,5,6,7,7,7), 3, 3, byrow=FALSE), c(2.5,2.5,1), c(2.5,2.5,2.5,2.5,2.5,2.5,6), T)
 #layout.show(pp)
@@ -364,35 +365,144 @@ plotWapyga <- function(COD,cause = "External",countries,xlim=c(-2,2)){
 	N <- 5
 	yat   <- seq(30,70, length = N + 1)
 	rect(.2, yat[1:N], .4, yat[2:(N + 1)], 
-			col = BrewerRamp("Oranges")(N), border = gray(.3), lwd = .5, xpd = TRUE)
+			col = rev(BrewerRamp("Oranges")(N)), border = gray(.3), lwd = .5, xpd = TRUE)
 	text(.4,yat,c(0,20,40,60,80,"100+"),pos=4)
-	text(.35,75,"Age saved",cex=1.2,xpd=TRUE)
+	text(.35,75,"Age saved at",cex=1.2,xpd=TRUE)
 	mtext(cause, side=3, line=2, cex=1.5, col="black", outer=FALSE, at = -2.5, padj=1) 
 }
-plotWapyga(COD,cause=causes[1],countries,xlim=c(-2,2))
+#dev.new(height = 8,width = 6)
+#plotWapyga(COD,cause=causes[1],countries,xlim=c(-2,2))
 
 pdf(file.path(folder,paste0("Wapyga",causes[1],".pdf")),height = 8,width = 6)
-plotWapyga(COD,cause=causes[1],countries,xlim=c(-3,3))
+plotWapyga(COD,cause=causes[1],countries,xlim=c(-2,2))
 dev.off()
 pdf(file.path(folder,paste0("Wapyga",causes[2],".pdf")),height = 8,width = 6)
-plotWapyga(COD,cause=causes[2],countries,xlim=c(-5,5))
+plotWapyga(COD,cause=causes[2],countries,xlim=c(-2.6,2.6))
 dev.off()
 pdf(file.path(folder,paste0("Wapyga",causes[3],".pdf")),height = 8,width = 6)
-plotWapyga(COD,cause=causes[3],countries,xlim=c(-2.2,2.2))
+plotWapyga(COD,cause=causes[3],countries,xlim=c(-1.6,1.6))
 dev.off()
 pdf(file.path(folder,paste0("Wapyga",causes[4],".pdf")),height = 8,width = 6)
-plotWapyga(COD,cause=causes[4],countries,xlim=c(-7,7))
+plotWapyga(COD,cause=causes[4],countries,xlim=c(-1.8,1.8))
 dev.off()
 pdf(file.path(folder,paste0("Wapyga",causes[5],".pdf")),height = 8,width = 6)
-plotWapyga(COD,cause=causes[5],countries,xlim=c(-2,2))
+plotWapyga(COD,cause=causes[5],countries,xlim=c(-1,1))
 dev.off()
 pdf(file.path(folder,paste0("Wapyga",causes[6],".pdf")),height = 8,width = 6)
-plotWapyga(COD,cause=causes[6],countries,xlim=c(-5,5))
+plotWapyga(COD,cause=causes[6],countries,xlim=c(-2.4,2.4))
 dev.off()
 pdf(file.path(folder,paste0("Wapyga",causes[7],".pdf")),height = 8,width = 6)
-plotWapyga(COD,cause=causes[7],countries,xlim=c(-8,8))
+plotWapyga(COD,cause=causes[7],countries,xlim=c(-4,4))
 dev.off()
 pdf(file.path(folder,paste0("Wapyga",causes[8],".pdf")),height = 8,width = 6)
-plotWapyga(COD,cause=causes[8],countries,xlim=c(-4.5,4.5))
+plotWapyga(COD,cause=causes[8],countries,xlim=c(-2.5,2.5))
 dev.off()
+}
 
+
+plotXYZcause4 <- function(COD, XYZ, cause, xlim = c(-1.5,1.5)){
+  Dxfc       <- COD[[XYZ]]$Dxfc[,cause]
+  Dxmc 	     <- COD[[XYZ]]$Dxmc[,cause]
+  lxmc       <- COD[[XYZ]]$Klxm[,cause]
+  lxfc       <- COD[[XYZ]]$Klxf[,cause]
+  lxmc[is.na(lxmc)] <- 0
+  lxfc[is.na(lxfc)] <- 0
+  LDM        <- makeLD(lxmc)
+  LDF        <- makeLD(lxfc)
+  LDM[is.nan(LDM)]  <- 0
+  LDF[is.nan(LDF)]  <- 0
+  Males      <- t(LDM)[2:112,2:112] * Dxmc
+  Females    <- t(LDF)[2:112,2:112] * Dxfc
+  MalesA     <- AggM(Males, FALSE, N = 20)
+  FemalesA   <- AggM(Females, FALSE, N = 20)
+  
+  #Males   <- ThanoAgg(Dxmc, dxmc, FALSE, N = 20)
+  #Females <- ThanoAgg(Dxfc, dxfc, FALSE, N = 20)
+  tics <- plotSetup(xlim)
+  PyrLevels(MalesA, FemalesA, revColors = FALSE, colRamp = BrewerRamp("Blues"), scale = 100)
+  PyramidOutline(colSums(MalesA), colSums(FemalesA), col = NA, border = gray(.2), lwd = .5, scale = 100)
+  invisible(tics)
+}
+
+plotWa <- function(COD,cause = "External",countries,xlim=c(-2,2)){
+  pp <- layout(matrix(c(1,2,3,4,5,6,7,7,7), 3, 3, byrow=FALSE), c(2.5,2.5,1), c(2.5,2.5,2.5,2.5,2.5,2.5,6), T)
+#layout.show(pp)
+  par(xaxs="i",yaxs="i",oma=c(0,1,0,0))
+# left side
+# top
+  par(mai = c(.05+.2, .28, .25, .02))
+  tics <- plotXYZcause4(COD, XYZ = countries[1], cause = cause,xlim=xlim)
+  ylabels(tics, left = TRUE)
+  text(0,-12,countries[1],xpd=TRUE)
+#mtext(-2,115,"Years Lived",pos=4,xpd=TRUE)
+#xlabels(tics,below=FALSE)
+# middle
+  par(mai = c(.15+.2, .28, .15, .02))
+  tics <- plotXYZcause4(COD, XYZ = countries[2], cause = cause,xlim=xlim)
+#ylabels(tics, left = TRUE)
+  text(0,-12,countries[2],xpd=TRUE)
+# bottom
+  par(mai = c(.25+.2, .28, .05, .02))
+  tics <- plotXYZcause4(COD, XYZ = countries[3], cause = cause,xlim=xlim)
+  ylabels(tics, left = TRUE)
+  xlabels(tics,below=TRUE)
+  text(0,-12,countries[3],xpd=TRUE)
+  
+# right side
+#top
+  par(mai = c(.05+.2, .02, .25, .28))
+  tics <- plotXYZcause4(COD, XYZ = countries[4], cause = cause,xlim=xlim)
+#ylabels(tics, left = FALSE)
+  xlabels(tics,below=FALSE)
+  text(0,-12,countries[4],xpd=TRUE)
+#middle
+  par(mai = c(.15+.2, .02, .15, .28))
+  tics <- plotXYZcause4(COD, XYZ = countries[5], cause = cause,xlim=xlim)
+  ylabels(tics, left = FALSE)
+  text(0,-12,countries[5],xpd=TRUE)
+# bottom
+  par(mai = c(.25+.2, .02, .05, .28))
+  tics <- plotXYZcause4(COD, XYZ = countries[6], cause = cause,xlim=xlim)
+#ylabels(tics, left = FALSE)
+#xlabels(tics,below=TRUE)
+  text(0,-12,countries[6],xpd=TRUE)
+#sapply(countries[4:6], plotXYZcause1, COD=COD, cause = "External", xlim = c(-1.6,1.6))
+  par(mai = c(0,0,0,0))
+  plotSetup(xlim= c(0,1), ylim = c(0,100), bg = NA, grid = FALSE)
+  N <- 5
+  yat   <- seq(30,70, length = N + 1)
+  rect(.2, yat[1:N], .4, yat[2:(N + 1)], 
+    col = rev(BrewerRamp("Blues")(N)), border = gray(.3), lwd = .5, xpd = TRUE)
+  text(.4,yat,c(0,20,40,60,80,"100+"),pos=4)
+  text(.35,75,"Ages won",cex=1.2,xpd=TRUE)
+  mtext(cause, side=3, line=2, cex=1.5, col="black", outer=FALSE, at = -2.5, padj=1) 
+}
+
+
+pdf(file.path(folder,paste0("Wa",causes[1],".pdf")),height = 8,width = 6)
+plotWa(COD,cause=causes[1],countries,xlim=c(-2,2))
+dev.off()
+pdf(file.path(folder,paste0("Wa",causes[2],".pdf")),height = 8,width = 6)
+plotWa(COD,cause=causes[2],countries,xlim=c(-2.6,2.6))
+dev.off()
+pdf(file.path(folder,paste0("Wa",causes[3],".pdf")),height = 8,width = 6)
+plotWa(COD,cause=causes[3],countries,xlim=c(-2.3,2.3))
+dev.off()
+pdf(file.path(folder,paste0("Wa",causes[4],"_1.pdf")),height = 8,width = 6)
+plotWa(COD,cause=causes[4],countries,xlim=c(-20,20))
+dev.off()
+pdf(file.path(folder,paste0("Wa",causes[4],"_2.pdf")),height = 8,width = 6)
+plotWa(COD,cause=causes[4],countries,xlim=c(-2.5,2.5))
+dev.off()
+pdf(file.path(folder,paste0("Wa",causes[5],".pdf")),height = 8,width = 6)
+plotWa(COD,cause=causes[5],countries,xlim=c(-2,2))
+dev.off()
+pdf(file.path(folder,paste0("Wa",causes[6],".pdf")),height = 8,width = 6)
+plotWa(COD,cause=causes[6],countries,xlim=c(-2,2))
+dev.off()
+pdf(file.path(folder,paste0("Wa",causes[7],".pdf")),height = 8,width = 6)
+plotWa(COD,cause=causes[7],countries,xlim=c(-4,4))
+dev.off()
+pdf(file.path(folder,paste0("Wa",causes[8],".pdf")),height = 8,width = 6)
+plotWa(COD,cause=causes[8],countries,xlim=c(-2,2))
+dev.off()

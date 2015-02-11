@@ -14,7 +14,7 @@ CODcountries <- c("USA","CAN","FRA","SWE","NOR","ENW")
 library(RCurl)
 library(DemogBerkeley)
 library(reshape2)
-XXX <- "CAN"
+
 grabCountryHMD <- function(XXX,Yr=2010,.us=us,.pw=pw){
   
     Dx  <- readHMDweb(XXX,"Deaths_1x1",username = .us, password = .pw)

@@ -63,11 +63,11 @@ DrawLabels(tics, ylab = "Years Left",xlab = "(1000s)", xlabs = zapsmall(abs(tics
 Drawlegend(tics, N = min(dim(Males)), colRamp = BrewerRamp("BuGn"), label = "Years Lived",revColors = TRUE)
 dev.off()
 
-y <- .5:110.5
-sum(Dxmc*y)/sum(Dxmc)
-sum(Dxfc*y)/sum(Dxfc)
-Dcym <- colSums(Males)
-Dcyf <- colSums(Females)
+#y <- .5:110.5
+#sum(Dxmc*y)/sum(Dxmc)
+#sum(Dxfc*y)/sum(Dxfc)
+#Dcym <- colSums(Males)
+#Dcyf <- colSums(Females)
 
 
 #names(COD$USA)
@@ -105,13 +105,13 @@ par(xaxs = "i",yaxs = "i", mai = c(.5, .6, .5, 1))
 tics <- plotSetup(xlim)
 PyrLevels(MalesA, FemalesA, revColors = FALSE, colRamp = BrewerRamp("Blues"))
 PyramidOutline(colSums(MalesA), colSums(FemalesA), col = NA, border = gray(.2), lwd = .5)
-DrawLabels(tics, ylab = "Age Saved at",xlab = "Years gained (100s)", 
+DrawLabels(tics, ylab = "Age Saved at",xlab = "Years gained (1000s)", 
         xlabs = zapsmall(abs(tics$x / 1e3)), cex = .7)
 Drawlegend(tics, N = min(dim(MalesA)), colRamp = BrewerRamp("Blues"), revColors = TRUE, label = "Ages gained")
 dev.off()
 
-Males   <- t(LDM)[2:112,2:112] * Dxmc
-Females <- t(LDF)[2:112,2:112] * Dxfc
+#Males   <- t(LDM)[2:112,2:112] * Dxmc
+#Females <- t(LDF)[2:112,2:112] * Dxfc
 
 # rowSums = thano, colsums = chrono
 #plot(colSums(Males))
