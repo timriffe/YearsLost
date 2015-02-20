@@ -204,3 +204,66 @@ n1$chart
 d1 <- dPlot(value~y+a,data=Pop,type="bar",stacked=TRUE)
 d1$yAxis(type="addCategoryAxis", orderRule="a")
 d1$xAxis(type="addMeasureAxis")
+
+
+
+#######################################################
+# a quick test for an unrelated paper:
+COD <- local(get(load("/data/commons/triffe/git/YearsLost/YearsLost/Data/COD.Rdata")))
+names(COD[[1]])
+COD[[1]]$Mxmc
+
+redistributeIllDefined <- function(Mxc){
+  Mxc[is.na(Mxc)] <- 0
+  ID                      <- Mxc[,"Ill defined"]
+  TheRest                 <- Mxc[,colnames(Mxc)!="Ill defined"]
+  denom                   <- rowSums(TheRest)
+  ind0                    <- denom == 0
+  TheRest                 <- TheRest + (TheRest/denom) * ID
+  TheRest[is.na(TheRest)] <- 0
+  TheRest[ind0, ]         <- ID[ind0] / ncol(TheRest)
+  TheRest[is.infinite(TheRest)] <- 0
+  TheRest
+}
+
+Mxmc <- lapply(COD, function(X){
+    redistributeIllDefined(X$Mxmc)
+  })
+Mxfc <- lapply(COD, function(X){
+    redistributeIllDefined(X$Mxfc)
+  })
+
+Causes <- colnames(Mxmc[[1]])
+cause <- "Cancer"
+Mxc <- Mxmc
+getMinc <- function(cause, Mxc){
+  Mc <- do.call(cbind, lapply(Mxc, function(X,cause){
+        X[,cause]
+      },cause=cause))
+  Mc[Mc==0] <- NA
+ 
+  apply(Mc,1,function(x){
+      ifelse(all(is.na(x)),0,min(x,na.rm=TRUE))
+    })
+  
+}
+Mcm <- do.call(cbind,lapply(Causes, getMinc, Mxc = Mxmc))
+Mcf <- do.call(cbind,lapply(Causes, getMinc, Mxc = Mxfc))
+
+Mxm <- rowSums(Mcm)
+Mxf <- rowSums(Mcf)
+matplot(0:110,Mcm,type='l',log='y')
+matplot(0:110,Mcf,type='l',log='y')
+
+sum(exp(-cumsum(Mxm))) # a best-practices e0
+sum(exp(-cumsum(Mxf))) 
+
+# the respective all-cause e0s
+unlist(lapply(COD, function(X){
+    sum(exp(-cumsum(rowSums(X$Mxmc,na.rm=TRUE))))
+  }))
+unlist(lapply(COD, function(X){
+      sum(exp(-cumsum(rowSums(X$Mxfc,na.rm=TRUE))))
+    }))
+
+# conclusion: this particular best practices lifetable isn't so great.
