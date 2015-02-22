@@ -267,3 +267,33 @@ unlist(lapply(COD, function(X){
     }))
 
 # conclusion: this particular best practices lifetable isn't so great.
+
+#
+devtools::load_all("/data/commons/triffe/git/HMDLexis/HMDLexis/HMDLexis")
+
+# LexisDB functions:
+
+#bitops_1.0-6     chron_2.3-45     compiler_3.0.1   data.table_1.9.4
+#devtools_1.4.1   digest_0.6.4     evaluate_0.5.5   httr_0.5        
+#lubridate_1.3.3  magrittr_1.5     memoise_0.2.1    parallel_3.0.1  
+#plyr_1.8.1       pracma_1.7.9     pspline_1.0-16   Rcpp_0.11.3     
+#RCurl_1.95-4.4   reshape2_1.4     stringr_0.6.2    tools_3.0.1     
+#whisker_0.3-2   
+#
+#importFrom(compiler,cmpfun)          # in RDC
+#importFrom(data.table,data.table)    # in RDC
+#importFrom(lubridate,decimal_date)
+#importFrom(lubridate,floor_date)
+#importFrom(lubridate,yday)
+#importFrom(lubridate,ymd)
+#importFrom(magrittr,"%>%")
+#importFrom(pracma,pchip)
+#importFrom(pspline,smooth.Pspline)
+#importFrom(reshape2,acast)           # in RDC
+#importFrom(reshape2,melt)            # in RDC
+
+# chron, stringr, memoise is a dependency of lubridate
+# RCurl, evaluate, whisker is needed by devtools, used to load this example....
+# bitops used by RCurl
+
+
