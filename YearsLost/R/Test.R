@@ -296,4 +296,7 @@ devtools::load_all("/data/commons/triffe/git/HMDLexis/HMDLexis/HMDLexis")
 # RCurl, evaluate, whisker is needed by devtools, used to load this example....
 # bitops used by RCurl
 
+q0 <- 1 - 98575 / 1e5
 
+D0 <- 21713 # from table 5
+(q0^2 * (1- q0))/D0 * 10^8
