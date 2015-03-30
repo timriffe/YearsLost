@@ -300,3 +300,128 @@ q0 <- 1 - 98575 / 1e5
 
 D0 <- 21713 # from table 5
 (q0^2 * (1- q0))/D0 * 10^8
+
+
+CODB <- local(get(load("/data/commons/triffe/git/YearsLost/YearsLost/Data/COD.Rdata")))
+COD         <- read.csv("/data/commons/triffe/HMDCOD.hg/test/USA/CODoutput/COD_5x1.csv", 
+                               stringsAsFactors = FALSE)
+unique(COD$Age)
+COD         <- COD[COD$Year == 2010 & COD$COD.cat != "All", ]
+COD$Age     <- as.integer(gsub("\\+","",unlist(lapply(strsplit(COD$Age,split = "-"),"[[",1))))
+
+#chapter	chapterName	            INED6	INED6Name	Code8	Code8Name
+# 1	    Certain infectious diseases	    3	Infectious	1	Infectious
+# 2	    Malignant neoplasms	            1	Cancer	    2	Cancer
+# 3	    Other neoplasms	                1	Cancer	    2	Cancer
+# 4	    Blood and blood-forming orga    2	Other	    3	Other
+# 5	    Endocrine, nutrition., metab    4	Other	    3	Other
+# 6	    Mental and behavioural diso     4	Other	    8	Mental
+# 7	    Diseases of the nervous system	4	Other	    3	Other
+# 8	    Heart disease	                2	Cardio	    4	Cardio
+# 9	    Cerebrovascular disease	        2	Cardio	    4	Cardio
+# 10	Other unsp. dis. circ   	    2	Cardio	    4	Cardio
+# 11	Respiratory diseases	        3	Infectious	1	Infectious
+# 12	Diseases of the digestive       4	Other	    3	Other
+# 13	Diseases of the skin	        4	Other	    3	Other
+# 14	Diseases of the musculoske      4	Other	    3	Other
+# 15	Diseases of the genitourin      4	Other	    3	Other
+# 16	Compli preg,  child	            4	Other	    3	Other
+# 17	Certain conditions originating  4	Other	    5	Infant/Cong.
+# 18	Congenital malformations/anom   4	Other	    5	Infant/Cong.
+# 19	Ill-defined or unknown	        6	Ill defined	6	Ill defined
+# 20	External causes	                5	Injuries	7	External
+xxx   <- local(get(load("/data/commons/triffe/HMDCOD.hg/RHMDCOD/data/hmdicdranges.rda")))
+
+Codes <- tapply(xxx$chapter,xxx$chapterName, unique)
+Names <- names(Codes)
+ord   <- order(Codes)
+Names <- Names[ord]
+Codes <- Codes[ord]
+names(Names) <- Codes
+Codes2 <- tapply(xxx$cause,xxx$causeName, unique)
+Names2 <- names(Codes2)
+ord2   <- order(Codes2)
+Names2 <- Names2[ord2]
+Codes2 <- Codes2[ord2]
+names(Names2) <- Codes2
+unique(COD$COD.cat)
+
+recvec          <- c(1,2,2,3,3,8,2,4,4,4,1,3,3,3,3,3,5,5,6,7)
+names(recvec)   <- sprintf("%.2d",1:20)
+TimCodes        <- 1:8
+names(TimCodes) <- c("Infectious","Cancer","Other","Cardio","Inf_Cong","Ill defined","External","Mental")
+TimNames        <- names(TimCodes)
+names(TimNames) <- 1:8
+
+# step 1) go from 92 codes to 92 names, then 92 codes to 20 names and codes, then 8 names and codes.
+COD$CauseName <- Names2[COD$COD.cat]
+
+# 2) get 20 codes from 92 codes.
+Codes3          <- tapply(xxx$chapter,xxx$cause, unique)
+COD$ChapterCode <- Codes3[COD$COD.cat]
+COD$Code8       <- recvec[COD$ChapterCode]
+COD$Name8       <- TimNames[COD$Code8]
+COD$ChapterName <- Names[COD$ChapterCode]
+
+save(COD, file = "/data/commons/triffe/git/YearsLost/YearsLost/Data/USA2010.Rdata")
+
+F92 <- tapply(COD$Deaths.F, COD$CauseName, sum)
+M92 <- tapply(COD$Deaths.M, COD$CauseName, sum)
+F20 <- tapply(COD$Deaths.F, COD$ChapterName, sum)
+M20 <- tapply(COD$Deaths.M, COD$ChapterName, sum)
+F8 <- tapply(COD$Deaths.F, COD$Name8, sum)
+M8 <- tapply(COD$Deaths.M, COD$Name8, sum)
+
+Out92 <- data.frame(Cause92 = names(F92), Females = F92, Males = M92, stringsAsFactors =FALSE)
+Out20 <- data.frame(Cause20 = names(F20), Females = F20, Males = M20, stringsAsFactors =FALSE)
+Out8 <- data.frame(Cause8 = names(F8), Females = F8, Males = M8, stringsAsFactors =FALSE)
+
+write.table(Out92, file = "/data/commons/triffe/HMDCOD.hg/test/USA/CODoutput/Out92.csv", sep = ",")
+write.table(Out20, file = "/data/commons/triffe/HMDCOD.hg/test/USA/CODoutput/Out20.csv", sep = ",")
+write.table(Out8, file = "/data/commons/triffe/HMDCOD.hg/test/USA/CODoutput/Out8.csv", sep = ",")
+
+#
+## open file connection
+#f <- file("/data/commons/triffe/VS13MORT.DUSMCPUB")
+#dir("/data/commons/triffe")
+## install.packages("sqldf")
+#library(sqldf)
+#
+## month of death: pos 65, 2 wide
+## sex: pos 69, 1
+## Age 70, 4
+## 39 cause recode: 160, 2
+#demo("sqldf-unitTests")
+#system.time(
+#  US2013 <- sqldf("select 
+#      substr(V1, 160, 2) Cause, 
+#      substr(V1, 69, 1) Sex, 
+#      substr(V1, 70, 4) Age, 
+#      substr(V1, 65, 2) Month, 
+#      count(*) Deaths 
+#      from f 
+#      group by  
+#      Cause, 
+#      Sex, 
+#      Age, 
+#      Month"))
+##user  system elapsed 
+##88.518  20.041 515.501  
+#dim(US2010)
+##[1] 68845     5
+#head(US2010)
+##  Cause Sex  Age Month Deaths
+##1    01   F 1002    08      1
+##2    01   F 1007    11      1
+##3    01   F 1009    12      1
+##4    01   F 1010    10      1
+##5    01   F 1017    12      1
+##6    01   F 1018    06      1
+#
+## close the connection
+#close(f)
+#
+
+## Gabor Grothendieck kindly emailed me the following simplification of the above sqldf statement:
+
+  

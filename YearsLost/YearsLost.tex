@@ -22,6 +22,13 @@
 \defcitealias{HFD}{HFD}
 \usepackage{appendix}
 
+\newcommand\ackn[1]{%
+  \begingroup
+  \renewcommand\thefootnote{}\footnote{#1}%
+  \addtocounter{footnote}{-1}%
+  \endgroup
+}
+
 \begin{document}
 
 
@@ -34,30 +41,24 @@
 
 \maketitle
 
-% AS: I know that you said that this paper is not motivated by a substantive
- % research question, but I
-%feel that there is a lack of the main research point. Why are you doing this
-% investigation? Are you going to present various descriptive possible scenarios about mortality 
-% impacts and potentials gains (in years of good/bad life). To address so, the
-% abstract needs to explain, in a very synthetic way, what the reader will find in the full manuscript.
-%
+% 
 \begin{abstract}
-We classify cause of death impacts on population stocks in five countries using
-a counterfactual framework. The lives and potential years of life lost due to death are presented as a metric for describing the population impacts of death and for comparing causes of
+The lives and potential years of life lost due to death are presented as a metric for describing the population impacts of death and for comparing causes of
 death. Lost lives and years of life may be classified by the ages in which
 deaths occurred, by the ages to which deaths would be postponed were they saved, by the
 ages through which the lost years would have been lived, or by the distribution of
 lost remaining lifespans. These temporal perspectives define the
 potential impacts of death and causes of death on population size and structure,
-and on the distribution of lifespans within populations. 
+and on the distribution of lifespans within populations. We
+illustrate these concepts using 2010 all-cause and cause-specific death
+data for the USA from the Human Mortality Database. \ackn{Research reported in this manuscript
+was supported by the U.S.
+National Institute On Aging of the National Institutes of Health under award numbers R01-AG011552 and R01-AG040245 and by the Spanish Ministry of Science and Innovation under award
+number ECO2013-48326-C2-1-P. The content is solely the responsibility of the
+authors and does not necessarily represent the official views of the funding
+agencies.}
 \end{abstract}
 
-%There is a need for an introduction. A general framework to situate the reader,
-% which concludes with a research question. We also need a paragraph to present
-% the data you are willing to use, as well as years and countries. The
-% introduction might structure a little bit what comes next: A) Temporal
-% relationships, B) Extension to causes of death; C) Population comparisons.
-%
 \section*{Introduction}
 A core task of demography is to account for and predict the population
 pyramid and the forces that shape it. The pyramid represents population
@@ -92,20 +93,20 @@ potentially saveable life. A potentially saveable life is a life that
 has been lost, a death, and a set of lost lives is a kind of population. The
 population of lost lives has static characteristics observed at the moment of
 death, such as age and sex structure. Were the
-population still living, it would also have a structure of remaining lifespans. Observed mortality patterns may be used to project remaining
-lifespan structure onto the lost population as an approximation of what would
+population still living, it would still be subject to a continued force of
+mortality and therefore retain a structure of remaining lifespans.
+Observed mortality patterns may be used to project remaining lifespan structure onto the lost population as an approximation of what would
 happen were the population to be resurrected simultaneously.
 This step is a counterfactual exercise, in line with the formal treatment given
 in \citet{vaupel1987repeated}.\footnote{\citet{vaupel2008lifesaving} follows in
 a similar vein, but aims at the effects of lifesaving on period distortions.}
 Saveable life and lifetime can be quantified under various demographic
-perspectives on age and lifespan. These perspectives refine and supplement YPLL when assessing the population impacts of causes of death, and we think that they would provide useful information for the targetting and planning of public health interventions and the comparison of mortality burdens between populations and subpopulations. The variety of visualizations presented in this article may also enrich official periodic reporting on the absolute and relative population impacts of causes of death.
+perspectives on age and lifespan. These perspectives refine and supplement YPLL when assessing the population impacts of causes of death, and we think that they would provide useful information for the targetting and planning of public health interventions and the comparison of mortality burdens between populations and subpopulations. 
 
 We first formally define what is meant by age and lifespan
 perspectives, illustrating on the example of all-cause
 mortality before proposing an extention to causes of death. Concepts are
-illustrated based on the population of the United States in 2010. We then
-compare a selection of five contemporary national populations (United States, England \& Wales, Norway, Sweden and Canada) based on pre-release
+illustrated based on the population of the United States in 2010 based on pre-release
 data newly collected by the Human Mortality
 Database~\citepalias{HMD}. We propose
 a selection of strategies for visualizing and arranging results for purposes of
@@ -163,8 +164,8 @@ years in the future given survival to current age $a$, and then dying at the
 exact age $a+y$.\footnote{A more explicit defintion is provided in the
 appendices.} Figure~\ref{fig:fya} shows selected cross-sections of the $f(y|a)$
 surface calculated from the 2010 US male period lifetable \citepalias{HMD}. The area under each chronological age-conditioned curve is equal to one.
-As an individual grows older (here under a fixed mortality schedule), the
-central mass of the curve approaches zero, moving one year down per year lived.
+In all cases where the underlying mortality pattern is fixed, the central mass
+of the curve approaches zero, moving one year down per year lived.
 In these data, the shape of the center of the curve does not change much until
 after chronological age 60, where conditional rescaling drives up death probabilities more and more. Upward
 scaling continues beyond those ages shown here, with $y=0$ becoming the greatest
@@ -188,7 +189,7 @@ by the part yet-unlived (years left, $y$) rather than by the part lived.
 The indices $a$ and $y$ differentiate between the past and future
 parts of a lifeline, respectively, and by extension of populations when
 so structured. As \citet{brouard1986structure}, when comparing the lived and
-to be-lived part of a population, we refer to $P(a)$ and $P(y)$.
+to-be-lived part of a population, we refer to $P(a)$ and $P(y)$.
 Is it so clear that the dead are no longer part of the population? If a life is
 completely saved, this life stays in the living population and is not counted
 as a death, but we (in common thinking) often imagine saved lives as a transient
@@ -203,18 +204,19 @@ the hypothetical population of lives saved a single time from death and subject 
 the same mortality as the population at large.
 
 Figure~\ref{fig:Day} (left) shows US 2010 period
-deaths (all the lives that could be saved) by age and sex (males on the left,
-females on the right). Over 1.23 million deaths each were recorded for US males
-and females in 2010. Deaths have been decomposed into discrete
-categories of remaining years of life using equation~\eqref{eq:fya}, under the assumption that saved lives are subject to the same mortality schedule as the rest of the population, and under the supposition that all 2010 deaths get saved (just once). The results of this decompositon are represented by color bands in
-Figure~\ref{fig:Day}. The average chronological age at death
-for males was a full seven years lower than that for females
-(69.9 versus, 76.9, respectively). Figure~\ref{fig:Dya} (right) displays the
-same decomposition after swapping the y axis and color gradient from Figure~\ref{fig:Day}. Now thanatological age (years left) of hypothetically saved lives are the primary y axis, while chronological age groups (years lived) are displayed with color. Figure~\ref{fig:Dya} communicates that most saveable
-lives would live short remaining lifespans once saved and granted the same lifetable
-mortality. This is so in this data because most saveable lives are already in
-chronological ages subject to high mortality rates. In general, the only
-saveable lives that might live very long remaining lifespans are the few deaths that occur in young ages. 
+deaths (the universe of lives that we counterfactually save) by age and sex (males on the left, females on the
+right).
+Over 1.23 million deaths each were recorded for US males and females in 2010. Deaths have been decomposed into discrete
+categories of remaining years of life (see appendix
+equation~\eqref{eq:fya}), under the assumption that saved lives are subject to
+the same mortality schedule as the rest of the population and that all 2010
+deaths get saved (just once). The results of this decompositon are represented
+by color bands in Figure~\ref{fig:Day}. The average chronological age at death
+observed for males was a full seven years lower than that for females: 69.9
+versus, 76.9, respectively.\footnote{This differs from period life expectancy
+(76.4 versus 81.2, respectively) because the population structure is not
+stationary.}
+Figure~\ref{fig:Dya} (right) displays the same decomposition after swapping the y axis and color gradient from Figure~\ref{fig:Day}. Now thanatological age (years left) of hypothetically saved lives are the primary y axis, while chronological age groups (years lived) are displayed with color. Figure~\ref{fig:Dya} communicates that most saveable lives would live short remaining lifespans once saved and granted the same lifetable mortality. This is so in this data because most saveable lives are already in chronological ages subject to high mortality rates. In general, the only saveable lives that might live very long remaining lifespans are the few deaths that occur in young ages. 
 
 Randomly
 selected saveable males from this population would have on average longer
@@ -278,17 +280,18 @@ by hypothetical remaining years of life (years left).}
 \caption*{*Note different x scale from Figure~\ref{fig:1}.}
 \end{figure}
 
-Figure~\ref{fig:SavedGained} shows the results of applying
-equation~\eqref{eq:savedea} to the same US data, which is essentially a
-reweighting of Figure~\ref{fig:Day} by remaining life expectancy. Color bands
-are assigned by decomposing the total life to be lived into the ages through
-which it will be lived. For example, if we save all 11700 of the 50-year-old US
-males that died in 2010, they would live a total of 349000 combined years (under constant and
-homogenous mortality), spread out over ages 50 and higher according to $\frac{l(50+y)}{l(50)}$. In Figure~\ref{fig:SavedGained} we decompose these
-gained years of life according to equation~\eqref{eq:savedy} (using $f(a+y|a)$)
-and highlight this decomposition with color, while in Figure~\ref{fig:LostLived}, \textit{gained} ages become the primary y axis,
-and color bands represent the ages in which populations in each age group were
-saved. 
+Figure~\ref{fig:SavedGained} shows the person years of life potentially won by
+saving all the deaths in each age (see appendix
+equation~\eqref{eq:savedea}) for the same US data, which is essentially a
+reweighting of Figure~\ref{fig:Day} by the standard age-pattern of remaining
+life expectancy that these lives would hypothetically be subject to.
+Color bands are assigned by decomposing the total life to be lived into the ages through which it will be lived. For example, if we save all 11700 of the 50-year-old US
+males that died in 2010, they would live a total of 349000 combined years (under
+a fixed 2010 mortality schedule), spread out over ages 50
+and higher according to $\frac{l(50+y)}{l(50)}$. In Figure~\ref{fig:SavedGained}
+we decompose these gained years of life according to the survival-conditioned
+distribution of remaining lifetime (see appendix
+equation~\eqref{eq:savedy}) and highlight this decomposition with color, while in Figure~\ref{fig:LostLived}, \textit{gained} ages become the primary y axis, and color bands represent the ages in which populations in each age group were saved.
 
 Figure~\ref{fig:LostLived} represents the cumulative contribution to the
 population pyramid that would result from saving all lives in 2010 and then
@@ -301,8 +304,8 @@ the NTA project, to benchmark the cumulative impacts of mortality on other
 quantities of interest. For instance, the females
 who died in 2010 would have given birth to 54122 babies cumulatively over their
 remaining lifetime assuming they were subject to constant 2010 period fertility
-\citepalias{HFD} and mortality. In the
-following we work only with mortality data.
+\citepalias{HFD} and mortality. In the present work, we only treat age
+structure, and we do not examine secondary consequences of this kind. 
 
 \section*{Causes of death}
 % AS: Extension to causes of death. This is the case you want to make. Saying,
@@ -314,12 +317,14 @@ following we work only with mortality data.
 
 These basic relationships carry over when deaths and survival are adjusted to
 account for the hypothetical elimination of particular causes (in the case of
-independence). In this case $D^s$ is the sum of $n$ causes, and to speak of
-eliminating cause $c$ from the lifetable is to speak of saving $D^{sc}$ lives and then
-subject them to the mortality conditions of all causes except $c$.
-This is problematic in that causes are not independent, and also in that
+independence). In this case, the total number of deaths observed, $D$, is the
+sum of the deaths from $n$ causes. To speak of eliminating cause $c$ (for
+instance, deaths from pancreatic cancer) from the lifetable is to speak of
+saving $D^{c}$ lives and then subjecting them to the mortality schedule after
+having deducted cause $c$ from the lifetable.
+This is problematic in that causes are not independent, and in that
 reductions in cause-specific mortality are not so thorough and immediate, but it
-serves as a good basis for comparing the relative impacts of different causes on
+serves as a basis for comparing the relative impacts of different causes on
 a given population structure. Humans have succeeded in eradicating certain
 causes of death in the past, and it
 is not so audacious to imagine that we may do so yet. While these
@@ -568,182 +573,182 @@ and so on, repeating equations \eqref{eq:savedea} and \eqref{eq:savedy} for the
 case of cause-specific saveable lives and their cause-deleted remaining
 lifespans.
 
-\section{Country comparison figures}
-Note to A{\"i}da:
-This is a temporary appendix, and all figures are provisional at this time. We
-just need to figure out how best to present information. For the time being we
-have six populations, and this will remain the case through PAA, it appears.
-I have taken figures \ref{fig:3} and \ref{fig:4} repeated these for each cause
-that made sense, and all sex countries, denoted with three letter codes at the
-moment. Some causes only hit one age, such as infant and
-congenital conditions (actually these appear later in life too, but in small numbers). $W(a)$ is not very useful to plot for this
-cause of death, since it is all concentrated in age 0. All x axes are now
-percent, in order to make populations of different size comparable. This works
-for each cause/perspective, but most causes have such different profiles that
-the x axes \textit{between} causes must have different ranges. So, each bundle
-of six figures is comparable within itself, but they are not comparable between
-each other. Also, note, I've been hasty and have not labeled the y axes. These
-are as in the respective figures from the text. Please just take a look for the
-time being and we can decide how best to organize things. I'll put each of the
-four figure types into appendix subsections. Each subsection will contain a
-figure for each cause that I worked with. These include cancer, cardio,
-external, ill defined, inf/cong, infectious, mental, and other (these are the
-short names for the categories I aggregated).
-\textit{Other} and \textit{ill defined} are admittedly not so interesting
-substantively, and we may as well omit them from the paper. It may make the
-most sense to just highlight a few interesting causes. Some causes/perspectives
-are very similar between countries, and some show more variety. Let's work on
-narrowing this down somehow and then decide how best to describe and display in
-the paper. 
-
-\pagebreak
-\subsection{$D^s(a)$, decomposed as in Figure~\ref{fig:Dayc}}
-Note, Infant and congenital conditions is omitted from this perspective. It
-still interesting, but better shown with a table than with a pyramid display.
-\begin{figure}
-\centering
-\includegraphics[scale=.8]{Figures/Causes/DxyCancer.pdf}
-\end{figure}
-\begin{figure}
-\centering
-\includegraphics[scale=.8]{Figures/Causes/DxyCardio.pdf}
-\end{figure}
-\begin{figure}
-\centering
-\includegraphics[scale=.8]{Figures/Causes/DxyExternal.pdf}
-\end{figure}
-\begin{figure}
-\centering
-\includegraphics[scale=.8]{Figures/Causes/DxyIll defined.pdf}
-\end{figure}
-\begin{figure}
-\centering
-\includegraphics[scale=.8]{Figures/Causes/DxyInfectious.pdf}
-\end{figure}
-\begin{figure}
-\centering
-\includegraphics[scale=.8]{Figures/Causes/DxyMental.pdf}
-\end{figure}
-\begin{figure}
-\centering
-\includegraphics[scale=.8]{Figures/Causes/DxyOther.pdf}
-\end{figure}
-
-\pagebreak
-\subsection{$D^s(y)$, decomposed as in Figure~\ref{fig:Dyac}}
-\begin{figure}
-\centering
-\includegraphics[scale=.8]{Figures/Causes/DyxCancer.pdf}
-\end{figure}
-\begin{figure}
-\centering
-\includegraphics[scale=.8]{Figures/Causes/DyxCardio.pdf}
-\end{figure}
-\begin{figure}
-\centering
-\includegraphics[scale=.8]{Figures/Causes/DyxExternal.pdf}
-\end{figure}
-\begin{figure}
-\centering
-\includegraphics[scale=.8]{Figures/Causes/DyxIll defined.pdf}
-\end{figure}
-\begin{figure}
-\centering
-\includegraphics[scale=.8]{Figures/Causes/DyxInf_Cong.pdf}
-\end{figure}
-\begin{figure}
-\centering
-\includegraphics[scale=.8]{Figures/Causes/DyxInfectious.pdf}
-\end{figure}
-\begin{figure}
-\centering
-\includegraphics[scale=.8]{Figures/Causes/DyxMental.pdf}
-\end{figure}
-\begin{figure}
-\centering
-\includegraphics[scale=.8]{Figures/Causes/DyxOther.pdf}
-\end{figure}
-
-\pagebreak
-\subsection{$W^s(a)$, decomposed as in Figure~\ref{fig:SavedGainedUSAExternal}}
-FYI, Ill-defined casues are shown twice because the axes are strange. There are
-possibly coding issues going on here. Anyway, we needn't show it for the paper.
-Also, infant and congenital conditions are shown here, but on an x scale that is
-shrunk- msot of the mass is on age 0- instead we see the profile of higher ages,
-very choppy in this case (the empty ages in SWE and NOR were 0s in the original
-abridged data, and these have been maintained after graduation).
-\begin{figure}
-\centering
-\includegraphics[scale=.8]{Figures/Causes/WaCancer.pdf}
-\end{figure}
-\begin{figure}
-\centering
-\includegraphics[scale=.8]{Figures/Causes/WaCardio.pdf}
-\end{figure}
-\begin{figure}
-\centering
-\includegraphics[scale=.8]{Figures/Causes/WaExternal.pdf}
-\end{figure}
+%\section{Country comparison figures}
+%Note to A{\"i}da:
+%This is a temporary appendix, and all figures are provisional at this time. We
+%just need to figure out how best to present information. For the time being we
+%have six populations, and this will remain the case through PAA, it appears.
+%I have taken figures \ref{fig:3} and \ref{fig:4} repeated these for each cause
+%that made sense, and all sex countries, denoted with three letter codes at the
+%moment. Some causes only hit one age, such as infant and
+%congenital conditions (actually these appear later in life too, but in small numbers). $W(a)$ is not very useful to plot for this
+%cause of death, since it is all concentrated in age 0. All x axes are now
+%percent, in order to make populations of different size comparable. This works
+%for each cause/perspective, but most causes have such different profiles that
+%the x axes \textit{between} causes must have different ranges. So, each bundle
+%of six figures is comparable within itself, but they are not comparable between
+%each other. Also, note, I've been hasty and have not labeled the y axes. These
+%are as in the respective figures from the text. Please just take a look for the
+%time being and we can decide how best to organize things. I'll put each of the
+%four figure types into appendix subsections. Each subsection will contain a
+%figure for each cause that I worked with. These include cancer, cardio,
+%external, ill defined, inf/cong, infectious, mental, and other (these are the
+%short names for the categories I aggregated).
+%\textit{Other} and \textit{ill defined} are admittedly not so interesting
+%substantively, and we may as well omit them from the paper. It may make the
+%most sense to just highlight a few interesting causes. Some causes/perspectives
+%are very similar between countries, and some show more variety. Let's work on
+%narrowing this down somehow and then decide how best to describe and display in
+%the paper. 
+%
+%\pagebreak
+%\subsection{$D^s(a)$, decomposed as in Figure~\ref{fig:Dayc}}
+%Note, Infant and congenital conditions is omitted from this perspective. It
+%still interesting, but better shown with a table than with a pyramid display.
 %\begin{figure}
 %\centering
-%\includegraphics[scale=.8]{Figures/Causes/WaIll defined_1.pdf}
+%\includegraphics[scale=.8]{Figures/Causes/DxyCancer.pdf}
 %\end{figure}
 %\begin{figure}
 %\centering
-%\includegraphics[scale=.8]{Figures/Causes/WaIll defined_2.pdf}
+%\includegraphics[scale=.8]{Figures/Causes/DxyCardio.pdf}
 %\end{figure}
-\begin{figure}
-\centering
-\includegraphics[scale=.8]{Figures/Causes/WaInf_Cong.pdf}
-\end{figure}
-\begin{figure}
-\centering
-\includegraphics[scale=.8]{Figures/Causes/WaInfectious.pdf}
-\end{figure}
-\begin{figure}
-\centering
-\includegraphics[scale=.8]{Figures/Causes/WaMental.pdf}
-\end{figure}
-\begin{figure}
-\centering
-\includegraphics[scale=.8]{Figures/Causes/WaOther.pdf}
-\end{figure}
-
-\pagebreak
-\subsection{$W^s(a+y|a)$, decomposed as in
-Figure~\ref{fig:LostLivedUSAExternal}}
-\begin{figure}
-\centering
-\includegraphics[scale=.8]{Figures/Causes/WapygaCancer.pdf}
-\end{figure}
-\begin{figure}
-\centering
-\includegraphics[scale=.8]{Figures/Causes/WapygaCardio.pdf}
-\end{figure}
-\begin{figure}
-\centering
-\includegraphics[scale=.8]{Figures/Causes/WapygaExternal.pdf}
-\end{figure}
-\begin{figure}
-\centering
-\includegraphics[scale=.8]{Figures/Causes/WapygaIll defined.pdf}
-\end{figure}
-\begin{figure}
-\centering
-\includegraphics[scale=.8]{Figures/Causes/WapygaInf_Cong.pdf}
-\end{figure}
-\begin{figure}
-\centering
-\includegraphics[scale=.8]{Figures/Causes/WapygaInfectious.pdf}
-\end{figure}
-\begin{figure}
-\centering
-\includegraphics[scale=.8]{Figures/Causes/WapygaMental.pdf}
-\end{figure}
-\begin{figure}
-\centering
-\includegraphics[scale=.8]{Figures/Causes/WapygaOther.pdf}
-\end{figure}
-
+%\begin{figure}
+%\centering
+%\includegraphics[scale=.8]{Figures/Causes/DxyExternal.pdf}
+%\end{figure}
+%\begin{figure}
+%\centering
+%\includegraphics[scale=.8]{Figures/Causes/DxyIll defined.pdf}
+%\end{figure}
+%\begin{figure}
+%\centering
+%\includegraphics[scale=.8]{Figures/Causes/DxyInfectious.pdf}
+%\end{figure}
+%\begin{figure}
+%\centering
+%\includegraphics[scale=.8]{Figures/Causes/DxyMental.pdf}
+%\end{figure}
+%\begin{figure}
+%\centering
+%\includegraphics[scale=.8]{Figures/Causes/DxyOther.pdf}
+%\end{figure}
+%
+%\pagebreak
+%\subsection{$D^s(y)$, decomposed as in Figure~\ref{fig:Dyac}}
+%\begin{figure}
+%\centering
+%\includegraphics[scale=.8]{Figures/Causes/DyxCancer.pdf}
+%\end{figure}
+%\begin{figure}
+%\centering
+%\includegraphics[scale=.8]{Figures/Causes/DyxCardio.pdf}
+%\end{figure}
+%\begin{figure}
+%\centering
+%\includegraphics[scale=.8]{Figures/Causes/DyxExternal.pdf}
+%\end{figure}
+%\begin{figure}
+%\centering
+%\includegraphics[scale=.8]{Figures/Causes/DyxIll defined.pdf}
+%\end{figure}
+%\begin{figure}
+%\centering
+%\includegraphics[scale=.8]{Figures/Causes/DyxInf_Cong.pdf}
+%\end{figure}
+%\begin{figure}
+%\centering
+%\includegraphics[scale=.8]{Figures/Causes/DyxInfectious.pdf}
+%\end{figure}
+%\begin{figure}
+%\centering
+%\includegraphics[scale=.8]{Figures/Causes/DyxMental.pdf}
+%\end{figure}
+%\begin{figure}
+%\centering
+%\includegraphics[scale=.8]{Figures/Causes/DyxOther.pdf}
+%\end{figure}
+%
+%\pagebreak
+%\subsection{$W^s(a)$, decomposed as in Figure~\ref{fig:SavedGainedUSAExternal}}
+%FYI, Ill-defined casues are shown twice because the axes are strange. There are
+%possibly coding issues going on here. Anyway, we needn't show it for the paper.
+%Also, infant and congenital conditions are shown here, but on an x scale that is
+%shrunk- msot of the mass is on age 0- instead we see the profile of higher ages,
+%very choppy in this case (the empty ages in SWE and NOR were 0s in the original
+%abridged data, and these have been maintained after graduation).
+%\begin{figure}
+%\centering
+%\includegraphics[scale=.8]{Figures/Causes/WaCancer.pdf}
+%\end{figure}
+%\begin{figure}
+%\centering
+%\includegraphics[scale=.8]{Figures/Causes/WaCardio.pdf}
+%\end{figure}
+%\begin{figure}
+%\centering
+%\includegraphics[scale=.8]{Figures/Causes/WaExternal.pdf}
+%\end{figure}
+%%\begin{figure}
+%%\centering
+%%\includegraphics[scale=.8]{Figures/Causes/WaIll defined_1.pdf}
+%%\end{figure}
+%%\begin{figure}
+%%\centering
+%%\includegraphics[scale=.8]{Figures/Causes/WaIll defined_2.pdf}
+%%\end{figure}
+%\begin{figure}
+%\centering
+%\includegraphics[scale=.8]{Figures/Causes/WaInf_Cong.pdf}
+%\end{figure}
+%\begin{figure}
+%\centering
+%\includegraphics[scale=.8]{Figures/Causes/WaInfectious.pdf}
+%\end{figure}
+%\begin{figure}
+%\centering
+%\includegraphics[scale=.8]{Figures/Causes/WaMental.pdf}
+%\end{figure}
+%\begin{figure}
+%\centering
+%\includegraphics[scale=.8]{Figures/Causes/WaOther.pdf}
+%\end{figure}
+%
+%\pagebreak
+%\subsection{$W^s(a+y|a)$, decomposed as in
+%Figure~\ref{fig:LostLivedUSAExternal}}
+%\begin{figuAre}
+%\centering
+%\includegraphics[scale=.8]{Figures/Causes/WapygaCancer.pdf}
+%\end{figure}
+%\begin{figure}
+%\centering
+%\includegraphics[scale=.8]{Figures/Causes/WapygaCardio.pdf}
+%\end{figure}
+%\begin{figure}
+%\centering
+%\includegraphics[scale=.8]{Figures/Causes/WapygaExternal.pdf}
+%\end{figure}
+%\begin{figure}
+%\centering
+%\includegraphics[scale=.8]{Figures/Causes/WapygaIll defined.pdf}
+%\end{figure}
+%\begin{figure}
+%\centering
+%\includegraphics[scale=.8]{Figures/Causes/WapygaInf_Cong.pdf}
+%\end{figure}
+%\begin{figure}
+%\centering
+%\includegraphics[scale=.8]{Figures/Causes/WapygaInfectious.pdf}
+%\end{figure}
+%\begin{figure}
+%\centering
+%\includegraphics[scale=.8]{Figures/Causes/WapygaMental.pdf}
+%\end{figure}
+%\begin{figure}
+%\centering
+%\includegraphics[scale=.8]{Figures/Causes/WapygaOther.pdf}
+%\end{figure}
+%
 \end{appendices}
 \end{document}

@@ -42,13 +42,14 @@ grabCountryHMD <- function(XXX,Yr=2010,.us=us,.pw=pw){
 
 # 1) get required HMD data, stick into list
 HMD <- lapply(HMDcountries,grabCountryHMD)
+head(HMD)
 names(HMD) <- CODcountries
 save(HMD, file = "Data/HMD.Rdata")
 # ---------------------------------------------------------------------------
 # 2) get COD data
 # ---------------------------------------------------------------------------
 
-# a function to expand ages. a bit overly cmplex, I admit 
+# a function to expand ages. a bit overly complex, I admit 
 expandAbdridged <- function(M){
     do.call(rbind,list(M[1,],
                     matrix(M[2,],nrow = 4, ncol = ncol(M), byrow = TRUE),
@@ -221,7 +222,151 @@ names(COD) <- CODcountries
 
 save(COD, file = "Data/COD.Rdata")
 
+####################################################################################
+# need some code specific for USA data, working at different levels of aggregation.
 
+# USA 92
+HMDUSA <- grabCountryHMD("USA")
+CODUSA <- local(get(load("Data/USA2010.Rdata")))
+#colnames(CODUSA)
+#unique(CODUSA$ChapterName)
+prepareUSAcause <- function(CODUSA,HMDUSA,VarName="Name8"){
 
+  # put into ageXcause array
+  Mf          <- acast(CODUSA, as.formula(paste0("Age~",VarName)), value.var = "Rates.F", sum)/1e5
+  Mm          <- acast(CODUSA, as.formula(paste0("Age~",VarName)), value.var = "Rates.M", sum)/1e5
+  
+  # these were re-ordered by acast()...
+  Names    <- colnames(Mm)
+  
+  # These are rates per 100000. Do all calcs then divide out back to pure rates.
+  # tried to smooth pattern, not worth it
+  ind0m       <- Mm == 0
+  ind0f       <- Mf == 0
+  
+  # this us just so the spline doesn't break: we put the zeros back later.
+  #Mm[ind0m]   <- 1e-6 # it turns out sometimes this is pernicious
+  #Mf[ind0f]   <- 1e-6
+  
+  MaxA        <- max(CODUSA$Age)
+  # for imputation of 0s later
+  ind0m1      <- expandAbdridged(ind0m)[1:(MaxA + 1), ]
+  ind0f1      <- expandAbdridged(ind0f)[1:(MaxA + 1), ]
+  
+  # ages for fitting
+  ages                       <- sort(unique(CODUSA$Age))
+  ages[1:(length(ages) - 1)] <- ages[1:(length(ages) - 1)] + diff(ages) / 2
+  ages[1]                    <- 0
+  
+  
+  Mf1 <- apply(log(Mf),2,function(y,MaxA){
+      if (all(is.infinite(y)) | all(is.na(y))){
+        return(rep(0, MaxA+1))
+      }
+      infi <- !is.infinite(y)
+      exp(splinefun(y[infi]~ages[infi])(0:MaxA))  
+    },MaxA=MaxA) 
+  Mm1 <- apply(log(Mm),2,function(y,MaxA){
+      if (all(is.infinite(y)) | all(is.na(y))){
+        return(rep(0, MaxA+1))
+      }
+      infi <- !is.infinite(y)
+      exp(splinefun(y[infi]~ages[infi])(0:MaxA))
+    },MaxA=MaxA)
+  # puts zeros back in where they belong
+  Mf1[ind0f1] <- 0
+  Mm1[ind0m1] <- 0
+  
+  # get Fracs (no need to get rid of 1e5)
+  Mfe <- Mf1 / rowSums(Mf1)
+  Mme <- Mm1 / rowSums(Mm1)
+  
+  # add on ages 101-110
+  Mfe <- rbind(Mfe, t(replicate((110-MaxA), Mfe[nrow(Mfe), ])))
+  Mme <- rbind(Mme, t(replicate((110-MaxA), Mme[nrow(Mme), ])))
+  rownames(Mfe) <- rownames(Mme) <- 0:110
+  
+  
+  #####################################################################
+  # deleted frac:
+  # K = Keep
+  Kf <- 1 - Mfe
+  Km <- 1 - Mme
+  
+  # deaths from each cause
+  Dxfc <- HMDUSA$Dxf * Mfe
+  Dxmc <- HMDUSA$Dxm * Mme
+  
+  # Mx of each cause:
+  Mxmc <- HMDUSA$Mxm * Mme
+  Mxfc <- HMDUSA$Mxf * Mfe
+  
+  # cause-deleted lx (simplified)
+  Klxm <- apply(HMDUSA$Mxm * Km ,2,function(x){
+      c(1,exp(-cumsum(x)))
+    })
+  Klxf <- apply(HMDUSA$Mxf * Kf ,2,function(x){
+      c(1,exp(-cumsum(x)))
+    })
+  dimnames(Klxm) <- dimnames(Klxf) <- list(0:111, Names)
+  # cause-deleted dx
+  Kdxm <- apply(Klxm, 2, lx2dx)
+  Kdxf <- apply(Klxf, 2, lx2dx)
+  dimnames(Kdxm) <- dimnames(Kdxf) <- list(0:110, Names)
+  
+  # stupid list trick. could be done another way I'm sure
+  LDm_list <- lapply(apply(Klxm,2,function(x){
+        list(makeLD(x))
+      }
+    ),"[[",1)
+  LDf_list <- lapply(apply(Klxf,2,function(x){
+        list(makeLD(x))
+      }
+    ),"[[",1)
+  
+  
+  DWmc_list <- lapply(names(LDm_list), function(CD, LDm_list, Dxmc){
+      t(LDm_list[[CD]])[2:112, 2:112] * Dxmc[,CD]
+    }, LDm_list = LDm_list, Dxmc = Dxmc)
+  DWfc_list <- lapply(names(LDf_list), function(CD, LDf_list, Dxfc){
+      t(LDf_list[[CD]])[2:112, 2:112] * Dxfc[,CD]
+    }, LDf_list = LDf_list, Dxfc = Dxfc)
+  
+  names(DWmc_list) <-  names(DWfc_list) <- names(LDm_list)
+  
+  invisible(
+    list(
+      DWmc_list = DWmc_list, DWfc_list = DWfc_list,     
+      LDm = LDm_list, LDf = LDf_list, 
+      Klxm = Klxm, Klxf = Klxf,
+      Kdxm = Kdxm, Kdxf = Kdxf, 
+      Mxmc = Mxmc, Mxfc = Mxfc, 
+      Dxfc = Dxfc, Dxmc = Dxmc,
+      MaxA = MaxA))
+  
+}
 
+CODUSA8 <- prepareUSAcause(CODUSA,HMDUSA,VarName="Name8")
+CODUSAChapter <- prepareUSAcause(CODUSA,HMDUSA,VarName="ChapterName")
+CODUSACause <- prepareUSAcause(CODUSA,HMDUSA,VarName="CauseName")
 
+save(CODUSA8, file = "Data/CODUSA8.Rdata")
+save(CODUSAChapter, file = "Data/CODUSAChapter.Rdata")
+save(CODUSACause, file = "Data/CODUSACause.Rdata")
+
+#matplot(0:110,log(CODUSACause$Mxfc),type='l')
+#colnames(CODUSACause$Mxfc)
+#plot(0:110,log(CODUSACause$Mxfc[,"Breast"]),type='l',col="red")
+#lines(0:110,log(CODUSACause$Mxmc[,"Prostate"]),col="blue")
+#
+#plot(0:110,CODUSA8$Mxfc[,"Cancer"],type='l',col="red",log='y',ylim=c(5e-6,.5))
+#lines(0:110,CODUSA8$Mxmc[,"Cancer"],col="blue")
+#lines(0:110,CODUSA8$Mxfc[,"Cardio"],col="red",lty=2)
+#lines(0:110,CODUSA8$Mxmc[,"Cardio"],col="blue",lty=2)
+#
+#head(CODUSA)
+#plot(CODUSA$Age[CODUSA$CauseName=="Prostate"],CODUSA$Rates.M[CODUSA$CauseName=="Prostate"]/1e5,type="s",lo='y')
+#lines(0:110,CODUSACause$Mxmc[,"Prostate"],col="blue")
+
+plot(CODUSACause$Dxmc[,"Prostate"],col="blue")
+names(CODUSACause)
