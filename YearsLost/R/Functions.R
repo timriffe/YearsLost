@@ -161,12 +161,21 @@ Drawlegend <- function(
             if(revColors){
                 Colors <- rev(Colors)
             }
-            xdiff <- diff(tics$x[1:2])
+            # pin = plot region dimensions:
+            # fin = figure dims (total)
+            # mai = margin inches
+            # x units per inch
+            xr  <- tics$xr       # right plt absolute
+            # now we can universalize, since xrr - xr = 1 inch :-)
+            xw  <- diff(par("usr")[1:2]) / par("pin")[2]
+            # bar width
+            bw  <- xw * 1/4
+            xl  <- xr + xw * 2/7
             yat   <- seq(min(tics$y), max(tics$y), length = N + 1)
-            rect(max(tics$x) + xdiff, yat[1:N], max(tics$x) + 2 * xdiff, yat[2:(N + 1)], 
+            rect(xl, yat[1:N], xl+bw, yat[2:(N + 1)], 
                     col = Colors, border = gray(.3), lwd = .5, xpd = TRUE)
-            text(max(tics$x) + 2 * xdiff, yat[1:N], tics$y, cex = cex, pos = 4, xpd = TRUE)
-            text(max(tics$x) + 1.5 * xdiff, max(tics$y) + 10, label, cex = cex, xpd = TRUE)
+            text(xl+bw, yat[1:N], tics$y, cex = cex, pos = 4, xpd = TRUE)
+            text(xl + xw * 1/12, max(tics$y) + 10, label, cex = cex, xpd = TRUE)
 
         }
 

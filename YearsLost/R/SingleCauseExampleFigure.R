@@ -17,7 +17,7 @@ COD <- local(get(load("Data/COD.Rdata")))
 
 #names(COD$USA)
 
-cause <- "External"
+cause <- "Cardio"
 XYZ   <- "USA"
 # cause-eliminated stuff:
 dxfc <- COD[[XYZ]]$Kdxf[,cause]
@@ -44,7 +44,6 @@ PyramidOutline(colSums(Males), colSums(Females), col = NA, border = gray(.2), lw
 DrawLabels(tics, ylab = "Years Lived",xlab = "(1000s)", xlabs = zapsmall(abs(tics$x / 1e3)))
 Drawlegend(tics, N = min(dim(Males)), colRamp = BrewerRamp("Blues"))
 dev.off()
-
 
 # Leaf
 Males   <- ThanoAgg(Dxmc, dxmc, FALSE, N = 10)
