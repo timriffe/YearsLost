@@ -68,7 +68,7 @@ expandAbdridged <- function(M){
 # 3	    Other neoplasms	                1	Cancer	    2	Cancer
 # 4	    Blood and blood-forming orga    2	Other	    3	Other
 # 5	    Endocrine, nutrition., metab    4	Other	    3	Other
-# 6	    Mental and behavioural diso     4	Other	    8	Mental
+# 6	    Mental and behavioural diso     4	Other	    7	Mental
 # 7	    Diseases of the nervous system	4	Other	    3	Other
 # 8	    Heart disease	                2	Cardio	    4	Cardio
 # 9	    Cerebrovascular disease	        2	Cardio	    4	Cardio
@@ -81,8 +81,8 @@ expandAbdridged <- function(M){
 # 16	Compli preg,  child	            4	Other	    3	Other
 # 17	Certain conditions originating  4	Other	    5	Infant/Cong.
 # 18	Congenital malformations/anom   4	Other	    5	Infant/Cong.
-# 19	Ill-defined or unknown	        6	Ill defined	6	Ill defined
-# 20	External causes	                5	Injuries	7	External
+# 19	Ill-defined or unknown	        6	Ill defined	3 Other
+# 20	External causes	                5	Injuries	6	External
 # ---------------------------------------------------------------------------
 # XXX <- "NOR"
 
@@ -96,14 +96,14 @@ grabCountryCOD <- function(XXX,HMD,Yr = 2010){
     
     # these code are hard-coded, but could be generalized for custom aggregations.
     # recode causes
-    recvec <- c(1,2,2,3,3,8,2,4,4,4,1,3,3,3,3,3,5,5,6,7)
+    recvec <- c(1,2,2,3,3,7,2,4,4,4,1,3,3,3,3,3,5,5,3,6)
     names(recvec) <- sprintf("%.2d",1:20)
     
-    TimCodes <- 1:8
-    names(TimCodes) <- c("Infectious","Cancer","Other","Cardio","Inf_Cong","Ill defined","External","Mental")
+    TimCodes <- 1:7
+    names(TimCodes) <- c("Infectious","Cancer","Other","Cardio","Inf_Cong","External","Mental")
     
     TimNames      <- names(TimCodes)
-    names(TimNames) <- 1:8
+    names(TimNames) <- 1:7
     COD$Code8     <- recvec[COD$COD.chap]
     COD$Code8Name <- TimNames[as.character(COD$Code8)]
     # ---------------------------------------------------------------------
@@ -212,8 +212,11 @@ grabCountryCOD <- function(XXX,HMD,Yr = 2010){
             Kdxm = Kdxm, Kdxf = Kdxf, 
             Mxmc = Mxmc, Mxfc = Mxfc, 
             Dxfc = Dxfc, Dxmc = Dxmc,
-            Yr = Yr, MaxA = MaxA))
-    
+            Yr = Yr, MaxA = MaxA, 
+            # some all cause stats, for comparison:
+            Mxm = HMD[[XXX]]$Mxm, Mxf = HMD[[XXX]]$Mxf,
+            lxm = HMD[[XXX]]$lxm, lxf = HMD[[XXX]]$lxf,
+            dxm = HMD[[XXX]]$dxm, dxf = HMD[[XXX]]$dxf))
 }
 
 
@@ -226,6 +229,7 @@ save(COD, file = "Data/COD.Rdata")
 # need some code specific for USA data, working at different levels of aggregation.
 
 # USA 92
+names(HMDUSA)
 HMDUSA <- grabCountryHMD("USA")
 CODUSA <- local(get(load("Data/USA2010.Rdata")))
 #colnames(CODUSA)
@@ -345,6 +349,8 @@ prepareUSAcause <- function(CODUSA,HMDUSA,VarName="Name8"){
       MaxA = MaxA))
   
 }
+with(CODUSA, unique(CauseName[Name8 == "Cancer"]))
+unique(CODUSA$ChapterName)
 
 CODUSA8 <- prepareUSAcause(CODUSA,HMDUSA,VarName="Name8")
 CODUSAChapter <- prepareUSAcause(CODUSA,HMDUSA,VarName="ChapterName")

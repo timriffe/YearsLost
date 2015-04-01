@@ -350,60 +350,75 @@ Cause &\multicolumn{2}{c}{ Female }&\multicolumn{2}{c}{ Male
  & count & \% & count & \% & count & \% \\ 
   \hline
    Cardiovascular & 395200 & 32.0 & 383077 & 31.1 & 778277 & 31.5 \\ 
-Cancer & 369411 & 29.9 & 366373 & 29.7 & 735785 & 29.8 \\ 
+Cancer* & 369411 & 29.9 & 366373 & 29.7 & 735785 & 29.8 \\ 
   Infectious & 156086 & 12.6 & 149139 & 12.1 & 305226 & 12.4 \\ 
   External & 60673 & 4.9 & 125733 & 10.2 & 186405 & 7.6 \\ 
     Mental & 76270 & 6.2 & 41413 & 3.4 & 117683 & 4.8 \\ 
-  Infant & 10368 & 0.8 & 12119 & 1.0 & 22487 & 0.9 \\ 
+  Infant* & 10368 & 0.8 & 12119 & 1.0 & 22487 & 0.9 \\ 
   Other & 167995 & 13.6 & 154577 & 12.5 & 322572 & 13.1 \\ 
   \hline
   Total & 1236003 & 100.0 & 1232432 & 100.0 & 2468435 & 100.0 \\
    \hline
-\end{tabular}
+\end{tabular}\par
+\bigskip
+\raggedright
+*The ``cancer'' group includes diseases of the nervous
+system. The ``infant'' category includes all congenital conditions, including
+those that result in death after infancy. 
 \end{minipage}
 \vspace{2em}
 
 Table~\ref{tab:counts} lists a selection of grouped causes of death for the
-United States in 2010.
+United States in 2010. The cardiovasclar category listed here combines
+various diseases of the heart, blood, and circulatory system. Cardiovascular
+diseases are the largest killer of both males and females, followed closely by
+the broad cancer category. Together, these two categories, which include most
+degenerative diseases, accounted for over 60\% of deaths in the United States in
+2010. For the following illustrations, we focus on cardiovascular
+diseases.
 
 Now Figures~\ref{fig:1} and~\ref{fig:2}
 can be repeated for any particular cause of death, and the profile of each of the four perspectives
 characterizes the population impact of the given cause of death.
-Figures~\ref{fig:3} and~ \ref{fig:4} depict the same temporal viewpoints,
-respectively, but now the deaths decomposed are only deaths to external
-causes, and external causes have been eliminated from the lifetable functions used for decomposition and
+Figures~\ref{fig:5} and~ \ref{fig:6} depict the same temporal viewpoints,
+respectively, but now the deaths decomposed are only deaths to cardiovascular
+causes, and cardiovascular causes have been eliminated from the lifetable functions used for decomposition and
  redistribution. Causes differ in their impact profiles, and this forms a
  basis for comparison. As with standard population pyramids, one may prefer the
  use of percent scales to facilitate comparisons between causes or countries. These
- figures for external causes give visual form to the intuition that demographers
- have about external causes of death. External causes are important in
- young ages, and affect males more than females. Saving a randomly selected death from an external
- cause will on average have a higher payoff in terms of expected years of life gained than does preventing a death in general. Further,
- a typical life saved will traverse many working ages, and reach well into old
+ figures for cardiovascular causes give visual form to the intuition that demographers
+ have about cardiovascular causes of death. Cardiovascular causes are important in
+ older ages, and kill similar numbers of males and females. Saving a randomly
+ selected death from a cardiovascular cause will on average have a slightly
+ lower payoff in terms of expected years of life gained than does preventing a death in general. Further, a typical life saved will traverse many working ages, and reach well into old
  ages.
- The group with the most to gain by eliminating external causes are males in
- their 20s (clearest in Figure~\ref{fig:4}).
+ The age groups with the most to gain by eliminating external causes are males
+between ages 55 and 65 and females in their 80s (clearest in
+Figure~\ref{fig:6}).
  
- The average chronological age of deaths to external causes in the USA in 2010
- was 47.9 for males and 57.1 for females. Their cause-deleted mean remaining
- lifetimes were 34.0 and 29.8 years, respectively. The mean age-at-saving of all
- the person-years hypothetically won under these same conditions becomes 36.7
- for males and 40.3 for females, whereas the mean of the ages \textit{enjoyed}
- by these hypothetically saved people are 59.7 and 63.3, respectively. Means do
- not tell the story as well as images. 
+ The average chronological age of deaths to cardiovascular causes in the USA in
+ 2010 was 74.4 for males and 81.8 for females. Their cause-deleted mean
+ remaining lifetimes would have been 16.0 and 13.0 years,
+ respectively.\footnote{This version of mean remaining lifetime refers to
+ observed deaths, as depicted in Figure~\ref{fig:Dyac}, not the stationary
+ lifetable measures. The same means from the stationary population would be 13.1
+ and 12.0, for males and females, respectively, and these latter figures can
+ be treated as hypothetical expectancies.} The mean age-at-saving of all the
+ person-years hypothetically won under these same conditions becomes 65.1 for males and 72.4 for females, whereas the mean of the ages \textit{enjoyed} by these hypothetically saved people are 78.0 and 83.7,
+ respectively. Means do not tell the story as well as images.
 
 \begin{figure}
 \centering
-\caption{Deaths from external causes in the USA, 2010}
-\label{fig:3}
+\caption{Deaths from cardiovascular causes in the USA, 2010}
+\label{fig:5}
 \begin{subfigure}[b]{.48\linewidth}
 \centering
 	\caption{Classified by age (years lived) and sex, and decomposed
 by hypothetical remaining years of life (years left).}
 	\label{fig:Dayc}
 	% Figure produced in R/SingleCauseExampleFigures.R
-	\includegraphics[scale=.55]{Figures/Deathsxy10USAExternal.pdf}	
-	\caption*{$D^{sc}(a)$}
+	\includegraphics[scale=.55]{Figures/Deathsxy10USACardio.pdf}	
+	\caption*{$D^{s~cardio}(a)$}
 \end{subfigure}
 ~
 \begin{subfigure}[b]{.48\linewidth}
@@ -412,24 +427,25 @@ by hypothetical remaining years of life (years left).}
 (years left) and sex, and decomposed by age (years lived).}
 	\label{fig:Dyac}
 	% Figure produced in R/SingleCauseExampleFigures.R
-    \includegraphics[scale=.55]{Figures/Deathsyx10USAExternal.pdf}
-    \caption*{$D^{sc}(y)$ }
+    \includegraphics[scale=.55]{Figures/Deathsyx10USACardio.pdf}
+    \caption*{$D^{s~cardio}(y)$ }
 \end{subfigure}
 \end{figure}
 
 
 \begin{figure}
 \centering
-\caption{USA, 2010 Deaths from external causes, years of life potentially won*}
-\label{fig:4}
+\caption{USA, 2010 Deaths from cardiovascular causes, years of life potentially
+won*}
+\label{fig:6}
 \begin{subfigure}[b]{.48\linewidth}
 \centering
 	\caption{Classified by age at hypothetical saving and sex, $W^s(a)$, and
 	decomposed by future ages to be lived.}
-	\label{fig:SavedGainedUSAExternal}
+	\label{fig:SavedGainedUSACardio}
 	% Figure produced in R/SingleCauseExampleFigures.R
-	\includegraphics[scale=.55]{Figures/YearsSavedGainedxx10USAExternal.pdf}
-	\caption*{$W^s(a)$ from equation~\ref{eq:savedea}}	
+	\includegraphics[scale=.55]{Figures/YearsSavedGainedxx10USACardio.pdf}
+	\caption*{$W^s(a)$ from appendix equation~\ref{eq:savedea}}	
 \end{subfigure}
 ~
 \begin{subfigure}[b]{.48\linewidth}
@@ -438,25 +454,19 @@ by hypothetical remaining years of life (years left).}
     decomposed by age at saving.}
 	\label{fig:LostLivedUSAExternal}
 	% Figure produced in R/SingleCauseExampleFigures.R
-    \includegraphics[scale=.55]{Figures/YearsLostLivedyx10USAExternal.pdf}
-    \caption*{$W^s(a+y|a)$ from equation~\ref{eq:gaineday}}	
+    \includegraphics[scale=.55]{Figures/YearsLostLivedyx10USACardio.pdf}
+    \caption*{$W^s(a+y|a)$ from appendix equation~\ref{eq:gaineday}}	
 \end{subfigure}
-\caption*{*Note different x scale from Figure~\ref{fig:3}.}
+\caption*{*Note different x scale from Figure~\ref{fig:5}.}
 \end{figure}
 
 \FloatBarrier
 
-\section*{Observed patterns}
-In this section we summarize cause of death impacts from eight
-major cause groups: cancers, cardiovascular disease, external causes, ill-defined casues, infant and congenital causes, infectious disease, mental
-debilitation, and other causes. These results will be summarized for the USA,
-Canada, England and Wales, Norway, and Sweden based on a soon-to-be
-released collection from the HMD. This section may have a supplemental appendix
-of results.
+
 
 \section*{Discussion}
 
-There are many perspectives under which the demography can account for the
+There are many perspectives under which demography can account for the
 relationships between stocks and flows, but not all form part of the collective
 practice of demography. 
 Our objective in these exercises has been to offer a novel quantitative and
@@ -494,7 +504,10 @@ compete to be first, and removing the first cause may not reduce the all cause
 rate by the same amount we have partitioned, $\mu^c$. The final reduction will
 lie somewhere between 0 and $\mu^c$, and may depend on the cause and
 overall level of mortality. We think that this possible unsolvable limitation
-ought not keep the researcher from exploring in this direction.
+ought not keep the researcher from exploring in this direction. With respect to
+survival after lifesaving, the researcher may choose to delete the cause in
+question or not. In practice, this choice makes little difference even for
+large causes, due to the constraints of lifetable entropy.
 \end{enumerate}
 
 

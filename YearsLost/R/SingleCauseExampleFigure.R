@@ -62,9 +62,21 @@ DrawLabels(tics, ylab = "Years Left",xlab = "(1000s)", xlabs = zapsmall(abs(tics
 Drawlegend(tics, N = min(dim(Males)), colRamp = BrewerRamp("BuGn"), label = "Years Lived",revColors = TRUE)
 dev.off()
 
+# for some in-paper stats
 #y <- .5:110.5
 #sum(Dxmc*y)/sum(Dxmc)
 #sum(Dxfc*y)/sum(Dxfc)
+#sum(rowSums(Thano(Dxmc,dxmc))*y)/sum(Dxmc)
+#sum(rowSums(Thano(Dxfc,dxfc))*y)/sum(Dxfc)
+#sum(rowSums(Thano(rowSums(COD[[XYZ]]$Dxmc),dxmc))*y)/sum(COD[[XYZ]]$Dxmc)
+#sum(rowSums(Thano(rowSums(COD[[XYZ]]$Dxfc),dxmc))*y)/sum(COD[[XYZ]]$Dxmc)
+#Lxmc <- (lxmc[1:111]+lxmc[2:112])/2
+#Lxfc <- (lxfc[1:111]+lxfc[2:112])/2
+#plot(rev(cumsum(rev(Lxmc))))
+#lines(rev(cumsum(rev(Lxmc)))/lxmc[1:111])
+#sum(dxmc * rev(cumsum(rev(Lxmc)))/lxmc[1:111])
+#sum(dxfc * rev(cumsum(rev(Lxfc)))/lxfc[1:111])
+# sum(Dxmc);sum(Dxfc);
 #Dcym <- colSums(Males)
 #Dcyf <- colSums(Females)
 
@@ -123,3 +135,12 @@ dev.off()
 #sum(rowSums(Females)*y)/sum(Females)
 #
 
+#Dxfc <- COD[[XYZ]]$Dxfc[,cause]
+#Dxmc <- COD[[XYZ]]$Dxmc[,cause]
+#Dxfc2 <- COD[[XYZ]]$Dxfc[,"External"]
+#Dxmc2 <- COD[[XYZ]]$Dxmc[,"External"]
+
+#plot(Dxfc2/Dxfc)
+#abline(h=1)
+#plot(Dxmc2/Dxmc)
+#abline(h=1)

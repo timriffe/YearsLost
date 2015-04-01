@@ -346,12 +346,13 @@ Codes2 <- Codes2[ord2]
 names(Names2) <- Codes2
 unique(COD$COD.cat)
 
-recvec          <- c(1,2,2,3,3,8,2,4,4,4,1,3,3,3,3,3,5,5,6,7)
-names(recvec)   <- sprintf("%.2d",1:20)
-TimCodes        <- 1:8
-names(TimCodes) <- c("Infectious","Cancer","Other","Cardio","Inf_Cong","Ill defined","External","Mental")
+recvec <- c(1,2,2,3,3,7,2,4,4,4,1,3,3,3,3,3,5,5,3,6)
+names(recvec) <- sprintf("%.2d",1:20)
+TimCodes <- 1:7
+names(TimCodes) <- c("Infectious","Cancer","Other","Cardio","Inf_Cong","External","Mental")
+
 TimNames        <- names(TimCodes)
-names(TimNames) <- 1:8
+names(TimNames) <- 1:7
 
 # step 1) go from 92 codes to 92 names, then 92 codes to 20 names and codes, then 8 names and codes.
 COD$CauseName <- Names2[COD$COD.cat]
@@ -359,8 +360,8 @@ COD$CauseName <- Names2[COD$COD.cat]
 # 2) get 20 codes from 92 codes.
 Codes3          <- tapply(xxx$chapter,xxx$cause, unique)
 COD$ChapterCode <- Codes3[COD$COD.cat]
-COD$Code8       <- recvec[COD$ChapterCode]
-COD$Name8       <- TimNames[COD$Code8]
+COD$Code7       <- recvec[COD$ChapterCode]
+COD$Name7       <- TimNames[COD$Code7]
 COD$ChapterName <- Names[COD$ChapterCode]
 
 save(COD, file = "/data/commons/triffe/git/YearsLost/YearsLost/Data/USA2010.Rdata")
@@ -369,16 +370,16 @@ F92 <- tapply(COD$Deaths.F, COD$CauseName, sum)
 M92 <- tapply(COD$Deaths.M, COD$CauseName, sum)
 F20 <- tapply(COD$Deaths.F, COD$ChapterName, sum)
 M20 <- tapply(COD$Deaths.M, COD$ChapterName, sum)
-F8 <- tapply(COD$Deaths.F, COD$Name8, sum)
-M8 <- tapply(COD$Deaths.M, COD$Name8, sum)
+F7 <- tapply(COD$Deaths.F, COD$Name7, sum)
+M7 <- tapply(COD$Deaths.M, COD$Name7, sum)
 
 Out92 <- data.frame(Cause92 = names(F92), Females = F92, Males = M92, stringsAsFactors =FALSE)
 Out20 <- data.frame(Cause20 = names(F20), Females = F20, Males = M20, stringsAsFactors =FALSE)
-Out8 <- data.frame(Cause8 = names(F8), Females = F8, Males = M8, stringsAsFactors =FALSE)
+Out7 <- data.frame(Cause7 = names(F7), Females = F7, Males = M7, stringsAsFactors =FALSE)
 
 write.table(Out92, file = "/data/commons/triffe/HMDCOD.hg/test/USA/CODoutput/Out92.csv", sep = ",")
 write.table(Out20, file = "/data/commons/triffe/HMDCOD.hg/test/USA/CODoutput/Out20.csv", sep = ",")
-write.table(Out8, file = "/data/commons/triffe/HMDCOD.hg/test/USA/CODoutput/Out8.csv", sep = ",")
+write.table(Out7, file = "/data/commons/triffe/HMDCOD.hg/test/USA/CODoutput/Out7.csv", sep = ",")
 
 #
 ## open file connection
