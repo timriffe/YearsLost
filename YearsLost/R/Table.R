@@ -37,7 +37,7 @@ print(xtable(B,digits=c(0,0,1,0,1,0,1)),floating=FALSE)
 # this is a rather ambitious distraction: produce stats for each cause
 
 #now let's get another table:
-names(COD[["USA"]])
+XYZ <- "USA"
 getMeans <- function(XYZ = "USA",cause = "External"){
  
   # all-cause elements
@@ -119,6 +119,7 @@ getMeans <- function(XYZ = "USA",cause = "External"){
 }
 
 # now get the same stuff for all-cause for the last row of the table..
+y       <- .5:110.5
 Dxm     <- rowSums(COD[[XYZ]]$Dxmc)
 Dxf     <- rowSums(COD[[XYZ]]$Dxfc)
 Mxm     <- COD[[XYZ]]$Mxm
@@ -167,7 +168,7 @@ WfS       <- sum(rowSums(Females2S)*y)/sum(Females2S)
 AmS       <- sum(colSums(Males2S)*y)/sum(Males2S)
 AfS       <- sum(colSums(Females2S)*y)/sum(Females2S)
 
-Stat <- cbind(xmS,xfS,ymS,yfS,WmS,WfS,AmS,AfS)
+StatT <- cbind(xmS,xfS,ymS,yfS,WmS,WfS,AmS,AfS)
 
 Causes <- c("Infectious","Cancer","Other","Cardio","Inf_Cong","External","Mental")
 getMeans("USA","Cardio")
@@ -183,7 +184,8 @@ rownames(Obs) <- Causes
 Obs <- rbind(Obs, Total = ObsT)
 
 Stat <- do.call(rbind, lapply(All,"[[",2))
-rownames(Stat) <- Causes
+Stat <- rbind(Stat, Total = StatT)
+rownames(Stat) <- c(Causes,"All")
+print(xtable(Stat,digits=1))
 
-print(xtable(Obs,digits=1))
-
+range(Obs / Stat)

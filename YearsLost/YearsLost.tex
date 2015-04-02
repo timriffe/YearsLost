@@ -21,8 +21,7 @@
 \newcommand{\tp}{\quad\quad\text{.}}
 \defcitealias{HMD}{HMD}
 \defcitealias{HFD}{HFD}
-\usepackage{appendix}
-
+\usepackage[titletoc,title]{appendix}
 \newcommand\ackn[1]{%
   \begingroup
   \renewcommand\thefootnote{}\footnote{#1}%
@@ -124,12 +123,13 @@ death, such as age and sex structure. Were the
 population still living, it would still be subject to a continued force of
 mortality and therefore retain a structure of remaining lifespans.
 Observed mortality patterns may be used to project remaining lifespan structure onto the lost population as an approximation of what would
-happen were the population to be resurrected simultaneously.
-This step is a counterfactual exercise, in line with the formal treatment given
-in \citet{vaupel1987repeated}.\footnote{\citet{vaupel2008lifesaving} follows in
-a similar vein, but aims at the effects of lifesaving on period distortions.}
-Saveable life and lifetime can be quantified under various demographic
-perspectives on age and lifespan. These perspectives refine and supplement YPLL when assessing the population impacts of causes of death, and we think that they would provide useful information for the targetting and planning of public health interventions and the comparison of mortality burdens between populations and subpopulations. 
+happen were the population to be resurrected simultaneously. In other words, we
+may estimate the vital momentum lost due to death. By hypothetically saving a
+life, we also save its momentum. By defining a universe of saveable lives in
+this way, we make no statement on the feasibility of lifesaving, but wish
+rather to make statements on the quantitative importance of lifesaving, wherein
+years of life are the universal currency.
+This step is a counterfactual exercise, in line with the formal treatment given in \citet{vaupel1987repeated}.\footnote{\citet{vaupel2008lifesaving} follows in a similar vein, but aims at the effects of lifesaving on period distortions.} Saveable life and lifetime can be quantified under various demographic perspectives on age and lifespan. These perspectives refine and supplement YPLL when assessing the population impacts of causes of death, and we think that they would provide useful information for the targetting and planning of public health interventions and the comparison of mortality burdens between populations and subpopulations.
 
 We first formally define what is meant by age and lifespan
 perspectives, illustrating on the example of all-cause
@@ -241,15 +241,15 @@ the same mortality schedule as the rest of the population and that all 2010
 deaths get saved (just once). The results of this decompositon are represented
 by color bands in Figure~\ref{fig:Day}. The average chronological age at death
 observed for males was a full seven years lower than that for females: 69.9
-versus, 76.9, respectively.\footnote{This differs from period life expectancy
+versus, 76.3, respectively.\footnote{This differs from period life expectancy
 (76.4 versus 81.2, respectively) because the population structure is not
 stationary.}
 Figure~\ref{fig:Dya} (right) displays the same decomposition after swapping the y axis and color gradient from Figure~\ref{fig:Day}. Now thanatological age (years left) of hypothetically saved lives are the primary y axis, while chronological age groups (years lived) are displayed with color. Figure~\ref{fig:Dya} communicates that most saveable lives would live short remaining lifespans once saved and granted the same lifetable mortality. This is so in this data because most saveable lives are already in chronological ages subject to high mortality rates. In general, the only saveable lives that might live very long remaining lifespans are the few deaths that occur in young ages. 
 
 Randomly
 selected saveable males from this population would have on average longer
-remaining lifespans than randomly selected saveable females (16.7 versus 13.3 years,
-respectively). This is a paradox because females have lower mortality rates in
+remaining lifespans than randomly selected saveable females (16.3 versus 13.7
+years, respectively). This is a paradox because females have lower mortality rates in
 nearly all ages, and have longer remaining life expectancies in all ages. Female
 mortality advantage is in this case more than offset by the relative youth of
 male deaths. Untangling the paradox further becomes a recursive exercise,
@@ -426,12 +426,12 @@ Figure~\ref{fig:6}).
  The average chronological age of deaths to cardiovascular causes in the USA in
  2010 was 74.4 for males and 81.8 for females. Their cause-deleted mean
  remaining lifetimes would have been 16.0 and 13.0 years,
- respectively.\footnote{This version of mean remaining lifetime refers to
+ respectively. This version of mean remaining lifetime refers to
  observed deaths, as depicted in Figure~\ref{fig:Dyac}, not the stationary
- lifetable measures. The same means from the stationary population would be 13.1
- and 12.0, for males and females, respectively, and these latter figures can
- be treated as hypothetical expectancies.} The mean age-at-saving of all the
- person-years hypothetically won under these same conditions becomes 65.1 for males and 72.4 for females, whereas the mean of the ages \textit{enjoyed} by these hypothetically saved people are 78.0 and 83.7,
+ lifetable measures. The same means from the stationary population would be 12.5
+ and 10.9, for males and females, respectively, and these latter figures can
+ be treated as hypothetical expectancies. The mean
+ age-at-saving of all the person-years hypothetically won under these same conditions becomes 65.1 for males and 72.4 for females, whereas the mean of the ages \textit{enjoyed} by these hypothetically saved people are 78.0 and 83.7,
  respectively. 
  
 \begin{figure}
@@ -507,6 +507,7 @@ won*}
  most years of life won being centered on chronological ages that nowadays are
  considered active.
  
+ \vspace{2em}
 \centerline{ 
 \begin{minipage}{\linewidth}
 \centering
@@ -694,6 +695,83 @@ remaining life expectancy assuming survival to age $a$ and no more death from ca
 and so on, repeating equations \eqref{eq:savedea} and \eqref{eq:savedy} for the
 case of cause-specific saveable lives and their cause-deleted remaining
 lifespans.
+
+In these equations, all quantities are derived on the basis of a mortality
+schedule and a given population structure, $P(a)$. Note that $P(a)$
+can also be defined as the stationary population structure implied by the given
+mortality conditions. In this case the interpretations are essentially the same,
+but impacts on population structure derived in this case would refer to a
+theoretical population that itself is completely a function of mortality.
+Summary results comparable to those given in the main text are reproduced in an
+appendix for the case of a stationary population.
+
+\section{Stationary-equivalent summary results}
+
+Table~\ref{tab:atatsummary} provides the same mean statistics as table
+\ref{tab:obssummary}, except that now instead of calculating on the basis of the
+mortality and population of the United States in 2010 we use the 2010 mortality
+conditions in conjunction with the stationary population they imply. These means
+have the same interpretation as those presented in the text, except that they
+are relevant for the theoretical stationary population, and are
+therefore entirely the product of the vital force of mortality. All results are
+therefore different than those relevant for the case of 2010, but not
+remarkably so, because the 2010 US population structure was
+coincidentally close to stationary. The cause of death that is most similar
+between the stationary and observed populations is infant and congenital
+conditions. This cause is highly concentrated in age 0 and youth, which means
+that thanatological redistributions of this cause approximate redistributing a
+lifetable radix, pulling patterns close to the stationary state. Other causes
+and measures differ by as much as \%35 in this case between the observed and
+stationary populations. We report observed patterns in the main text because
+these are of more immediate relevance.
+
+
+\vspace{2em}
+\centerline{ 
+\begin{minipage}{\linewidth}
+\centering
+\captionof{table}{Summary of four time perspectives for the U.S. 2010 stationary
+population by sex, 2010 (HMD)}
+\label{tab:atatsummary}
+% latex table generated in R 3.0.1 by xtable 1.7-4 package
+% Wed Apr  1 16:34:03 2015
+\centering
+\begin{tabular}{rrrrrrrrr}
+Cause &\multicolumn{2}{c}{ $\bar{a}^c$ }&\multicolumn{2}{c}{ $\bar{y}^c$
+}&\multicolumn{2}{c}{ $\widebar{W(a)}^c$}&\multicolumn{2}{c}{
+$\widebar{W(a+y|a)}^c$}\\
+ & \myalign{c}{Male} & \myalign{c}{Female} & \myalign{c}{Male} & \myalign{c}{Female} & \myalign{c}{Male} & \myalign{c}{Female} & \myalign{c}{Male} & \myalign{c}{Female} \\ 
+  \hline
+  Cardiovascular & 79.8 & 85.0 & 12.5 & 10.9 & 70.9 & 77.0 & 81.7 & 86.6 \\ 
+  Cancer* & 76.8 & 78.5 & 13.3 & 13.9 & 68.2 & 68.8 & 79.2 & 80.4 \\ 
+  Infectious & 79.2 & 81.3 & 11.0 & 11.1 & 68.4 & 71.0 & 78.9 & 81.4 \\ 
+  External & 54.9 & 64.8 & 28.9 & 24.0 & 38.8 & 43.2 & 61.0 & 65.0 \\ 
+   Mental & 84.9 & 89.2 & 7.6 & 6.5 & 75.0 & 83.2 & 83.0 & 89.3 \\ 
+  Infant* & 11.3 & 13.0 & 66.7 & 69.7 & 3.8 & 4.1 & 41.7 & 43.8 \\
+  Other & 75.9 & 80.5 & 13.3 & 12.1 & 61.4 & 65.9 & 74.6 & 78.6 \\ 
+   \hline
+   All & 76.4 & 81.2 & 12.2 & 10.9 & 60.8 & 66.5 & 73.9 & 78.5 \\ 
+   \hline
+\end{tabular}
+\raggedright\small
+*The ``cancer'' group includes diseases of the nervous
+system. The ``infant'' category includes all congenital conditions, including
+those that result in death after infancy. 
+\end{minipage}
+}
+
+Note that in the stationary population the mean age at death for all-cause
+mortality is equal to life expectancy at birth, shown in this table as 76.4 and
+81.2 for males and females, respectively. These figures are slightly off from
+the Human Mortality Database estimates of 76.60 and 81.37, respectively, because
+we have used simplified lifetable assumptions, such as assuming $L_x$ is the
+linear average of $l_x$ and $l_{x+1}$, even for age zero. Further, we have not
+smoothed older ages, as does the HMD. The majority of the difference in these
+two figures is due to our not having given special treatment to $a_0$, the mean age
+of infant deaths. This error is a small artifact, and it is more trivial for
+causes of death that tend to concentrate in older ages. Further details can be
+found by examining the R code provided in an online repository for this
+work.\footnote{See \url{https://github.com/timriffe/YearsLost}}
 
 %\section{Country comparison figures}
 %Note to A{\"i}da:
