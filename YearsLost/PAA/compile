@@ -1,0 +1,3 @@
+
+
+system('cd /home/tim/git/YearsLost/YearsLost/PAA | pdflatex RiffeSole2015PAA')
