@@ -10,6 +10,8 @@
 
 \usepackage{graphicx} % Allows including images
 \usepackage{booktabs} % Allows the use of \toprule, \midrule and \bottomrule in tables
+\newcommand{\dd}{\; \mathrm{d}}
+\usepackage{amsmath}
 %----------------------------------------------------------------------------------------
 %	TITLE PAGE
 %----------------------------------------------------------------------------------------
@@ -55,10 +57,18 @@ Tim Riffe \inst{1} \and A{\"i}da Sol\'{e} Aur\'{o} \inst{2}}
 
 \begin{frame}
 \frametitle{PYLL}
+Person years of life lost
+\begin{equation}
+PYLL = \int_0^\omega D(x) \times e(x) \dd x
+\end{equation}
 \end{frame}
-\begin{frame}
 
+
+\begin{frame}
+\frametitle{PYLL \& Counts}
+include a table of cause counts and PYLL?
 \end{frame}
+
 \begin{frame}
 
 \end{frame}
