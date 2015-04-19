@@ -1,9 +1,10 @@
 # for Tim, this will choke
 if (system("hostname",intern=TRUE) %in% c("triffe-N80Vm", "tim-ThinkPad-L440")){
   # if I'm on the laptop
-  setwd("/home/tim/git/YearsLost/YearsLost")
+  setwd("/home/tim/git/YearsLost/YearsLost/PAA")
 } else {
   # in that case I'm on Berkeley system, and other people in the dept can run this too
-  setwd(paste0("/data/commons/",system("whoami",intern=TRUE),"/git/YearsLost/YearsLost"))
+  setwd(paste0("/data/commons/",system("whoami",intern=TRUE),"/git/YearsLost/YearsLost/PAA"))
 }
+getwd()
 system('pdflatex RiffeSole2015PAA.tex')
