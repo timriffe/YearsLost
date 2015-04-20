@@ -524,9 +524,12 @@ plot(1751:2011, acast(SWE[SWE$Sex == "m", ],Age~Year,value.var = "Rx")[50,])
 plot(DAT$mx,log='y')
 lines(rev(cumsum(rev(DAT$WDx)))  / rev(cumsum(rev(DAT$Wx))))
 
+# are foregone years like a shadow, or are they more like the impact with
+# which you hit a wall?
 
-
-
+# Deaths times remaining years = impact,
+# and Force * mass (exposure) = deaths 
+# momentum? # velocity? the question: how far would life go if we let off the gas at age of death.
 
 
 
