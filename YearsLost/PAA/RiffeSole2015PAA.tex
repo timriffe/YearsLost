@@ -38,6 +38,8 @@ Tim Riffe \inst{1} \and A{\"i}da Sol\'{e} Aur\'{o} \inst{2}}
 %\date[May 2, 2015] % (optional)
 %{PAA annual meeting\\ Session 234}
 \begin{document}
+% remove figure headers
+\setbeamertemplate{caption}{\raggedright\insertcaption\par}
 
 % ------------------------------------------
 % title page for now. see about logos
@@ -82,32 +84,94 @@ Tim Riffe \inst{1} \and A{\"i}da Sol\'{e} Aur\'{o} \inst{2}}
 \frametitle{PYLL}
 Person years of life lost
 \begin{align}
-\text{PYLL} &= \int_0^\omega D(x) \times e(x) \dd x \\
-\text{PYLL}^c &= \int_0^\omega D^c(x) \times e(x) \dd x
+\text{PYLL} &= \int_0^\omega D(a) \cdot e(a) \dd a \\
+\text{PYLL}^c &= \int_0^\omega D^c(a) \cdot e(a) \dd a
 \end{align}
-(mention that there are decreasing returns to $\mu(x)$ improvements, since
-$D(x)$ decreases, but $e(x)$ increases = ambiguous change in PYLL?)
+(mention that there are decreasing returns to $\mu(a)$ improvements, since
+$D(a)$ decreases, but $e(a)$ increases = ambiguous change in PYLL?)
 \end{frame}
 
 
 \begin{frame}
-\frametitle{PYLL}
-PYLL has an age pattern that we're aware of but don't often look at:
+\frametitle{PYLL \& friends}
+\vspace{-1cm}
+\begin{figure}[b]
+    \centering
+    \includegraphics[scale=.7]{Figures/f1_Da.pdf}
+    \caption{$D(a)$ (US, 2010)}
+\end{figure} 
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% D(y) --- lifespans foregone                  %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{PYLL \& friends}
+\vspace{-1cm}
+\begin{figure}[b]
+    \centering
+    \includegraphics[scale=.7]{Figures/f2_Dy.pdf}
+    \caption{$D(y)$ (US, 2010)}
+\end{figure} 
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% D(a) --- lifespans foregone                  %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{PYLL \& friends}
+\vspace{-1cm}
+\begin{figure}[b]
+    \centering
+    \includegraphics[scale=.7]{Figures/f3_Da.pdf}
+    \caption{$D(a)$ (US, 2010)}
+\end{figure} 
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% D(a) - lifespans foregone                    %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{PYLL \& friends}
+\vspace{-1cm}
+\begin{figure}[b]
+    \centering
+    \includegraphics[scale=.7]{Figures/f4_Da.pdf}
+    \caption{$D(a)$ (US, 2010)- changed scale}
+\end{figure} 
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% D(a)e(a) - PYLL(a)                           %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{PYLL \& friends}
+\vspace{-1cm}
+\begin{figure}[b]
+    \centering
+    \includegraphics[scale=.7]{Figures/f5_Daea.pdf}
+    \caption{$PYLL(a)$ (US, 2010)}
+\end{figure} 
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Ages won                                     %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{PYLL \& friends}
+\vspace{-1cm}
+\begin{figure}[b]
+    \centering
+    \includegraphics[scale=.7]{Figures/f6_AgesWon.pdf}
+    \caption{$W(a+y|a)$ (US, 2010)}
+\end{figure} 
+\end{frame}
 
-1) Dx 2) Wx
-in this case person years of life lost is assigned to the age in which death
-ocurred, but it makes more sense to plot them through the ages in which the
-years will be lived. use prop to show momentum with before after death.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  I'm leaning toward just showing this last plot for causes %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Causes}
+\begin{frame}
+
 \end{frame}
 
 \begin{frame}
-Here a plot of the years of life lived through (foregone). In order to do this
-properly, you can't just do $x+e(x)$, but you need to use the whole conditional
-dist. Show eqn?
-\end{frame}
 
-\begin{frame}
-Now the same thing for causes: no formula necessary, just figs.
 \end{frame}
 
 \begin{frame}
