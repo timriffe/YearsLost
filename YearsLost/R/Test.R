@@ -423,6 +423,110 @@ write.table(Out7, file = "/data/commons/triffe/HMDCOD.hg/test/USA/CODoutput/Out7
 #close(f)
 #
 
-## Gabor Grothendieck kindly emailed me the following simplification of the above sqldf statement:
+# quick test of random thought
+# ----------------------------------------------------
+HMD <- local(get(load("/home/tim/git/YearsLost/YearsLost/Data/HMD.Rdata")))
+names(HMD$USA)
 
-  
+Dxm <- HMD$USA$Dxm
+Mxm <- HMD$USA$Mxm
+Exm <- Dxm / Mxm
+
+mx2ex <- function(mx){
+ lx <-	c(1,exp(cumsum(-mx)))
+ Lx <- (lx[1:(length(lx)-1)] + lx[2:length(lx)])/2
+ rev(cumsum(rev(Lx)))
+}
+plot(mx2ex(Mxm))
+Exmx2PYLL <- function(Ex,mx){
+	Dx <- Ex * mx
+	ex <- mx2ex(mx)
+	sum(Dx*ex,na.rm=TRUE)
+}
+PYLL1 <- Exmx2PYLL(Exm, Mxm)
+PYLL2 <- Exmx2PYLL(Exm, Mxm/2)
+PYLL3 <- Exmx2PYLL(Exm, Mxm*2)
+
+PYL1;PYL2;PYL3
+(PYL2/PYL1+PYL1/PYL3)/2
+
+facs <- c(1/rev(seq(1,3,by=.1)),seq(1,3,by=.1))
+e0vec <- sapply(facs,function(fac,mx){
+			mx2ex(mx*fac)[1]
+		},mx=Mxm)
+ratiovec <- sapply(facs, function(fac,mx,Ex){
+			PYL1 <- Exmx2PYLL(Ex, mx)
+			PYL2 <- Exmx2PYLL(Ex, mx*fac)
+			PYL2 / PYL1
+		},mx=Mxm,Ex=Exm)
+plot(facs,ratiovec)
+abline(h=1);abline(v=1)
+abline(lm(ratiovec~facs))
+
+PYLLvec <- sapply(facs, function(fac,mx,Ex){
+			Exmx2PYLL(Ex, mx*fac)
+		},mx=Mxm,Ex=Exm)
+PYLvec <- sapply(facs, function(fac,mx,Ex){
+			sum(Ex * mx2ex(mx*fac))
+		},mx=Mxm,Ex=Exm)
+
+plot(facs,PYLLvec / PYLvec,log='x')
+
+PYL1 <- sum(Exm * mx2ex(Mxm))
+PYL2 <- sum(Exm * mx2ex(Mxm)/2)
+PYL3 <- sum(Exm * mx2ex(Mxm)*2)
+
+PYLL1 / PYL1
+PYLL2 / PYL2
+(PYLL3 / PYL3) / (PYLL1 / PYL1)
+(PYLL1 / PYL1) / (PYLL2 / PYL2)
+#abline(v=c(.5,1,2))
+#plot(facs,PYLLvec)
+#plot(diff(PYLLvec)/PYLLvec[-1] )
+# at least with this population exposure...
+# interpretation: a 10% decrease / increase is only worth 3.8% decrease/increase in PYLL!
+# wow. That's cool. Entropy shows its head.
+
+sum(Exm * mx2ex(Mxm)) / 
+sum(Exm * mx2ex(Mxm))
+
+# and what about as a period indicator over the SWE time series?
+
+HMD <- local(get(load("/home/tim/git/DistributionTTD/DistributionTTD/Data/HMDltper.Rdata")))
+SWE <- HMD[HMD$CNTRY == "SWE", ]
+
+# first as a stationary population measure. Then as a stable population measure?
+SWE$Wx <- SWE$Lx * SWE$ex
+SWE$WDx <- SWE$Wx * SWE$mx
+SWE$Rx <- SWE$WDx / SWE$Wx
+
+
+SWEL <- split(SWE, list(SWE$Year,SWE$Sex))
+SWE <- do.call(rbind,lapply(SWEL, function(DAT){
+			DAT$WDxC <- rev(cumsum(rev(DAT$WDx)))
+			DAT$WxC  <- rev(cumsum(rev(DAT$Wx)))
+			DAT$WRx  <- DAT$WDxC  / DAT$WxC
+			DAT$WRx[is.infinite(DAT$WRx)] <- NA
+			DAT
+		}))
+
+library(LexisUtils)
+library(reshape2)
+LexisMap(acast(SWE[SWE$Sex == "m", ],Age~Year,value.var = "WRx") ,log=FALSE)
+LexisMap(acast(SWE[SWE$Sex == "m", ],Age~Year,value.var = "Rx"),log=TRUE)
+LexisMap(acast(SWE[SWE$Sex == "m", ],Age~Year,value.var = "WRx") - 
+				acast(SWE[SWE$Sex == "m", ],Age~Year,value.var = "Rx"),log=FALSE)
+plot(acast(SWE[SWE$Sex == "m", ],Age~Year,value.var = "WRx")[,1])
+# what's the meaning of cumulative... is there a point to this measure?
+plot(1751:2011, acast(SWE[SWE$Sex == "m", ],Age~Year,value.var = "WRx")[1,])
+plot(1751:2011, acast(SWE[SWE$Sex == "m", ],Age~Year,value.var = "Rx")[50,])
+
+plot(DAT$mx,log='y')
+lines(rev(cumsum(rev(DAT$WDx)))  / rev(cumsum(rev(DAT$Wx))))
+
+
+
+
+
+
+
