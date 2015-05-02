@@ -8,3 +8,11 @@ if (system("hostname",intern=TRUE) %in% c("triffe-N80Vm", "tim-ThinkPad-L440")){
 }
 getwd()
 system('pdflatex RiffeSole2015PAA.tex')
+
+
+
+
+
+
+
+
