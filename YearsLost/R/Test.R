@@ -431,9 +431,11 @@ names(HMD$USA)
 Dxm <- HMD$USA$Dxm
 Mxm <- HMD$USA$Mxm
 Exm <- Dxm / Mxm
-
+mx2lx <- function(mx){
+	c(1,exp(cumsum(-mx)))
+}
 mx2ex <- function(mx){
- lx <-	c(1,exp(cumsum(-mx)))
+ lx <-	mx2lx(mx)
  Lx <- (lx[1:(length(lx)-1)] + lx[2:length(lx)])/2
  rev(cumsum(rev(Lx)))
 }
@@ -494,7 +496,7 @@ sum(Exm * mx2ex(Mxm))
 
 HMD <- local(get(load("/home/tim/git/DistributionTTD/DistributionTTD/Data/HMDltper.Rdata")))
 SWE <- HMD[HMD$CNTRY == "SWE", ]
-
+head(HMD)
 # first as a stationary population measure. Then as a stable population measure?
 SWE$Wx <- SWE$Lx * SWE$ex
 SWE$WDx <- SWE$Wx * SWE$mx
@@ -531,5 +533,97 @@ lines(rev(cumsum(rev(DAT$WDx)))  / rev(cumsum(rev(DAT$Wx))))
 # and Force * mass (exposure) = deaths 
 # momentum? # velocity? the question: how far would life go if we let off the gas at age of death.
 
+source("/home/tim/git/YearsLost/YearsLost/R/Functions.R")
+lx <- mx2lx(Mxm)[-112]
+LX <- makeLD(lx)
 
+plot(colSums(Dxm * LX) /colSums(Exm * LX))
+lines(Mxm)
+head(LX)
 
+Gx <- colSums(Dxm * LX) /colSums(Exm * LX)
+
+plot(Gx,log="y",type='l')
+lines(Mxm,col="blue")
+
+plot(mx2ex(Gx))
+
+mx2ex(Gx)[1]
+mx2ex(Mxm)[1]
+
+plot(mx2lx(Gx),type='l')
+library(reshape2)
+mxL <- acast(SWE[SWE$Sex == "f",], Age~Year, value.var = "mx")
+
+apply(mxL, 2, function(mxx){
+			 
+LX <- makeLD(mx2lx(Mxm)[-112])
+
+		})
+HMD <- local(get(load("/home/tim/git/YearsLost/YearsLost/Data/HMD.Rdata")))
+
+Dxm <- HMD$USA$Dxm
+Mxm <- HMD$USA$Mxm
+
+library(DemogBerkeley)
+Dx <- readHMDweb("SWE","Deaths_1x1",username = us, password = pw)
+Ex <- readHMDweb("SWE","Exposures_1x1",username = us, password = pw)
+mx <- readHMDweb("SWE","mltper_1x1",username = us, password = pw)
+head(Dx)
+Dxm <- acast(Dx, Age~Year, value.var = "Male")
+Exm <- acast(Ex, Age~Year, value.var = "Male")
+Mxm <- acast(mx, Age~Year, value.var = "mx")
+#Mxm <- Dxm / Exm
+any(is.na(Mxm))
+Gxm <- Exm * 0 #yr <- 261
+for (yr in 1:ncol(Exm)){
+	
+	LX <- makeLD(mx2lx(Mxm[,yr])[-112])
+	Gxm[,yr] <- colSums(Dxm[,yr] * LX) /colSums(Exm[,yr] * LX)
+}
+Gxm[is.na(Gxm)] <- 0
+Gxm[Gxm==0]<- NA
+sum(colSums(Exm[,yr] * LX))
+
+#library(LexisUtils)
+LexisMap(Gxm,contour=TRUE)
+
+plot(as.integer(colnames(Exm)),apply(Gxm,2,function(mx){
+			sum(exp(-cumsum(mx)),na.rm=TRUE)
+		}),type='l')
+
+Gxmprime <- Exm * 0
+for (yr in 1:ncol(Exm)){
+	lx <- mx2lx(Mxm[,yr])
+	dx <- -diff(lx)
+	Lx <- (lx[1:111] + lx[2:112]) / 2
+	LX <- makeLD(Lx)
+	
+	Gxmprime[,yr] <- colSums(dx * LX) /colSums(Lx * LX)
+}
+plot(as.integer(colnames(Exm)),apply(Gxmprime,2,function(mx){
+					sum(exp(-cumsum(mx)),na.rm=TRUE)
+				}),type='l')
+LexisMap(Gxmprime,contour=TRUE)
+LexisMap(Gxm,contour=TRUE)
+matplot(Gxmprime,type='l',lty=1,lwd=1,col="#00000050",log='y')
+matplot(Gxm[,1:200],type='l',lty=1,lwd=1,col="#00000050",log='y')
+
+# ratio
+ratiovec <- c()
+for (yr in 1:ncol(Exm)){
+	
+	LX <- makeLD(mx2lx(Mxm[,yr])[-112])
+	ratiovec[yr] <- sum(colSums(Dxm[,yr] * LX)) / sum(colSums(Exm[,yr] * LX))
+}
+ratiovecprime <- c()
+for (yr in 1:ncol(Exm)){
+	lx <- mx2lx(Mxm[,yr])
+	dx <- -diff(lx)
+	Lx <- (lx[1:111] + lx[2:112]) / 2
+	LX <- makeLD(Lx)
+	
+	ratiovecprime[yr] <- sum(colSums(dx * LX)) / sum(colSums(Lx * LX))
+}
+plot(1751:2011,ratiovec,type='l')
+lines(1751:2011,ratiovecprime,col='red')
