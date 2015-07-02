@@ -17,7 +17,7 @@ source("R/Functions.R")
 # TR: a user other myself will need to 
 # specify the username and password as character strings directly here
 # (I specify them in .Rprofile so I don't need to type them in so often...)
-library(DemogBerkeley)
+library(HMDHFDplus)
 Dx  		<- readHMDweb("USA","Deaths_1x1",username = us, password = pw)
 Ex  		<- readHMDweb("USA","Exposures_1x1",username = us, password = pw)
 

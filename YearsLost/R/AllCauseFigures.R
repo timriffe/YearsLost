@@ -14,7 +14,7 @@ getwd()
 # get plotting functions
 source("R/Functions.R")
 
-library(DemogBerkeley)
+library(HMDHFDplus)
 Dx  <- readHMDweb("USA","Deaths_1x1",username = us, password = pw)
 Ex  <- readHMDweb("USA","Exposures_1x1",username = us, password = pw)
 Px  <- readHMDweb("USA","Population",username = us, password = pw)
