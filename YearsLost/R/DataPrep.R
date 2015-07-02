@@ -1,18 +1,25 @@
 
-# for Tim, this will choke
+# this script uses the HMDresults object to search for common patterns to the various defined measures.
 if (system("hostname",intern=TRUE) %in% c("triffe-N80Vm", "tim-ThinkPad-L440")){
-  # if I'm on the laptop
-  setwd("/home/tim/git/YearsLost/YearsLost")
+	# if I'm on the laptop
+	setwd("/home/tim/git/YearsLost/YearsLost")
 } else {
-  # in that case I'm on Berkeley system, and other people in the dept can run this too
-  setwd(paste0("/data/commons/",system("whoami",intern=TRUE),"/git/YearsLost/YearsLost"))
+	if (system("hostname",intern=TRUE) == "PC-403478"){
+		# on MPIDR PC
+		setwd("U://git//YearsLost//YearsLost")
+	} else {
+		# in that case I'm on Berkeley system, and other people in the dept can run this too
+		setwd(paste0("/data/commons/",system("whoami",intern=TRUE),"/git/YearsLost/YearsLost"))
+	}
 }
+getwd()
+
 
 source("R/Functions.R")
 HMDcountries <- c("USA","CAN","FRATNP","SWE","NOR","GBRTENW")
 CODcountries <- c("USA","CAN","FRA","SWE","NOR","ENW")
 library(RCurl)
-library(DemogBerkeley)
+library(HMDHFDplus)
 library(reshape2)
 
 grabCountryHMD <- function(XXX,Yr=2010,.us=us,.pw=pw){
@@ -86,6 +93,7 @@ expandAbdridged <- function(M){
 # ---------------------------------------------------------------------------
 # XXX <- "NOR"
 
+#need to add COD data
 grabCountryCOD <- function(XXX,HMD,Yr = 2010){
   cat(XXX,"\n")
     COD         <- read.csv(file.path("Data","COD5x1",paste0(XXX,"_5x1_chapters.csv")), 

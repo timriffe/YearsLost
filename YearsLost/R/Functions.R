@@ -1,10 +1,13 @@
+
+
+
 library(devtools)
 if (! "RiffeetalFunctions" %in% installed.packages()[,"Package"]){
     cat("\nInstalling custom package from github
 This may fail on Mac or Windows if some preliminary configuring isn't done
 See page: https://github.com/hadley/devtools
 if you're having problems loading/installing from github\n")
-    install_github(repo = "Leaves", subdir = "PlosOne/R/RiffeetalFunctions", username = "timriffe")
+    install_github(repo = "timriffe/Leaves/PlosOne/R/RiffeetalFunctions")
 }
 library(RiffeetalFunctions)
 
