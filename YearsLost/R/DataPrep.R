@@ -227,7 +227,8 @@ grabCountryCOD <- function(XXX,HMD,Yr = 2010){
             dxm = HMD[[XXX]]$dxm, dxf = HMD[[XXX]]$dxf))
 }
 
-
+getwd(
+		)
 COD <- lapply(CODcountries,grabCountryCOD,HMD=HMD)
 names(COD) <- CODcountries
 
@@ -237,7 +238,8 @@ save(COD, file = "Data/COD.Rdata")
 # need some code specific for USA data, working at different levels of aggregation.
 
 # USA 92
-names(HMDUSA)
+
+
 HMDUSA <- grabCountryHMD("USA")
 CODUSA <- local(get(load("Data/USA2010.Rdata")))
 #colnames(CODUSA)
