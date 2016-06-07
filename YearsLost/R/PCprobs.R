@@ -15,10 +15,14 @@ if (system("hostname",intern=TRUE) %in% c("triffe-N80Vm", "tim-ThinkPad-L440")){
 
 library(HMDHFDplus)
 library(reshape2)
-DT            <- readHMDweb("ESP","Deaths_lexis",username=us,password=pw)
-Pop           <- readHMDweb("ESP","Population",username=us,password=pw)
-B             <- readHMDweb("ESP","Births",username=us,password=pw)
-
+#DT            <- readHMDweb("ESP","Deaths_lexis",username=us,password=pw)
+#Pop           <- readHMDweb("ESP","Population",username=us,password=pw)
+#B             <- readHMDweb("ESP","Births",username=us,password=pw)
+#FPC           <- readHFDweb("ESP","asfrVV",username=us,password=pw)
+save(DT, file = "Data/PCmaterials/DT.Rdata")
+save(Pop, file = "Data/PCmaterials/Pop.Rdata")
+save(B, file = "Data/PCmaterials/B.Rdata")
+save(FPC, file = "Data/PCmaterials/FPC.Rdata")
 # We'll need these for age 0 death probabilities
 BM            <- B$Male
 BF            <- B$Female
@@ -111,7 +115,6 @@ abline(v=1918)
 
 
 propFemale     <- BF / (BF+BM)
-FPC            <- readHFDweb("ESP","asfrVV",username=us,password=pw)
 
 # minor setback: HFD only starts in 1922, HFC too. INE starts 1941.
 # so we'll need to improvise for 1908 to 1921:
