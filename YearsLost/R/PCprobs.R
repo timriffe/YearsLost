@@ -147,6 +147,10 @@ Fxm 			<- t((1-propFemale[colnames(FPCAP)]) * t(FPCAP))
 Fxf 			<- t((propFemale[colnames(FPCAP)]) * t(FPCAP))
 
 # this is a temporary line:
+# save these for accelerated progress scenario
+qxf.future      <- qxf
+qxm.future      <- qxm
+
 # cut down qx to match Fx:
 qxf 			<- qxf[,colnames(Fxf)]
 qxm 			<- qxm[,colnames(Fxm)]

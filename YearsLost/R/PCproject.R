@@ -121,15 +121,81 @@ for (i in 1:Horiz){
 			Fxm[, i])  %*% PprojExperiment3[, i]
 }
 
+########################################################################
+# a final scenario. What if no shocks, and observed rates always happened 5 years
+# earlier? i.e. what are the impacts of slow progress?
 
-colSums(PprojExperiment2)
+# get wider mat, replace early years as necessary
+qxf.accell 					<- qxf.future
+qxf.accell[,colnames(qxf4)] <- qxf4
+qxm.accell 					<- qxm.future
+qxm.accell[,colnames(qxm4)] <- qxm4
+
+# add up to 2017:
+N <- ncol(qxm.accell)
+qxm.accell 				<- cbind(qxm.accell,qxm.accell[,N],qxm.accell[,N],qxm.accell[,N])
+qxf.accell 				<- cbind(qxf.accell,qxf.accell[,N],qxf.accell[,N],qxf.accell[,N])
+colnames(qxf.accell) 	<- 1908:2017
+colnames(qxm.accell) 	<- 1908:2017
+#################################################
+
+PprojExperiment4  <- matrix(0, nrow = length(Pinit), ncol = Horiz + 1)
+PprojExperiment4[, 1] <- Pinit
+for (i in 1:Horiz){
+	PprojExperiment4[, i + 1] <- makeLeslie(qxf.accell[, i+5], 
+			qxm.accell[, i+5],
+			Fxf[, i],
+			Fxm[, i])  %*% PprojExperiment4[, i]
+}
+
+# get wider mat, replace early years as necessary
+qxf.accell2 					<- qxf.future
+qxm.accell2 					<- qxm.future
+
+
+# add up to 2017:
+N <- ncol(qxm.accell2)
+qxm.accell2 				<- cbind(qxm.accell2,qxm.accell2[,N],qxm.accell2[,N],qxm.accell2[,N])
+qxf.accell2 				<- cbind(qxf.accell2,qxf.accell2[,N],qxf.accell2[,N],qxf.accell2[,N])
+colnames(qxf.accell2) 		<- 1908:2017
+colnames(qxm.accell2) 		<- 1908:2017
+#################################################
+
+PprojExperiment5  <- matrix(0, nrow = length(Pinit), ncol = Horiz + 1)
+PprojExperiment5[, 1] <- Pinit
+for (i in 1:Horiz){
+	PprojExperiment5[, i + 1] <- makeLeslie(qxf.accell2[, i+5], 
+			qxm.accell2[, i+5],
+			Fxf[, i],
+			Fxm[, i])  %*% PprojExperiment5[, i]
+}
+
+
+Diff1 <- PprojExperiment1 - PprojBase
 Diff2 <- PprojExperiment2 - PprojBase
 Diff3 <- PprojExperiment3 - PprojBase
-plot(1908:2013, colSums(Diff3), type = 'l',col="red",lwd=3)
+Diff4 <- PprojExperiment4 - PprojBase
+Diff5 <- PprojExperiment5 - PprojBase
+
+plot(1908:2013, colSums(Diff4), type = 'l',col="red",lwd=3)
+lines(1908:2013, colSums(Diff5),col = "green",lty=2)
+lines(1908:2013, colSums(Diff3),col = "orange",lty=2)
 lines(1908:2013, colSums(Diff2),col = "forestgreen",lty=1)
 lines(1908:2013, colSums(Diff1),col="blue",lty="22")
+text(c(1945,1941,1942,1948),c(2e6,767000,491000,250000),c("5yrs faster, no war, no flu", "no war and no flu","no war","no flu"),pos=4)
 
+#colSums(PprojBase)
+#colSums(Diff1)
+#colSums(Diff2)
+#colSums(Diff3)
+#colSums(Diff4)
+#colSums(Diff5)
+#colSums(PprojExperiment5)
+sum(Pop[Pop$Year == 2013, "Total1"])
+# next step would be to decompose into original saved, and descendents.
+# total more than sum of parts
 plot(colSums(Diff3) - colSums(Diff1) + colSums(Diff2))
+
 
 #
 #
@@ -157,3 +223,4 @@ plot(colSums(Diff3) - colSums(Diff1) + colSums(Diff2))
 #	tapply(x,age5,sum)
 #}
 #
+
