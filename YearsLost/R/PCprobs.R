@@ -18,11 +18,19 @@ library(reshape2)
 #DT            <- readHMDweb("ESP","Deaths_lexis",username=us,password=pw)
 #Pop           <- readHMDweb("ESP","Population",username=us,password=pw)
 #B             <- readHMDweb("ESP","Births",username=us,password=pw)
+#E 			   <- readHMDweb("ESP","Exposures_1x1",username=us,password=pw)
 #FPC           <- readHFDweb("ESP","asfrVV",username=us,password=pw)
-save(DT, file = "Data/PCmaterials/DT.Rdata")
-save(Pop, file = "Data/PCmaterials/Pop.Rdata")
-save(B, file = "Data/PCmaterials/B.Rdata")
-save(FPC, file = "Data/PCmaterials/FPC.Rdata")
+#save(DT, file = "Data/PCmaterials/DT.Rdata")
+#save(Pop, file = "Data/PCmaterials/Pop.Rdata")
+#save(B, file = "Data/PCmaterials/B.Rdata")
+#save(FPC, file = "Data/PCmaterials/FPC.Rdata")
+#save(E, file = "Data/PCmaterials/E.Rdata")
+DT 		<- local(get(load("Data/PCmaterials/DT.Rdata")))
+Pop 	<- local(get(load("Data/PCmaterials/Pop.Rdata")))
+B 		<- local(get(load("Data/PCmaterials/B.Rdata")))
+FPC 	<- local(get(load("Data/PCmaterials/FPC.Rdata")))
+E 		<- local(get(load("Data/PCmaterials/E.Rdata")))
+
 # We'll need these for age 0 death probabilities
 BM            <- B$Male
 BF            <- B$Female
@@ -98,40 +106,77 @@ PCqxm                         <- PCqxm[PCqxm$Age >= 0 & PCqxm$Age <= 110, ]
 
 
 # put into AP matrix (of PC values), where Age is actually indexed to the birthday line.
-qxf <- acast(PCqxf, Age ~ Year, value.var = "qx")
-qxm <- acast(PCqxm, Age ~ Year, value.var = "qx")
+qxf 			<- acast(PCqxf, Age ~ Year, value.var = "qx")
+qxm 			<- acast(PCqxm, Age ~ Year, value.var = "qx")
 
-# save for re-use later:
-save(qxf, file ="Data/qxfPCinAPformat.Rdata")
-save(qxm, file ="Data/qxmPCinAPformat.Rdata")
-
-
-
-#library(devtools)
-#document("/home/tim/git/LexisUtils/LexisUtils")
-#install_github("timriffe/LexisUtils/LexisUtils")
-plot(1908:2014,tapply(DT$Total,DT$Year,sum))
-abline(v=1918)
-
-
-propFemale     <- BF / (BF+BM)
-
+# this will be helpful for two-sex female-dominant matrices.
+propFemale     	<- BF / (BF + BM)
+names(propFemale) <- B$Year
 # minor setback: HFD only starts in 1922, HFC too. INE starts 1941.
 # so we'll need to improvise for 1908 to 1921:
-FPCAP <- acast(FPC, ARDY~Year, value.var = "ASFR")
-#matplot(12:55,FPCAP[,1:6],type='l',col=gray(c(.8,.7,.6,.5,.3,.2)), lwd = c(2,1.6,1.2,.8,.6,.5), lty = 1)
+FPCAP 			<- acast(FPC, ARDY~Year, value.var = "ASFR")
 
 # get shape
-FPCAPshape <- t(t(FPCAP) /colSums(FPCAP))
-#matplot(12:55,FPCAPshape[,1:6],type='l',col=gray(c(.8,.7,.6,.5,.3,.2)), lwd = c(2,1.6,1.2,.8,.6,.5), lty = 1)
-#lines(12:55,rowMeans(FPCAPshape[,1:6]),col="red")
+FPCAPshape 		<- t(t(FPCAP) /colSums(FPCAP))
 
 # can try different ranges to see how sensitive it actually is:
 pre1922standard <- rowMeans(FPCAPshape[,1:6])
 
+# get total births to rescale standard schedule
+BT    			<- BF + BM
+names(BT) 		<- B$Year # names, for selection?
 
+BT    			<- BT[as.character(1908:1921)]
 
+# this is AP exposure. Would need to recalculate for PC.
+# just do this for the time being, then swap out for PC exposure later
+Ef    			<- acast(E, Age ~ Year, value.var = "Female")
+# select down for conformability
+Ef    			<- Ef[as.character(12:55), names(BT)]
 
+# get birth matrix, rescaled.
+Bxt   			<- t(t(Ef * pre1922standard) * BT / colSums((Ef * pre1922standard)))
+# divide back to rates.
+Fxt   			<- Bxt / Ef
+
+# stick on for earlier years:
+FPCAP 			<- cbind(Fxt, FPCAP)
+
+# get Female -> Male and Female -> Female fertility rates (PC)
+Fxm 			<- t((1-propFemale[colnames(FPCAP)]) * t(FPCAP))
+Fxf 			<- t((propFemale[colnames(FPCAP)]) * t(FPCAP))
+
+# this is a temporary line:
+# cut down qx to match Fx:
+qxf 			<- qxf[,colnames(Fxf)]
+qxm 			<- qxm[,colnames(Fxm)]
+
+# need to pad fertility with 0s:
+# 12:55 fertility, so 0:11 = 0, and 56:110 = 0
+agesbelow 		<- 0:11
+agesabove 		<- 56:110
+
+Below0s         <- matrix(0, 
+						nrow = length(agesbelow),
+						ncol = ncol(qxf),
+						dimnames = list(agesbelow, colnames(Fxf)))
+Above0s         <- matrix(0, 
+						nrow = length(agesabove),
+						ncol = ncol(qxf),
+						dimnames = list(agesabove, colnames(Fxf)))
+Fxf             <- rbind(Below0s, Fxf, Above0s)
+Fxm             <- rbind(Below0s, Fxm, Above0s)
+
+# a glance at TFR shows very close values to those of Saez.
+# also OK diagnostic would be
+#Saez 			 <- read.csv("/home/tim/git/YearsLost/YearsLost/Data/SeazFx.csv")
+#rownames(Saez)  <- Saez[,1]
+#Saez 			 <- Saez[,-1]
+#colnames(Saez)  <- seq(1901,1946,by=5)
+
+# 2d spline? This can wait for the time being.
+
+# compare standard method w Saez data.
 #################################################################################
 ## would a rescale have made sense for SWE over the Spanish flu years?
 ## looks like no big deal actually...
