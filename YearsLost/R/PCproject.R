@@ -129,25 +129,31 @@ plot(1908:2013, colSums(Diff3), type = 'l',col="red",lwd=3)
 lines(1908:2013, colSums(Diff2),col = "forestgreen",lty=1)
 lines(1908:2013, colSums(Diff1),col="blue",lty="22")
 
+plot(colSums(Diff3) - colSums(Diff1) + colSums(Diff2))
 
-library(Pyramid)
-Pyramid(males = Diff[112:222,ncol(Diff)], females = Diff[1:111,ncol(Diff)],
-		fill.males="gray",fill.females="gray",grid = FALSE)
-mls <- PprojBase[112:222,ncol(Diff)]; fmls <- PprojBase[1:111,ncol(Diff)]
-PyramidOutline(males = mls, females = fmls, 
-		scale = 100 )
-
-for (yr in 12:length(years)){
-	Pyramid(males = Diff[112:222,yr], females = Diff[1:111,yr],
-			fill.males="gray",fill.females="gray",grid = FALSE)
-	Sys.sleep(.5)
-}
-
-Pyramid(males = mls, females = fmls,
-		fill.males="gray",fill.females="gray",grid = FALSE)
-
-group5 <- function(x,age = 1:length(age)-1){
-	age5 <- age - age %% 5
-	tapply(x,age5,sum)
-}
-
+#
+#
+#library(Pyramid)
+#Pyramid(males = Diff[112:222,ncol(Diff)], females = Diff[1:111,ncol(Diff)],
+#		fill.males="gray",fill.females="gray",grid = FALSE)
+#mls <- PprojBase[112:222,ncol(Diff)]; fmls <- PprojBase[1:111,ncol(Diff)]
+#PyramidOutline(males = mls, females = fmls, 
+#		scale = 100 )
+#
+#for (yr in 12:length(years)){
+#	Pyramid(males = Diff[112:222,yr], females = Diff[1:111,yr],
+#			fill.males="gray",fill.females="gray",grid = FALSE)
+#	Sys.sleep(.5)
+#}
+#
+#
+#
+#
+#Pyramid(males = mls, females = fmls,
+#		fill.males="gray",fill.females="gray",grid = FALSE)
+#
+#group5 <- function(x,age = 1:length(age)-1){
+#	age5 <- age - age %% 5
+#	tapply(x,age5,sum)
+#}
+#
