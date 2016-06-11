@@ -177,24 +177,92 @@ Diff3 <- PprojExperiment3 - PprojBase
 Diff4 <- PprojExperiment4 - PprojBase
 Diff5 <- PprojExperiment5 - PprojBase
 
-plot(1908:2013, colSums(Diff4), type = 'l',col="red",lwd=3)
+png("Figures/ScenarioTrends.png")
+plot(1908:2013, colSums(Diff4), type = 'l',col="red",ylab="Population", xlab = "year",
+		main = "Persons missing from base scenario\n different mortality scenarios",
+		sub="base scenario = observed vital rates, without migration")
 lines(1908:2013, colSums(Diff5),col = "green",lty=2)
 lines(1908:2013, colSums(Diff3),col = "orange",lty=2)
 lines(1908:2013, colSums(Diff2),col = "forestgreen",lty=1)
 lines(1908:2013, colSums(Diff1),col="blue",lty="22")
-text(c(1945,1941,1942,1948),c(2e6,767000,491000,250000),c("5yrs faster, no war, no flu", "no war and no flu","no war","no flu"),pos=4)
+text(c(1945,1946,1941,1942,1948),
+		c(2e6,1.5e6,767000,491000,250000),
+		c("5yrs faster, no war, no flu", "5yrs faster","no war and no flu","no war","no flu"),pos=4)
+dev.off()
 
-#colSums(PprojBase)
-#colSums(Diff1)
-#colSums(Diff2)
-#colSums(Diff3)
-#colSums(Diff4)
-#colSums(Diff5)
-#colSums(PprojExperiment5)
-sum(Pop[Pop$Year == 2013, "Total1"])
+
+
 # next step would be to decompose into original saved, and descendents.
 # total more than sum of parts
 plot(colSums(Diff3) - colSums(Diff1) + colSums(Diff2))
+
+# Pop pyramids:
+library(Pyramid)
+N     <- ncol(Diff1)
+yrind <- Pop$Year == 2013
+
+png("Figures/DifferencesPyramid.png")
+Pyramid(males = PprojBase[112:222,N], 
+		females = PprojBase[1:111,N], 
+		fill.males = gray(.8), 
+		fill.females = gray(.8),
+		grid = FALSE,
+		verbose = FALSE,
+		xlim = c(-2.2,2.2))
+mtext("Age structure of difference between Jan 1, 2013 population\nScenario minus base scenario",side=3,line=2)
+mtext("base scenario = observed vital rates, without migration",side=1,line=4)
+PyramidOutline(males = Diff1[112:222,N], females = Diff1[1:111,N],scale=100,border="blue",lty="22")
+PyramidOutline(males = Diff2[112:222,N], females = Diff2[1:111,N],scale=100,border = "forestgreen",lty=1)
+PyramidOutline(males = Diff3[112:222,N], females = Diff3[1:111,N],scale=100,border = "orange",lty=2)
+PyramidOutline(males = Diff4[112:222,N], females = Diff4[1:111,N],scale=100,border="red")
+PyramidOutline(males = Diff5[112:222,N], females = Diff5[1:111,N],scale=100,border = "green",lty=2)
+dev.off()
+
+# and total population structure Jan 1, 2013. Not crazy differences
+Pyramid(males = PprojBase[112:222,N], 
+		females = PprojBase[1:111,N], 
+		fill.males = gray(.8), 
+		fill.females = gray(.8),
+		grid = FALSE,
+		verbose = FALSE,
+		xlim = c(-1.2,1.2))
+mtext("Age structure of Jan 1, 2013 population\nScenario minus base scenario",side=3,line=2)
+mtext("base scenario = observed vital rates, without migration",side=1,line=4)
+PyramidOutline(males = PprojExperiment1[112:222,N], females = PprojExperiment1[1:111,N],scale=100,border="blue",lty="22")
+PyramidOutline(males = PprojExperiment2[112:222,N], females = PprojExperiment2[1:111,N],scale=100,border = "forestgreen",lty=1)
+PyramidOutline(males = PprojExperiment3[112:222,N], females = PprojExperiment3[1:111,N],scale=100,border = "orange",lty=2)
+PyramidOutline(males = PprojExperiment4[112:222,N], females = PprojExperiment4[1:111,N],scale=100,border="red")
+PyramidOutline(males = PprojExperiment5[112:222,N], females = PprojExperiment5[1:111,N],scale=100,border = "green",lty=2)
+
+# but, not standardized populations:
+png("Figures/Pyramids2013.png")
+Pyramid(males = PprojBase[112:222,N], 
+		females = PprojBase[1:111,N], 
+		fill.males = gray(.8), 
+		fill.females = gray(.8),
+		grid = FALSE,
+		verbose = FALSE,
+		prop = FALSE)
+mtext("Age pyramid of Jan 1, 2013 population\nScenario minus base scenario",side=3,line=2)
+mtext("base scenario = observed vital rates, without migration",side=1,line=4)
+PyramidOutline(males = PprojExperiment1[112:222,N], females = PprojExperiment1[1:111,N],
+		scale=sum(PprojExperiment1[,N])/1000,border="blue",lty="22")
+PyramidOutline(males = PprojExperiment2[112:222,N], females = PprojExperiment2[1:111,N],
+		scale=sum(PprojExperiment2[,N])/1000,border = "forestgreen",lty=1)
+PyramidOutline(males = PprojExperiment3[112:222,N], females = PprojExperiment3[1:111,N],
+		scale=sum(PprojExperiment3[,N])/1000,border = "orange",lty=2)
+PyramidOutline(males = PprojExperiment4[112:222,N], females = PprojExperiment4[1:111,N],
+		scale=sum(PprojExperiment4[,N])/1000,border="red")
+PyramidOutline(males = PprojExperiment5[112:222,N], females = PprojExperiment5[1:111,N],
+		scale=sum(PprojExperiment5[,N])/1000,border = "green",lty=2)
+PyramidOutline(males = PprojExperiment5[112:222,N], females = PprojExperiment5[1:111,N],
+		scale=sum(PprojExperiment5[,N])/1000,border = "green",lty=2)
+PyramidOutline(males = Pop$Male1[yrind], females = Pop$Female1[yrind],
+		scale=sum(Pop$Male1[yrind]+ Pop$Female1[yrind])/1000,border = "black",lty=1,lwd=.5)
+dev.off()
+
+
+
 
 
 #
