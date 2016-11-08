@@ -62,7 +62,7 @@ Pop           <- rbind(Pop0, Pop)
 # determine Lexis shape for deaths
 res                           <- DT$Year - DT$Age - DT$Cohort
 res[is.na(res)]               <- 0
-DT$Lexis                      <- ifelse(res==0,"TL","TU")
+DT$Lexis                      <- ifelse(res == 0,"TL","TU")
 
 # open interval all in lower tri, odd.
 # divide by 3?
@@ -78,7 +78,7 @@ PCm                           <- acast(DT, Year~Cohort, value.var = "Male", sum)
 P1f                           <- acast(Pop[Pop$Age < 110, ], Year~Coh1, value.var = "Female1")
 P1m                           <- acast(Pop[Pop$Age < 110, ], Year~Coh1, value.var = "Male1")
 
-# PC death probabilities
+# PC death probabilities (70)
 qPCf                          <- PCf / P1f
 qPCm                          <- PCm / P1m
 
@@ -106,15 +106,15 @@ PCqxm                         <- PCqxm[PCqxm$Age >= 0 & PCqxm$Age <= 110, ]
 
 
 # put into AP matrix (of PC values), where Age is actually indexed to the birthday line.
-qxf 			<- acast(PCqxf, Age ~ Year, value.var = "qx")
-qxm 			<- acast(PCqxm, Age ~ Year, value.var = "qx")
+qxf 						  <- acast(PCqxf, Age ~ Year, value.var = "qx")
+qxm 					      <- acast(PCqxm, Age ~ Year, value.var = "qx")
 
 # this will be helpful for two-sex female-dominant matrices.
-propFemale     	<- BF / (BF + BM)
-names(propFemale) <- B$Year
+propFemale     	              <- BF / (BF + BM)
+names(propFemale)             <- B$Year
 # minor setback: HFD only starts in 1922, HFC too. INE starts 1941.
 # so we'll need to improvise for 1908 to 1921:
-FPCAP 			<- acast(FPC, ARDY~Year, value.var = "ASFR")
+FPCAP 			              <- acast(FPC, ARDY~Year, value.var = "ASFR")
 
 # get shape
 FPCAPshape 		<- t(t(FPCAP) /colSums(FPCAP))
@@ -177,6 +177,9 @@ Fxm             <- rbind(Below0s, Fxm, Above0s)
 #rownames(Saez)  <- Saez[,1]
 #Saez 			 <- Saez[,-1]
 #colnames(Saez)  <- seq(1901,1946,by=5)
+
+
+
 
 # 2d spline? This can wait for the time being.
 
