@@ -31,6 +31,9 @@ B 		<- local(get(load("Data/PCmaterials/B.Rdata")))
 FPC 	<- local(get(load("Data/PCmaterials/FPC.Rdata")))
 E 		<- local(get(load("Data/PCmaterials/E.Rdata")))
 
+# TODO calculate PC exposures
+
+
 # We'll need these for age 0 death probabilities
 BM            <- B$Male
 BF            <- B$Female
@@ -116,17 +119,17 @@ names(propFemale)             <- B$Year
 # so we'll need to improvise for 1908 to 1921:
 FPCAP 			              <- acast(FPC, ARDY~Year, value.var = "ASFR")
 
-# get shape
-FPCAPshape 		<- t(t(FPCAP) /colSums(FPCAP))
-
-# can try different ranges to see how sensitive it actually is:
-pre1922standard <- rowMeans(FPCAPshape[,1:6])
-
+## get shape
+source("R/graduateSaez.R")
+Saez            <- local(get(load("Data/FxSaez_graduated.Rdata")))
+pre1922Shape    <- Saez %*% diag(1 / colSums(Saez))
+pre1922Shape    <- rbind(pre1922Shape[-c(1,2), ],0,0,0,0,0,0)
+# 1908-1946
 # get total births to rescale standard schedule
 BT    			<- BF + BM
 names(BT) 		<- B$Year # names, for selection?
-
-BT    			<- BT[as.character(1908:1921)]
+# 1908-1946
+BT    			<- BT[colnames(Saez)]
 
 # this is AP exposure. Would need to recalculate for PC.
 # just do this for the time being, then swap out for PC exposure later
@@ -135,15 +138,25 @@ Ef    			<- acast(E, Age ~ Year, value.var = "Female")
 Ef    			<- Ef[as.character(12:55), names(BT)]
 
 # get birth matrix, rescaled.
-Bxt   			<- t(t(Ef * pre1922standard) * BT / colSums((Ef * pre1922standard)))
+Bshape          <- (Ef * pre1922Shape)
+numerator       <- Bshape %*% diag(BT) 
+denominator     <- diag(c(1 / (rep(1,nrow(Bshape)) %*% Bshape)))
+
+Bxt   			<- numerator %*% denominator
+
 # divide back to rates.
 Fxt   			<- Bxt / Ef
+colnames(Fxt)   <- colnames(Ef)
+
+# for test comparisons
+#compareyrs      <- intersect(colnames(Fxt), colnames(FPCAP))
 
 # stick on for earlier years:
-FPCAP 			<- cbind(Fxt, FPCAP)
+preyears        <- colnames(Fxt)[!colnames(Fxt) %in% colnames(FPCAP)]
+FPCAP 			<- cbind(Fxt[, preyears], FPCAP)
 
 # get Female -> Male and Female -> Female fertility rates (PC)
-Fxm 			<- t((1-propFemale[colnames(FPCAP)]) * t(FPCAP))
+Fxm 			<- t((1 - propFemale[colnames(FPCAP)]) * t(FPCAP))
 Fxf 			<- t((propFemale[colnames(FPCAP)]) * t(FPCAP))
 
 # this is a temporary line:
